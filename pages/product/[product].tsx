@@ -32,12 +32,10 @@ export default function ProductPage() {
     const router = useRouter();
     const productId = router.query.product;
 
-    const product =
-        typeof productId === "string"
-            ? useAppSelector((store) => store.products).find(
-                  (p) => p.id === parseInt(productId)
-              )
-            : undefined;
+    const product = useAppSelector((store) => store.products).find(
+        (p) =>
+            p.id === (typeof productId === "string" ? parseInt(productId) : -1)
+    );
 
     if (product !== undefined) {
         return (
