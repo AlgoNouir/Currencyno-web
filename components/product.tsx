@@ -30,11 +30,11 @@ export default function Product(props: productType) {
                                 <p className="text-lg">
                                     {Intl.NumberFormat("fa-IR").format(
                                         Math.round(
-                                            (-10000 *
+                                            (-1000 *
                                                 (props.offerPrice -
                                                     props.price)) /
                                                 props.price
-                                        ) / 100
+                                        ) / 10
                                     )}
                                 </p>
                             </div>
