@@ -1,10 +1,15 @@
 import { productType } from "@/store/product/slice";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { BiSolidOffer } from "react-icons/bi";
 
 export default function Product(props: productType) {
+    const router = useRouter();
     return (
-        <div className="bg-white rounded-xl h-96 p-5 flex flex-col justify-between">
+        <button
+            onClick={() => router.push(`product/${props.id}`)}
+            className="bg-white rounded-xl h-96 p-5 flex flex-col justify-between"
+        >
             <div className="flex flex-col space-y-5">
                 <div className="h-44 flex items-center justify-center">
                     <Image src={require("@/public/next.svg")} alt="image" />
@@ -54,6 +59,6 @@ export default function Product(props: productType) {
                     </div>
                 </div>
             </div>
-        </div>
+        </button>
     );
 }

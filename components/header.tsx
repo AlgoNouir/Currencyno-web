@@ -106,28 +106,28 @@ export default function Header() {
                 <div className="flex flex-col items-end justify-end h-9">
                     <div className="grid grid-cols-4 gap-5">
                         <button
-                            onClick={() => router.push("lists/")}
+                            onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
                             hover:border-b-2 hover:pb-2 border-green-500 transition-all"
                         >
                             <p className="text-xl p-1">محصولات دیجیتال</p>
                         </button>
                         <button
-                            onClick={() => router.push("lists/")}
+                            onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
                             hover:border-b-2 hover:pb-2 border-green-500 transition-all"
                         >
                             <p className="text-xl p-1">کتابخانه اقتصادی</p>
                         </button>
                         <button
-                            onClick={() => router.push("lists/")}
+                            onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
                             hover:border-b-2 hover:pb-2 border-green-500 transition-all"
                         >
                             <p className="text-xl p-1">کافه کارآفرینی</p>
                         </button>
                         <button
-                            onClick={() => router.push("lists/")}
+                            onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
                             hover:border-b-2 hover:pb-2 border-green-500 transition-all"
                         >
