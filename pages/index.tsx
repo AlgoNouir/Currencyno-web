@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 function Data() {
@@ -76,7 +77,7 @@ export default function Home() {
                 <Desc reverse={true} />
                 <Desc reverse={false} />
             </div>
-            <div className="bg-white h-96 rounded-t-xl"></div>
+            <Footer />
         </div>
     );
 }
