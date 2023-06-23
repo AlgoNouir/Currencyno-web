@@ -1,0 +1,59 @@
+import { productType } from "@/store/product/slice";
+import Image from "next/image";
+import { BiSolidOffer } from "react-icons/bi";
+
+export default function Product(props: productType) {
+    return (
+        <div className="bg-white rounded-xl h-96 p-5 flex flex-col justify-between">
+            <div className="flex flex-col space-y-5">
+                <div className="h-44 flex items-center justify-center">
+                    <Image src={require("@/public/next.svg")} alt="image" />
+                </div>
+                <p className="text-center text-gray-600">{props.persianName}</p>
+            </div>
+            <div className="flex flex-col justify-end">
+                {props.offerPrice > 0 && (
+                    <del className="flex text-red-600 flex-row items-center space-x-2 rtl:space-x-reverse justify-end">
+                        {Intl.NumberFormat("fa-IR").format(props.price)}
+                    </del>
+                )}
+                <div className="flex flex-row items-center justify-between">
+                    {props.offerPrice > 0 && (
+                        <div className="flex flex-row items-center justify-between">
+                            <div className="text-green-700 flex flex-row items-center space-x-1 rtl:space-x-reverse">
+                                <BiSolidOffer className="text-2xl" />
+                                <p className="text-lg">
+                                    {Intl.NumberFormat("fa-IR").format(
+                                        Math.round(
+                                            (-10000 *
+                                                (props.offerPrice -
+                                                    props.price)) /
+                                                props.price
+                                        ) / 100
+                                    )}
+                                </p>
+                            </div>
+                            {/* <small>تخفیف</small> */}
+                        </div>
+                    )}
+                    <div className="flex flex-row grow items-center space-x-2 rtl:space-x-reverse justify-end">
+                        <p
+                            className={`text-xl font-bold ${
+                                props.offerPrice > 0
+                                    ? "text-green-700"
+                                    : "text-text"
+                            }`}
+                        >
+                            {Intl.NumberFormat("fa-IR").format(
+                                props.offerPrice > 0
+                                    ? props.offerPrice
+                                    : props.price
+                            )}
+                        </p>
+                        <small className="text-gray-500">تومان</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
