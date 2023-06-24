@@ -56,7 +56,7 @@ export default function Header() {
     const [loginModalOpen, loginModalOpenHandler] = useState("");
     return (
         <div className="relative">
-            <div className="bg-white flex flex-col px-5 items-center space-y-5 pt-5">
+            <div className="bg-white flex flex-col px-5 w-screen items-center space-y-5 pt-5">
                 <div className="flex flex-row items-center justify-between w-full">
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <button

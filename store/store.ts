@@ -2,6 +2,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
 import products from "./product/slice";
 import account from "./account/slice";
+import core from "./core/slice";
 
 export const store = configureStore({
     reducer: {
