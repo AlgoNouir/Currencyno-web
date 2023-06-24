@@ -25,6 +25,15 @@ const initialState: {
     user?: userType;
 } = {
     login: "inLogin",
+    user: {
+        fName: "مهدی",
+        lName: "نوری",
+        address: [0, 0, "آدرس تست"],
+        phone: 9143707245,
+        nationalCode: 1451829159,
+        product: [],
+        email: "",
+    },
 };
 
 const accountSlice = createSlice({

@@ -77,16 +77,23 @@ export default function Header() {
                     </div>
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse ">
                         <button
-                            onClick={() =>
-                                loginModalOpenHandler(
-                                    "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
-                                )
+                            onClick={
+                                user === undefined
+                                    ? () =>
+                                          loginModalOpenHandler(
+                                              "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
+                                          )
+                                    : () => router.push("/profile/")
                             }
                             className="border p-3 rounded-xl flex flex-row space-x-3 
                             rtl:space-x-reverse items-center"
                         >
                             <BsFillPersonFill className="text-2xl text-gray-600" />
-                            <p>ورود یا ثبت نام</p>
+                            <p>
+                                {user === undefined
+                                    ? "ورود یا ثبت نام"
+                                    : `${user.fName} ${user.lName}`}
+                            </p>
                         </button>
                         <button
                             onClick={
@@ -95,7 +102,7 @@ export default function Header() {
                                           loginModalOpenHandler(
                                               "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
                                           )
-                                    : () => router.push("")
+                                    : () => router.push("/profile")
                             }
                         >
                             <PiBasketLight className="text-3xl" />

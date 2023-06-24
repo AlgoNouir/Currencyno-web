@@ -144,24 +144,29 @@ export default function ProductPage() {
                             </p>
                         </div>
                         <div className="bg-white rounded-xl w-1/3  relative overflow-hidden space-y-5 p-5 flex flex-col items-center">
-                            <div className="absolute flex-col space-y-5 backdrop-blur w-full h-full rounded-xl flex items-center justify-center">
-                                <p className="text-gray-700 text-xl">
-                                    برای ارسال نظر ابتدا بایستی وارد شوید
-                                </p>
-                                <button className="px-5 py-3 bg-yellow-500 rounded-xl">
-                                    <p className="">ورود به حساب کاربری</p>
-                                </button>
-                            </div>
+                            {user === undefined ? (
+                                <div className="absolute flex-col space-y-5 backdrop-blur w-full h-full rounded-xl flex items-center justify-center">
+                                    <p className="text-gray-700 text-xl">
+                                        برای ارسال نظر ابتدا بایستی وارد شوید
+                                    </p>
+                                    <button className="px-5 py-3 bg-yellow-500 rounded-xl">
+                                        <p className="">ورود به حساب کاربری</p>
+                                    </button>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                             <p className="font-bold text-xl">ارسال نظر</p>
 
-                            <div className="flex flex-col w-full">
+                            <div className="flex flex-col w-full space-y-2">
                                 <label htmlFor="name">نظر شما :</label>
                                 <textarea
                                     id="name"
-                                    className="bg-gray-100 rounded-xl p-2 w-full h-64 outline-none"
+                                    className="bg-gray-100 rounded-xl p-2 w-full h-64
+                                    resize-none outline-none"
                                 />
                             </div>
-                            <button className="bg-green-400 p-3 rounded-xl">
+                            <button className="bg-green-400 p-3 rounded-xl w-44">
                                 <p>ارسال نظر</p>
                             </button>
                         </div>
