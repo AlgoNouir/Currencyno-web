@@ -29,7 +29,7 @@ const initialState: productType[] = [
         persianName:
             "تلویزیون ال ای دی هوشمند جی پلاس مدل GTV-50PU746N سایز 50 اینچ",
         englishName: "test TV",
-        garanty: "24 month garanty",
+        garanty: "۲۴ ماه گارانتی",
         category: 1,
         price: 28000000,
         deliveryType: 0,
@@ -52,7 +52,7 @@ const initialState: productType[] = [
         persianName:
             "تلویزیون ال ای دی هوشمند جی پلاس مدل GTV-50PU746N سایز 50 اینچ",
         englishName: "test TV",
-        garanty: "24 month garanty",
+        garanty: "۲۴ ماه گارانتی و خدمات پس از فروش",
         category: 1,
         price: 28000000,
         deliveryType: 0,
@@ -67,7 +67,7 @@ const initialState: productType[] = [
         persianName:
             "تلویزیون ال ای دی هوشمند جی پلاس مدل GTV-50PU746N سایز 50 اینچ",
         englishName: "test TV",
-        garanty: "24 month garanty",
+        garanty: "۲۴ ماه گارانتی",
         category: 1,
         price: 28000000,
         deliveryType: 0,
