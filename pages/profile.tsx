@@ -17,8 +17,9 @@ export default function ProfilePage() {
             </div>
             <div className="h-full p-5 flex flex-row space-x-5 rtl:space-x-reverse">
                 <div className="w-96 h-full bg-white rounded-xl flex flex-col space-y-2 items-end py-5">
-                    {screens.map((s) => (
+                    {screens.map((s, index) => (
                         <button
+                            key={`screen-${index}`}
                             onClick={() => screenHandler(s)}
                             style={{
                                 backgroundColor:
