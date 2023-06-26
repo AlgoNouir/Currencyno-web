@@ -6,6 +6,26 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors:{
+      prime:{
+        100:"#173664",
+        200:"#4771AF",
+        300:"#6F9BDC"
+      },
+      accent:{
+        100:"#FCC40D",
+        200:"#FF8C00"
+      },
+      bg:{
+        100:"#FFFFFF",
+        200:"#F3F3F3",
+        300:"#fcc40d"
+      },
+      text:{
+        100:"#173664",
+        200:"#495f92"
+      }
+    }
   },
   plugins: [],
 }
