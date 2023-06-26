@@ -12,7 +12,7 @@ function LoginModal(props: { handler: any; message: string }) {
             backdrop-blur flex items-center justify-center bg-black/10"
         >
             <div
-                className="bg-white pb-5 rounded-xl relative
+                className="bg-bg-200 pb-5 rounded-xl relative
                 space-y-5 flex flex-col items-center px-5"
             >
                 <div className="flex flex-row items-center justify-center p-5">
@@ -56,7 +56,7 @@ export default function Header() {
     const [loginModalOpen, loginModalOpenHandler] = useState("");
     return (
         <div className="relative">
-            <div className="bg-white flex flex-col px-5 w-screen items-center space-y-5 pt-5">
+            <div className="bg-bg-200/50 backdrop-blur-xl shadow flex flex-col px-5 w-screen items-center space-y-5 pt-5">
                 <div className="flex flex-row items-center justify-between w-full">
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <button
@@ -115,28 +115,28 @@ export default function Header() {
                         <button
                             onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
-                            hover:border-b-2 hover:pb-2 border-green-500 transition-all"
+                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                         >
                             <p className="text-xl p-1">محصولات دیجیتال</p>
                         </button>
                         <button
                             onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
-                            hover:border-b-2 hover:pb-2 border-green-500 transition-all"
+                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                         >
                             <p className="text-xl p-1">کتابخانه اقتصادی</p>
                         </button>
                         <button
                             onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
-                            hover:border-b-2 hover:pb-2 border-green-500 transition-all"
+                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                         >
                             <p className="text-xl p-1">کافه کارآفرینی</p>
                         </button>
                         <button
                             onClick={() => router.push("/lists/")}
                             className="flex flex-row items-end justify-center 
-                            hover:border-b-2 hover:pb-2 border-green-500 transition-all"
+                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                         >
                             <p className="text-xl p-1">یک موضوع تست</p>
                         </button>

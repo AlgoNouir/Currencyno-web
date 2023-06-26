@@ -6,7 +6,7 @@ import { BiMessageSquareX } from "react-icons/bi";
 
 function ProductDetail(props: { name: string; amount: string }) {
     return (
-        <div className="h-44 bg-white rounded-xl flex items-center justify-center relative">
+        <div className="h-44 bg-bg-200 rounded-xl flex items-center justify-center relative">
             <p className="text-xl font-bold">{props.amount}</p>
             <p className="absolute bottom-5 text-gray-500 text-lg">
                 {props.name}
@@ -44,7 +44,7 @@ export default function ProductPage() {
             <div className="flex flex-col items-center w-full">
                 <Header />
                 <div className="space-y-5 p-5 container">
-                    <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-white">
+                    <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
                         <div className="w-1/2"></div>
                         <div
                             className="w-1/2 p-10 flex
@@ -110,7 +110,7 @@ export default function ProductPage() {
                         </div>
                     </div>
                     <div
-                        className="w-full rounded-xl bg-white p-10
+                        className="w-full rounded-xl bg-bg-200 p-10
                         flex flex-col space-y-5"
                     >
                         <label>توضیحات : </label>
@@ -133,7 +133,7 @@ export default function ProductPage() {
                             )
                         )}
                     </div>
-                    <div className="bg-white w-full rounded-xl h-72 p-5">
+                    <div className="bg-bg-200 w-full rounded-xl h-72 p-5">
                         <label>محصولات مشابه</label>
                     </div>
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse">
@@ -143,7 +143,7 @@ export default function ProductPage() {
                                 در حال حاضر نظری برای این محصول ثبت نشده است
                             </p>
                         </div>
-                        <div className="bg-white rounded-xl w-1/3  relative overflow-hidden space-y-5 p-5 flex flex-col items-center">
+                        <div className="bg-bg-200 rounded-xl w-1/3  relative overflow-hidden space-y-5 p-5 flex flex-col items-center">
                             {user === undefined ? (
                                 <div className="absolute flex-col space-y-5 backdrop-blur w-full h-full rounded-xl flex items-center justify-center">
                                     <p className="text-gray-700 text-xl">

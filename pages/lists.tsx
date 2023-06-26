@@ -8,7 +8,7 @@ export default function ListsPage() {
         <div className="flex flex-col space-y-5 h-screen">
             <Header />
             <div className="flex flex-row space-x-5 rtl:space-x-reverse grow p-5">
-                <div className="bg-white h-full w-96 rounded-xl p-5">
+                <div className="bg-bg-200 h-full w-96 rounded-xl p-5">
                     <p>فیلتر انجام کار</p>
                 </div>
                 <div

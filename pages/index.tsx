@@ -4,13 +4,13 @@ import Header from "@/components/header";
 function Data() {
     return (
         <div className="flex items-center justify-center">
-            <div className="bg-white w-64 h-64 rounded-full"></div>
+            <div className="bg-bg-200 w-64 h-64 rounded-full"></div>
         </div>
     );
 }
 
 function Pic() {
-    return <div className="bg-white w-1/3 h-96 rounded-xl"></div>;
+    return <div className="bg-bg-200 w-1/3 h-96 rounded-xl"></div>;
 }
 
 function Desc(props: { reverse: boolean }) {
@@ -59,8 +59,8 @@ export default function Home() {
             </div>
             <div className="p-5 space-y-5">
                 <div className="space-x-5 rtl:space-x-reverse flex flex-row items-center">
-                    <div className="bg-white w-2/3 rounded-xl h-96"></div>
-                    <div className="bg-white w-1/3 rounded-xl h-96"></div>
+                    <div className="bg-bg-200 w-2/3 rounded-xl h-96"></div>
+                    <div className="bg-bg-200 w-1/3 rounded-xl h-96"></div>
                 </div>
                 <div className="grid grid-cols-5 gap-5">
                     <Data />
@@ -71,7 +71,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="p-5 space-y-5">
-                <div className="bg-white h-96 rounded-xl"></div>
+                <div className="bg-bg-200 h-96 rounded-xl"></div>
                 <Desc reverse={true} />
                 <Desc reverse={false} />
                 <Desc reverse={true} />

@@ -16,14 +16,16 @@ export default function ProfilePage() {
                 <Header />
             </div>
             <div className="h-full p-5 flex flex-row space-x-5 rtl:space-x-reverse">
-                <div className="w-96 h-full bg-white rounded-xl flex flex-col space-y-2 items-end py-5">
+                <div className="w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-end py-5">
                     {screens.map((s, index) => (
                         <button
                             key={`screen-${index}`}
                             onClick={() => screenHandler(s)}
                             style={{
                                 backgroundColor:
-                                    s.id === screen.id ? "red" : "",
+                                    s.id === screen.id ? "#4771AF" : "",
+                                color:
+                                    s.id === screen.id ? "#FFFFFF" : "#000000",
                             }}
                             className="w-5/6 p-5 rounded-r-full"
                         >
@@ -32,7 +34,7 @@ export default function ProfilePage() {
                     ))}
                 </div>
                 <div className="w-full h">
-                    <div className="w-full h-16 rounded-xl bg-white flex items-center justify-center">
+                    <div className="w-full h-16 rounded-xl bg-bg-200 flex items-center justify-center">
                         <p className="font-bold text-xl">{screen.name}</p>
                     </div>
                     <div className="h-full w-full">{screen.component}</div>
@@ -50,9 +52,9 @@ function ProductScreen() {
             <p>در حال حاضر شما محصولی سفارش نداده اید</p>
             <button
                 onClick={() => router.push("/lists")}
-                className="bg-green-400 p-5 rounded-xl"
+                className="bg-prime-100 p-5 rounded-xl"
             >
-                <p>مشاهده لیست محصولات</p>
+                <p className="text-white">مشاهده لیست محصولات</p>
             </button>
         </div>
     );
