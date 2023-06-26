@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export enum produvtDelivery {
-    "tahvil ba post",
+    "تحویل با پست",
 }
 
 export type productType = {
