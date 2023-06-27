@@ -8,7 +8,7 @@ export default function Product(props: productType) {
     return (
         <button
             onClick={() => router.push(`product/${props.id}`)}
-            className="bg-bg-200 rounded-xl p-5 flex flex-col justify-between"
+            className="bg-bg-200 rounded-xl p-5 flex flex-col justify-between h-full"
         >
             <div className="flex flex-col space-y-5">
                 <div className="h-44 flex items-center justify-center">

@@ -71,7 +71,7 @@ export default function Home() {
                             className="absolute"
                         />
                         <div className="bg-yellow-500/50 animate-pulse grow absolute z-10 w-full h-full"></div>
-                        <div className="absolute z-10 w-64 h-72 top-7 right-7">
+                        <div className="absolute z-10 w-64  top-7 right-7">
                             <Product {...products} />
                         </div>
                     </div>
@@ -109,7 +109,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="p-5 space-y-5">
-                <div className="bg-bg-200 h-96 rounded-xl"></div>
+                <div className="bg-prime-100 h-96 rounded-xl"></div>
                 <Desc reverse={true} />
                 <Desc reverse={false} />
                 <Desc reverse={true} />

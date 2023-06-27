@@ -19,7 +19,9 @@ export default function ListsPage() {
                     className="grid w-full gap-5"
                 >
                     {products.map((item, index) => (
-                        <Product {...item} key={index} />
+                        <div className="h-96">
+                            <Product {...item} key={index} />
+                        </div>
                     ))}
                 </div>
             </div>
