@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "axios-auth-refresh": "^3.3.6",
+    "cors": "^2.8.5",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
