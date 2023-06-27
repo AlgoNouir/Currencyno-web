@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getInitDataThunk } from "./thunk";
 
 export type categoryType = {
     [key: string]: categoryType | number;
 };
 
 const initialState: {
+    serverStatus: "connect" | "disconnect" | "pending" | "init";
     category: categoryType;
 } = {
+    serverStatus: "init",
     category: {
         "لوازم جانبی موبایل": {
             شارژر: {
@@ -54,6 +57,14 @@ const coreSlice = createSlice({
     name: "coreSlice",
     initialState,
     reducers: {},
+    extraReducers(builder) {
+        builder.addCase(getInitDataThunk.rejected, (state) => {
+            state.serverStatus = "disconnect";
+        });
+        builder.addCase(getInitDataThunk.pending, (state) => {
+            state.serverStatus = "pending";
+        });
+    },
 });
 
 export default coreSlice.reducer;
