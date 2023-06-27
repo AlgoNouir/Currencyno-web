@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getInitDataThunk } from "../core/thunk";
 
 export enum produvtDelivery {
     "تحویل با پست",
@@ -81,6 +82,12 @@ const productSlice = createSlice({
     name: "productSlice",
     initialState,
     reducers: {},
+    extraReducers(builder) {
+        builder.addCase(
+            getInitDataThunk.fulfilled,
+            (state, action) => action.payload
+        );
+    },
 });
 
 export default productSlice.reducer;
