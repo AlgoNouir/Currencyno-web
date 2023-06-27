@@ -3,11 +3,18 @@ import Header from "@/components/header";
 import Product from "@/components/product";
 import { useAppSelector } from "@/store/HOCs";
 import Image from "next/image";
+import { AiOutlineFieldTime } from "react-icons/ai";
 
-function Data() {
+function Data(props: { icon: any; text: string }) {
     return (
-        <div className="flex items-center justify-center">
-            <div className="bg-bg-200 w-64 h-64 rounded-full"></div>
+        <div className="flex items-center justify-center flex-col space-y-3">
+            <div
+                className="bg-bg-200 w-48 h-48 rounded-full text-8xl
+                items-center justify-center flex text-prime-100"
+            >
+                {props.icon}
+            </div>
+            <p className="text-2xl text-black/50">{props.text}</p>
         </div>
     );
 }
@@ -61,8 +68,8 @@ export default function Home() {
             <div className="fixed w-full top-0 z-20">
                 <Header />
             </div>
-            <div className="p-5 space-y-5">
-                <div className="space-x-5 rtl:space-x-reverse flex flex-row items-center">
+            <div className="p-5 space-y-5 items-center flex flex-col">
+                <div className="space-x-5 rtl:space-x-reverse flex flex-row items-center w-full">
                     <div className="bg-bg-200 w-2/3 rounded-xl h-96 overflow-hidden relative">
                         <Image
                             src={require("@/public/3.png")}
@@ -100,16 +107,16 @@ export default function Home() {
                         </div>
                     </button>
                 </div>
-                <div className="grid grid-cols-5 gap-5">
-                    <Data />
-                    <Data />
-                    <Data />
-                    <Data />
-                    <Data />
+                <div className="bg-prime-100 h-96 rounded-xl w-full"></div>
+                <div className="grid grid-cols-5 w-fit gap-10">
+                    <Data icon={<AiOutlineFieldTime />} text="متن تست" />
+                    <Data icon={<AiOutlineFieldTime />} text="متن تست" />
+                    <Data icon={<AiOutlineFieldTime />} text="متن تست" />
+                    <Data icon={<AiOutlineFieldTime />} text="متن تست" />
+                    <Data icon={<AiOutlineFieldTime />} text="متن تست" />
                 </div>
             </div>
             <div className="p-5 space-y-5">
-                <div className="bg-prime-100 h-96 rounded-xl"></div>
                 <Desc reverse={true} />
                 <Desc reverse={false} />
                 <Desc reverse={true} />
