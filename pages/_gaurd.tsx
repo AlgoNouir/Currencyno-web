@@ -15,7 +15,7 @@ export default function Gaurd(props: { children: ReactNode }) {
         if (serverStatus === "init") {
             dispatch(getInitDataThunk());
         } else if (serverStatus === "disconnect") {
-            router.push("error");
+            // router.push("error");
         }
     }, [dispatch, serverStatus]);
 

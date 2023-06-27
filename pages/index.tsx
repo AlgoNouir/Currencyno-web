@@ -1,5 +1,8 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import Product from "@/components/product";
+import { useAppSelector } from "@/store/HOCs";
+import Image from "next/image";
 
 function Data() {
     return (
@@ -52,15 +55,50 @@ function Desc(props: { reverse: boolean }) {
 }
 
 export default function Home() {
+    const products = useAppSelector((store) => store.products)[0];
     return (
         <div className="space-y-5 pt-32">
-            <div className="fixed w-full top-0">
+            <div className="fixed w-full top-0 z-20">
                 <Header />
             </div>
             <div className="p-5 space-y-5">
                 <div className="space-x-5 rtl:space-x-reverse flex flex-row items-center">
-                    <div className="bg-bg-200 w-2/3 rounded-xl h-96"></div>
-                    <div className="bg-bg-200 w-1/3 rounded-xl h-96"></div>
+                    <div className="bg-bg-200 w-2/3 rounded-xl h-96 overflow-hidden relative">
+                        <Image
+                            src={require("@/public/3.png")}
+                            alt="test"
+                            width={1100}
+                            className="absolute"
+                        />
+                        <div className="bg-yellow-500/50 animate-pulse grow absolute z-10 w-full h-full"></div>
+                        <div className="absolute z-10 w-64 h-72 top-7 right-7">
+                            <Product {...products} />
+                        </div>
+                    </div>
+                    <button
+                        className="bg-[#ef3f3e]  w-1/3 rounded-xl h-96 flex flex-col
+                        items-center justify-center relative"
+                    >
+                        <Image
+                            src={require("@/public/watch_prev_ui.png")}
+                            alt="besrt"
+                            height={350}
+                            className="-mt-14 "
+                        />
+                        <p className="font-bold text-3xl mt-5 text-white">
+                            G-tab GT3 pro
+                        </p>
+                        <div
+                            className="bg-prime-100 w-20 h-20 items-center top-5 right-5
+                            justify-center flex rounded-full text-white absolute rotate-12"
+                        >
+                            <div
+                                className="bg-prime-200/50 rounded-full  animate-ping
+                                h-16 w-16 absolute"
+                            ></div>
+                            <label>پر فروش</label>
+                        </div>
+                    </button>
                 </div>
                 <div className="grid grid-cols-5 gap-5">
                     <Data />
