@@ -89,7 +89,7 @@ export default function Home() {
                             G-tab GT3 pro
                         </p>
                         <div
-                            className="bg-prime-100 w-20 h-20 items-center top-5 right-5
+                            className="bg-prime-100 border-4 border-prime-200 w-20 h-20 items-center top-5 right-5
                             justify-center flex rounded-full text-white absolute rotate-12"
                         >
                             <div
