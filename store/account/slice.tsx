@@ -28,21 +28,6 @@ const initialState: {
     user?: userType;
 } = {
     login: "inLogin",
-    user: {
-        fName: "مهدی",
-        lName: "نوری",
-        address: [0, 0, "آدرس تستی که از قبل ثبت شده است"],
-        phone: 9143707245,
-        nationalCode: 1451829159,
-        products: [
-            {
-                id: 0,
-                productID: 0,
-                price: 20000,
-                orderStatus: OrderStatusEnum.pending,
-            },
-        ],
-    },
 };
 
 const accountSlice = createSlice({

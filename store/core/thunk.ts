@@ -1,10 +1,10 @@
-import { axiosUser } from "@/core/axios";
+import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getInitDataThunk = createAsyncThunk(
     "getInitData",
     async (_, { rejectWithValue }) => {
-        const response = await axiosUser.get("products/");
+        const response = await axiosNoUser.get("products/");
 
         if (response.status === 200) {
             return response.data;

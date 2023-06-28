@@ -4,8 +4,11 @@ import { BsFillPersonFill, BsTelephone } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
+import { axiosNoUser } from "@/core/axios";
 
 function LoginModal(props: { handler: any; message: string }) {
+    const [sms, smsHandler] = useState(false);
+    const [phone, phoneHandler] = useState<string | undefined>();
     return (
         <div
             className="absolute z-10 h-screen top-0 w-screen 
@@ -35,11 +38,23 @@ function LoginModal(props: { handler: any; message: string }) {
                         <BsTelephone className="text-xl text-gray-700" />
                         <input
                             type="text"
+                            value={phone}
+                            onChange={(e) =>
+                                phoneHandler("0" + parseInt(e.target.value))
+                            }
                             className="outline-none bg-slate-200 p-2 w-full"
                         />
                     </div>
-                    <button className="bg-green-400 p-3 rounded-xl w-44">
-                        دریافت کد تایید
+                    <button
+                        onClick={() => {
+                            axiosNoUser
+                                .get("user/")
+                                .catch(() => console.log("error"));
+                            smsHandler(true);
+                        }}
+                        className="bg-green-400 p-3 rounded-xl w-44"
+                    >
+                        <p>ارسال کد تایید</p>
                     </button>
                 </div>
                 <p className="text-center text-gray-500 text-sm">
