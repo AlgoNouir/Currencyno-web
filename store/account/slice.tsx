@@ -6,7 +6,10 @@ export enum OrderStatusEnum {
     "done",
 }
 
-export interface OrderProduct extends productType {
+export interface OrderProduct {
+    id: number;
+    productID: number;
+    price: number;
     orderStatus: OrderStatusEnum;
 }
 
@@ -15,9 +18,9 @@ export type userType = {
     lName: string;
     address: [number, number, string];
     phone: number;
-    email: string;
-    nationalCode: number;
-    product: OrderProduct[];
+    email?: string;
+    nationalCode?: number;
+    products: OrderProduct[];
 };
 
 const initialState: {
@@ -25,6 +28,21 @@ const initialState: {
     user?: userType;
 } = {
     login: "inLogin",
+    user: {
+        fName: "مهدی",
+        lName: "نوری",
+        address: [0, 0, "آدرس تستی که از قبل ثبت شده است"],
+        phone: 9143707245,
+        nationalCode: 1451829159,
+        products: [
+            {
+                id: 0,
+                productID: 0,
+                price: 20000,
+                orderStatus: OrderStatusEnum.pending,
+            },
+        ],
+    },
 };
 
 const accountSlice = createSlice({
