@@ -1,7 +1,8 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Product from "@/components/product";
-import { useAppSelector } from "@/store/HOCs";
+import { useAppDispatch, useAppSelector } from "@/store/HOCs";
+import { addToCartThunk } from "@/store/account/thunk";
 import { useRouter } from "next/router";
 import { BiMessageSquareX } from "react-icons/bi";
 
@@ -31,6 +32,8 @@ function Offer(props: { amount: number }) {
 export default function ProductPage() {
     const router = useRouter();
     const user = useAppSelector((store) => store.account.user);
+    const dispatch = useAppDispatch();
+
     const productId = router.query.product;
 
     const tmp = useAppSelector((store) => store.products);
@@ -111,7 +114,14 @@ export default function ProductPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <button className="bg-green-700 p-5 w-72 rounded-xl">
+                                <button
+                                    onClick={() =>
+                                        dispatch(
+                                            addToCartThunk({ id: product.id })
+                                        )
+                                    }
+                                    className="bg-green-700 p-5 w-72 rounded-xl"
+                                >
                                     <p className="text-xl font-bold text-white">
                                         افزودن به سبد خرید
                                     </p>
@@ -133,13 +143,17 @@ export default function ProductPage() {
                         }}
                         className="grid gap-5 mb-10"
                     >
-                        {Object.entries(product.data).map(
-                            ([key, value], index) => (
-                                <ProductDetail
-                                    key={`productDetail-${index}`}
-                                    name={key}
-                                    amount={value}
-                                />
+                        {product.data === undefined ? (
+                            <></>
+                        ) : (
+                            Object.entries(product.data).map(
+                                ([key, value], index) => (
+                                    <ProductDetail
+                                        key={`productDetail-${index}`}
+                                        name={key}
+                                        amount={value}
+                                    />
+                                )
                             )
                         )}
                     </div>

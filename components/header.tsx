@@ -20,42 +20,98 @@ function LoginModal(props: { handler: any; message: string }) {
             >
                 <div className="flex flex-row items-center justify-center p-5">
                     <button
-                        onClick={() => props.handler("")}
+                        onClick={() => {
+                            props.handler("");
+                            smsHandler(false);
+                        }}
                         className="absolute left-5"
                     >
                         <AiOutlineArrowLeft className="text-xl" />
                     </button>
                     <p>ورود به حساب کاربری</p>
                 </div>
-                <div
-                    style={{ direction: "ltr" }}
-                    className="space-x-2 flex flex-row w-fit"
-                >
+                <div className="flex flex-col space-y-5">
                     <div
-                        className="flex bg-slate-200 items-center
+                        style={{ direction: "ltr" }}
+                        className="space-x-2 flex flex-row w-fit"
+                    >
+                        <div
+                            className="flex bg-slate-200 items-center
                         space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
-                    >
-                        <BsTelephone className="text-xl text-gray-700" />
-                        <input
-                            type="text"
-                            value={phone}
-                            onChange={(e) =>
-                                phoneHandler("0" + parseInt(e.target.value))
+                        >
+                            <BsTelephone className="text-xl text-gray-700" />
+                            <input
+                                type="text"
+                                value={phone}
+                                onChange={(e) =>
+                                    phoneHandler("0" + parseInt(e.target.value))
+                                }
+                                className="outline-none bg-slate-200 p-2 w-full"
+                            />
+                        </div>
+                        <button
+                            disabled={sms}
+                            onClick={
+                                sms
+                                    ? () => {}
+                                    : () => {
+                                          axiosNoUser
+                                              .get("user/")
+                                              .catch(() =>
+                                                  console.log("error")
+                                              );
+                                          smsHandler(true);
+                                      }
                             }
-                            className="outline-none bg-slate-200 p-2 w-full"
-                        />
+                            className={`${
+                                sms ? "bg-prime-200 " : "bg-green-400"
+                            } p-3 rounded-xl w-44`}
+                        >
+                            <p>{sms ? "ارسال مجدد" : "دریافت کد تایید"}</p>
+                        </button>
                     </div>
-                    <button
-                        onClick={() => {
-                            axiosNoUser
-                                .get("user/")
-                                .catch(() => console.log("error"));
-                            smsHandler(true);
-                        }}
-                        className="bg-green-400 p-3 rounded-xl w-44"
-                    >
-                        <p>ارسال کد تایید</p>
-                    </button>
+                    {sms ? (
+                        <div
+                            style={{ direction: "ltr" }}
+                            className="space-x-2 flex flex-row w-fit"
+                        >
+                            <div
+                                className="flex bg-slate-200 items-center
+                        space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
+                            >
+                                <BsTelephone className="text-xl text-gray-700" />
+                                <input
+                                    type="text"
+                                    value={phone}
+                                    onChange={(e) =>
+                                        phoneHandler(
+                                            "0" + parseInt(e.target.value)
+                                        )
+                                    }
+                                    className="outline-none bg-slate-200 p-2 w-full"
+                                />
+                            </div>
+                            <button
+                                onClick={
+                                    sms
+                                        ? () => {}
+                                        : () => {
+                                              axiosNoUser
+                                                  .get("user/")
+                                                  .catch(() =>
+                                                      console.log("error")
+                                                  );
+                                              smsHandler(true);
+                                          }
+                                }
+                                className="p-3 rounded-xl w-44 bg-prime-300"
+                            >
+                                <p>تایید کد</p>
+                            </button>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 <p className="text-center text-gray-500 text-sm">
                     {props.message}
