@@ -70,6 +70,13 @@ function ProductScreen() {
                 }}
                 className="grid w-full gap-5"
             >
+                <button
+                    onClick={() => router.push("factor")}
+                    className="absolute bottom-14 text-white
+                    bg-prime-100 px-16 py-2 rounded-xl left-14"
+                >
+                    سفارش نهایی
+                </button>
                 {user.inCart.map((p, index) => {
                     const product = products.find((pp) => pp.id === p);
                     if (product)
