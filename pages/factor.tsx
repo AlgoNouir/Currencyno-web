@@ -1,8 +1,10 @@
 import { useAppSelector } from "@/store/HOCs";
+import { useRouter } from "next/router";
 
 export default function FactorPage() {
     const user = useAppSelector((store) => store.account.user);
     const products = useAppSelector((store) => store.products);
+    const router = useRouter();
     if (user)
         return (
             <div
@@ -30,7 +32,12 @@ export default function FactorPage() {
                             </p>
                             <p className="text-gray-800">تومان</p>
                         </div>
-                        <button className="bg-green-600 px-7 py-2 rounded-xl text-white">
+                        <button
+                            onClick={() => {
+                                router.push("/");
+                            }}
+                            className="bg-green-600 px-7 py-2 rounded-xl text-white"
+                        >
                             پرداخت و ثبت سفارش
                         </button>
                     </div>

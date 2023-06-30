@@ -25,3 +25,15 @@ export const removeFromCartThunk = createAsyncThunk(
         const response = await axiosUser.put("user/", { id: actionData.id });
     }
 );
+
+export const OrderingThunk = createAsyncThunk(
+    "OrderingThunk",
+    async (_, { rejectWithValue }) => {
+        const response = await axiosUser.post("order/");
+        if (response.status === 201) {
+            return 0;
+        } else {
+            return rejectWithValue(response.status);
+        }
+    }
+);
