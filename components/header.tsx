@@ -167,6 +167,7 @@ export default function Header() {
                             </p>
                         </button>
                         <button
+                            className="relative"
                             onClick={
                                 user === undefined
                                     ? () =>
@@ -176,6 +177,20 @@ export default function Header() {
                                     : () => router.push("/profile")
                             }
                         >
+                            {user?.inCart || 0 > 0 ? (
+                                <div
+                                    className="bg-red-600 rounded-full w-6 h-6 
+                                flex items-center justify-center absolute top-0 -right-3"
+                                >
+                                    <label className="text-white">
+                                        {Intl.NumberFormat("fa-IR").format(
+                                            user?.inCart.length || 0
+                                        )}
+                                    </label>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                             <PiBasketLight className="text-3xl" />
                         </button>
                     </div>

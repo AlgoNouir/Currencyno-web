@@ -33,7 +33,6 @@ export default function ProductPage() {
     const router = useRouter();
     const user = useAppSelector((store) => store.account.user);
     const dispatch = useAppDispatch();
-
     const productId = router.query.product;
 
     const tmp = useAppSelector((store) => store.products);

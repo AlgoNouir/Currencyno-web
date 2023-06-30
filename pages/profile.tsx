@@ -51,7 +51,7 @@ function ProductScreen() {
     const user = useAppSelector((store) => store.account.user);
     const products = useAppSelector((store) => store.products);
     if (user)
-        return user.products.length === 0 ? (
+        return user.inCart.length === 0 ? (
             <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
                 <HiOutlineArchiveBoxXMark className="text-[150px]" />
                 <p>در حال حاضر شما محصولی سفارش نداده اید</p>
@@ -70,18 +70,12 @@ function ProductScreen() {
                 }}
                 className="grid w-full gap-5"
             >
-                {user.products.map((p, index) => {
-                    const product = products.find(
-                        (pp) => pp.id === p.productID
-                    );
+                {user.inCart.map((p, index) => {
+                    const product = products.find((pp) => pp.id === p);
                     if (product)
                         return (
                             <div className="h-96">
-                                <Product
-                                    {...product}
-                                    key={index}
-                                    price={p.price}
-                                />
+                                <Product {...product} key={index} />
                             </div>
                         );
                 })}

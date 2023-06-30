@@ -18,3 +18,10 @@ export const addToCartThunk = createAsyncThunk(
         }
     }
 );
+
+export const removeFromCartThunk = createAsyncThunk(
+    "removeFromCartThunk",
+    async (actionData: { id: number }, { rejectWithValue }) => {
+        const response = await axiosUser.put("user/", { id: actionData.id });
+    }
+);
