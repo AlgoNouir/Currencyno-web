@@ -7,7 +7,8 @@ import { HiOutlineArchiveBoxXMark } from "react-icons/hi2";
 
 const screens = [
     { id: 0, name: "سبد خرید", component: <ProductScreen /> },
-    { id: 1, name: "تنظیمات", component: <SettingScreen /> },
+    { id: 1, name: "سوابق سفارشات", component: <OrderScreen /> },
+    { id: 2, name: "تنظیمات", component: <SettingScreen /> },
 ];
 
 export default function ProfilePage() {
@@ -123,4 +124,25 @@ function SettingScreen() {
             </div>
         </div>
     );
+}
+
+function OrderScreen() {
+    const user = useAppSelector((store) => store.account.user);
+    const products = useAppSelector((store) => store.products);
+    if (user)
+        return (
+            <div className="flex flex-col space-y-5">
+                {user.products.map((OrderProduct) => {
+                    const product = products.find(
+                        (p) => p.id === OrderProduct.productID
+                    );
+                    if (product)
+                        return (
+                            <div className="w-full h-44 bg-white rounded-xl">
+                                <div>{OrderProduct.productID}</div>
+                            </div>
+                        );
+                })}
+            </div>
+        );
 }
