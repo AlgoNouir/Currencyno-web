@@ -4,6 +4,7 @@ import Product from "@/components/product";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { addToCartThunk } from "@/store/account/thunk";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { BiMessageSquareX } from "react-icons/bi";
 
 function ProductDetail(props: { name: string; amount: string }) {
@@ -31,6 +32,7 @@ function Offer(props: { amount: number }) {
 
 export default function ProductPage() {
     const router = useRouter();
+    const [count, countHandler] = useState(0);
     const user = useAppSelector((store) => store.account.user);
     const dispatch = useAppDispatch();
     const productId = router.query.product;
@@ -113,18 +115,57 @@ export default function ProductPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={() =>
-                                        dispatch(
-                                            addToCartThunk({ id: product.id })
-                                        )
-                                    }
-                                    className="bg-green-700 p-5 w-72 rounded-xl"
-                                >
-                                    <p className="text-xl font-bold text-white">
-                                        افزودن به سبد خرید
-                                    </p>
-                                </button>
+                                <div className="flex flex-col space-y-3">
+                                    <div
+                                        style={{
+                                            direction: "ltr",
+                                        }}
+                                        className="flex flex-rowx space-x-5"
+                                    >
+                                        <button
+                                            onClick={() => {
+                                                if (count > 0)
+                                                    countHandler((v) => v - 1);
+                                            }}
+                                            className="bg-prime-300 w-12 rounded-xl"
+                                        >
+                                            -
+                                        </button>
+                                        <div className="grow flex items-center justify-center">
+                                            <p>
+                                                {Intl.NumberFormat(
+                                                    "fa-IR"
+                                                ).format(count)}
+                                            </p>
+                                        </div>
+                                        <button
+                                            onClick={() =>
+                                                countHandler((v) => v + 1)
+                                            }
+                                            className="bg-prime-300 w-12 rounded-xl"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            if (count > 0) {
+                                                dispatch(
+                                                    addToCartThunk({
+                                                        id: product.id,
+                                                        count,
+                                                    })
+                                                );
+                                                countHandler(0);
+                                            }
+                                        }}
+                                        className="bg-green-700 p-5 w-72 rounded-xl"
+                                    >
+                                        <p className="text-xl font-bold text-white">
+                                            افزودن به سبد خرید
+                                        </p>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { axiosUser } from "@/core/axios";
+import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const accountThunk = createAsyncThunk(
@@ -8,8 +8,8 @@ export const accountThunk = createAsyncThunk(
 
 export const addToCartThunk = createAsyncThunk(
     "addToCartThunk",
-    async (actionData: { id: number }, { rejectWithValue }) => {
-        const response = await axiosUser.post("user/", { id: actionData.id });
+    async (actionData: { id: number; count: number }, { rejectWithValue }) => {
+        const response = await axiosUser.post("user/", actionData);
 
         if (response.status === 202) {
             return actionData;
@@ -35,5 +35,18 @@ export const OrderingThunk = createAsyncThunk(
         } else {
             return rejectWithValue(response.status);
         }
+    }
+);
+
+export const loginThunk = createAsyncThunk(
+    "loginThunk",
+    async (actionData: { code: string }, { rejectWithValue }) => {
+        const response = await axiosNoUser.post("api/user/login/", actionData);
+
+        const { access, refresh, user } = response.data;
+
+        axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
+
+        return user;
     }
 );
