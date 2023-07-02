@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import Product from "@/components/product";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { addToCartThunk } from "@/store/account/thunk";
+import { setNotif } from "@/store/core/slice";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiMessageSquareX } from "react-icons/bi";
@@ -160,11 +161,39 @@ export default function ProductPage() {
                                     </div>
                                     <button
                                         onClick={() => {
-                                            if (count > 0) {
+                                            if (user !== undefined) {
+                                                if (count > 0) {
+                                                    dispatch(
+                                                        addToCartThunk({
+                                                            product: product.id,
+                                                            count,
+                                                        })
+                                                    );
+
+                                                    dispatch(
+                                                        setNotif({
+                                                            title: "افزودن به سبد خرید",
+                                                            message: `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`,
+                                                            type: "success",
+                                                        })
+                                                    );
+                                                } else {
+                                                    dispatch(
+                                                        setNotif({
+                                                            title: "خطای تعداد",
+                                                            message:
+                                                                "مقدار محصول مورد نظر شما بایستی بیشتر از ۰ باشد",
+                                                            type: "error",
+                                                        })
+                                                    );
+                                                }
+                                            } else {
                                                 dispatch(
-                                                    addToCartThunk({
-                                                        product: product.id,
-                                                        count,
+                                                    setNotif({
+                                                        title: "احراز هویت",
+                                                        message:
+                                                            "برای افزودن کالای مورد نظر خود به سبد خرید ابتدا وارد شوید یا ثبت نام کنید",
+                                                        type: "error",
                                                     })
                                                 );
                                             }

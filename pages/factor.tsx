@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
+import { setNotif } from "@/store/core/slice";
 import { cartToOrderThunk } from "@/store/order/thunk";
 import { useRouter } from "next/router";
 
@@ -91,6 +92,12 @@ export default function FactorPage() {
                                 onClick={() => {
                                     router.push("/");
                                     dispatch(cartToOrderThunk());
+                                    dispatch(
+                                        setNotif({
+                                            title: "hello World",
+                                            message: "hello world",
+                                        })
+                                    );
                                 }}
                                 className="bg-green-600 px-7 py-2 rounded-xl text-white"
                             >

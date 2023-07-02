@@ -1,7 +1,4 @@
-import { useAppDispatch } from "@/store/HOCs";
-import { getInitDataThunk } from "@/store/core/thunk";
 import { Html, Head, Main, NextScript } from "next/document";
-import { useEffect } from "react";
 
 export default function Document() {
     return (

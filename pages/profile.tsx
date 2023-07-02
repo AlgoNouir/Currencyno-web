@@ -55,7 +55,7 @@ function ProductScreen() {
         return user.products.length === 0 ? (
             <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
                 <HiOutlineArchiveBoxXMark className="text-[150px]" />
-                <p>در حال حاضر شما محصولی سفارش نداده اید</p>
+                <label>در حال حاضر شما محصولی سفارش نداده اید</label>
                 <button
                     onClick={() => router.push("/lists")}
                     className="bg-prime-100 p-5 rounded-xl"
@@ -82,9 +82,39 @@ function ProductScreen() {
                     const product = products.find((pp) => pp.id === p.product);
                     if (product)
                         return (
-                            <div className="h-96">
-                                <Product {...product} key={index} />
-                            </div>
+                            <button
+                                onClick={() =>
+                                    router.push(`product/${product.id}`)
+                                }
+                                className="relative"
+                            >
+                                <div
+                                    className="bg-white h-44 w-full rounded-xl flex-col space-y-2
+                                    absolute z-10 flex items-center justify-center"
+                                >
+                                    <label className="text-xl">
+                                        {product.persianName}
+                                    </label>
+                                    <label className="text-gray-700">
+                                        {product.englishName}
+                                    </label>
+                                </div>
+                                <div
+                                    className="bg-prime-300 h-56 z-0 rounded-xl flex 
+                                    flex-row items-end justify-between p-2"
+                                >
+                                    <label>
+                                        {`${Intl.NumberFormat("fa-IR").format(
+                                            p.count
+                                        )} عدد`}
+                                    </label>
+                                    <label>{`${Intl.NumberFormat(
+                                        "fa-IR"
+                                    ).format(
+                                        p.count * product.price
+                                    )} تومان`}</label>
+                                </div>
+                            </button>
                         );
                 })}
             </div>

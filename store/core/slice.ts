@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getInitDataThunk } from "./thunk";
 
 export type categoryType = {
@@ -7,9 +7,15 @@ export type categoryType = {
 
 const initialState: {
     serverStatus: "connect" | "disconnect" | "pending" | "init";
+    notif: {
+        title: string;
+        message: string;
+        type: "error" | "success" | "info" | "";
+    };
     category: categoryType;
 } = {
     serverStatus: "init",
+    notif: { title: "", message: "", type: "" },
     category: {
         "لوازم جانبی موبایل": {
             "کابل شارژر": 0,
@@ -53,7 +59,18 @@ const initialState: {
 const coreSlice = createSlice({
     name: "coreSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        setNotif: (
+            state,
+            action: PayloadAction<{
+                title: string;
+                message: string;
+                type: "error" | "success" | "info" | "";
+            }>
+        ) => {
+            state.notif = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(getInitDataThunk.rejected, (state) => {
             state.serverStatus = "disconnect";
@@ -65,3 +82,4 @@ const coreSlice = createSlice({
 });
 
 export default coreSlice.reducer;
+export const { setNotif } = coreSlice.actions;
