@@ -1,11 +1,16 @@
-import { useAppSelector } from "@/store/HOCs";
-import { OrderStatusEnum } from "@/store/account/slice";
+import { useAppDispatch, useAppSelector } from "@/store/HOCs";
+import { cartToOrderThunk } from "@/store/order/thunk";
 import { useRouter } from "next/router";
 
 export default function FactorPage() {
+    // main
+    const router = useRouter();
+
+    // resdux
     const user = useAppSelector((store) => store.account.user);
     const products = useAppSelector((store) => store.products);
-    const router = useRouter();
+    const dispatch = useAppDispatch();
+
     if (user)
         return (
             <div
@@ -13,44 +18,39 @@ export default function FactorPage() {
             justify-between space-x-5 rtl:space-x-reverse"
             >
                 <div className="space-y-5 w-1/2 h-full rounded-xl overflow-scroll">
-                    {user.products
-                        .filter(
-                            (p) => p.orderStatus === OrderStatusEnum.pending
-                        )
-                        .map((item) => {
-                            const product = products.find(
-                                (p) => p.id === item.product
-                            );
-                            if (product)
-                                return (
-                                    <div className="bg-white rounded-xl space-y-5 p-5 flex flex-col">
-                                        <div>
-                                            <p className="text-xl font-bold">
-                                                {product.persianName}
+                    {user.products.map((item) => {
+                        const product = products.find(
+                            (p) => p.id === item.product
+                        );
+                        if (product)
+                            return (
+                                <div className="bg-white rounded-xl space-y-5 p-5 flex flex-col">
+                                    <div>
+                                        <p className="text-xl font-bold">
+                                            {product.persianName}
+                                        </p>
+                                        <p className="text-gray-700">
+                                            {product.englishName}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-row justify-between">
+                                        <div></div>
+                                        <div className="flex flex-row items-center space-x-2 rtl:space-x-reverse">
+                                            <p className="text-lg font-bold">
+                                                {Intl.NumberFormat(
+                                                    "fa-IR"
+                                                ).format(
+                                                    product.price * item.count
+                                                )}
                                             </p>
-                                            <p className="text-gray-700">
-                                                {product.englishName}
-                                            </p>
-                                        </div>
-                                        <div className="flex flex-row justify-between">
-                                            <div></div>
-                                            <div className="flex flex-row items-center space-x-2 rtl:space-x-reverse">
-                                                <p className="text-lg font-bold">
-                                                    {Intl.NumberFormat(
-                                                        "fa-IR"
-                                                    ).format(
-                                                        product.price *
-                                                            item.count
-                                                    )}
-                                                </p>
-                                                <small className="text-gray-700">
-                                                    تومان
-                                                </small>
-                                            </div>
+                                            <small className="text-gray-700">
+                                                تومان
+                                            </small>
                                         </div>
                                     </div>
-                                );
-                        })}
+                                </div>
+                            );
+                    })}
                 </div>
                 <div
                     className="bg-white w-1/2 h-full rounded-xl
@@ -90,6 +90,7 @@ export default function FactorPage() {
                             <button
                                 onClick={() => {
                                     router.push("/");
+                                    dispatch(cartToOrderThunk());
                                 }}
                                 className="bg-green-600 px-7 py-2 rounded-xl text-white"
                             >

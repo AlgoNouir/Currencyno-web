@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productType } from "../product/slice";
 import { addToCartThunk, loginThunk } from "./thunk";
+import { cartToOrderThunk } from "../order/thunk";
 
 export interface OrderProduct {
     id: number;
@@ -57,6 +58,9 @@ const accountSlice = createSlice({
 
             state.login = "accepted";
             state.user = action.payload;
+        });
+        builder.addCase(cartToOrderThunk.fulfilled, (state) => {
+            if (state.user) state.user.products = [];
         });
     },
 });
