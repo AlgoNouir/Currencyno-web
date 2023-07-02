@@ -3,12 +3,16 @@ import { PiBasketLight } from "react-icons/pi";
 import { BsFillPersonFill, BsTelephone } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useAppSelector } from "@/store/HOCs";
+import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { axiosNoUser } from "@/core/axios";
+import { loginThunk } from "@/store/account/thunk";
 
 function LoginModal(props: { handler: any; message: string }) {
     const [sms, smsHandler] = useState(false);
+    const [code, codeHandler] = useState("");
     const [phone, phoneHandler] = useState<string | undefined>();
+
+    const dispatch = useAppDispatch();
     return (
         <div
             className="absolute z-10 h-screen top-0 w-screen 
@@ -82,11 +86,9 @@ function LoginModal(props: { handler: any; message: string }) {
                                 <BsTelephone className="text-xl text-gray-700" />
                                 <input
                                     type="text"
-                                    value={phone}
+                                    value={code}
                                     onChange={(e) =>
-                                        phoneHandler(
-                                            "0" + parseInt(e.target.value)
-                                        )
+                                        codeHandler(e.target.value)
                                     }
                                     className="outline-none bg-slate-200 p-2 w-full"
                                 />
@@ -94,15 +96,12 @@ function LoginModal(props: { handler: any; message: string }) {
                             <button
                                 onClick={
                                     sms
-                                        ? () => {}
-                                        : () => {
-                                              axiosNoUser
-                                                  .get("user/")
-                                                  .catch(() =>
-                                                      console.log("error")
-                                                  );
-                                              smsHandler(true);
+                                        ? () => {
+                                              dispatch(loginThunk({ code }));
+                                              props.handler("");
+                                              smsHandler(false);
                                           }
+                                        : () => {}
                                 }
                                 className="p-3 rounded-xl w-44 bg-prime-300"
                             >
@@ -177,14 +176,14 @@ export default function Header() {
                                     : () => router.push("/profile")
                             }
                         >
-                            {user?.inCart || 0 > 0 ? (
+                            {user?.products || 0 > 0 ? (
                                 <div
                                     className="bg-red-600 rounded-full w-6 h-6 
                                 flex items-center justify-center absolute top-0 -right-3"
                                 >
                                     <label className="text-white">
                                         {Intl.NumberFormat("fa-IR").format(
-                                            user?.inCart.length || 0
+                                            user?.products.length || 0
                                         )}
                                     </label>
                                 </div>

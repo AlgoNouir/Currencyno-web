@@ -1,5 +1,6 @@
 import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { OrderProduct, OrderStatusEnum } from "./slice";
 
 export const accountThunk = createAsyncThunk(
     "account",
@@ -8,11 +9,17 @@ export const accountThunk = createAsyncThunk(
 
 export const addToCartThunk = createAsyncThunk(
     "addToCartThunk",
-    async (actionData: { id: number; count: number }, { rejectWithValue }) => {
+    async (
+        actionData: { product: number; count: number },
+        { rejectWithValue }
+    ) => {
         const response = await axiosUser.post("user/", actionData);
-
         if (response.status === 202) {
-            return actionData;
+            return {
+                ...actionData,
+                ...response.data,
+                orderStatus: OrderStatusEnum.pending,
+            };
         } else {
             return rejectWithValue(response.status);
         }
@@ -41,12 +48,25 @@ export const OrderingThunk = createAsyncThunk(
 export const loginThunk = createAsyncThunk(
     "loginThunk",
     async (actionData: { code: string }, { rejectWithValue }) => {
-        const response = await axiosNoUser.post("api/user/login/", actionData);
+        const response = await axiosNoUser.get("user");
 
-        const { access, refresh, user } = response.data;
+        console.log("response -> ", response.data);
 
-        axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
+        // axiosUser.data.defaults.headers.Authorization = `Bearer ${access}`;
 
-        return user;
+        console.log(response.data.user);
+        // {
+        //     last_login: "2023-07-02T08:17:47Z",
+        //     phone: 1,
+        //     fName: "مهدی",
+        //     lName: "نوری",
+        //     address: "اردبیل - یک مکان تستی جالب",
+        //     lat: 1,
+        //     long: 1,
+        //     email: "algo.mahdi.nouri@gmail.com",
+        //     nationalCode: 1,
+        // };
+
+        return response.data.user;
     }
 );

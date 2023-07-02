@@ -152,7 +152,7 @@ export default function ProductPage() {
                                             if (count > 0) {
                                                 dispatch(
                                                     addToCartThunk({
-                                                        id: product.id,
+                                                        product: product.id,
                                                         count,
                                                     })
                                                 );
