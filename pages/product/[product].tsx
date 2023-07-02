@@ -31,22 +31,33 @@ function Offer(props: { amount: number }) {
 }
 
 export default function ProductPage() {
-    const router = useRouter();
-    const [count, countHandler] = useState(0);
+    // redux
     const user = useAppSelector((store) => store.account.user);
     const dispatch = useAppDispatch();
+    const tmp = useAppSelector((store) => store.products);
+
+    // main
+    const router = useRouter();
     const productId = router.query.product;
 
-    const tmp = useAppSelector((store) => store.products);
+    // data
     const product = tmp.find(
         (p) =>
             p.id === (typeof productId === "string" ? parseInt(productId) : -1)
     );
+    const inCart =
+        product && user?.products.find((p) => p.product === product.id);
 
-    if (product !== undefined) {
-        const products = tmp.filter(
+    const products =
+        product &&
+        tmp.filter(
             (p) => p.category === product.category && p.id !== product.id
         );
+
+    // states
+    const [count, countHandler] = useState(inCart?.count || 0);
+
+    if (product !== undefined) {
         return (
             <div className="flex flex-col items-center w-full">
                 <Header />
@@ -156,13 +167,18 @@ export default function ProductPage() {
                                                         count,
                                                     })
                                                 );
-                                                countHandler(0);
                                             }
                                         }}
-                                        className="bg-green-700 p-5 w-72 rounded-xl"
+                                        className={`${
+                                            inCart === undefined
+                                                ? "bg-green-700"
+                                                : "bg-accent-200"
+                                        } p-5 w-72 rounded-xl`}
                                     >
                                         <p className="text-xl font-bold text-white">
-                                            افزودن به سبد خرید
+                                            {inCart === undefined
+                                                ? "افزودن به سبد خرید"
+                                                : "ثبت تغیرات سفارش"}
                                         </p>
                                     </button>
                                 </div>
@@ -197,19 +213,21 @@ export default function ProductPage() {
                             )
                         )}
                     </div>
-                    <div
-                        className="bg-prime-200 w-full rounded-xl h-96 relative
+                    {products && (
+                        <div
+                            className="bg-prime-200 w-full rounded-xl h-96 relative
                         justify-end items-end p-5 flex flex-row space-x-5 rtl:space-x-reverse"
-                    >
-                        <label className="absolute top-10 right-10 z-10 text-white text-xl">
-                            محصولات مشابه
-                        </label>
-                        {products.map((item) => (
-                            <div className="w-64 h-96 -mt-32">
-                                <Product {...item} />
-                            </div>
-                        ))}
-                    </div>
+                        >
+                            <label className="absolute top-10 right-10 z-10 text-white text-xl">
+                                محصولات مشابه
+                            </label>
+                            {products.map((item) => (
+                                <div className="w-64 h-96 -mt-32">
+                                    <Product {...item} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <div className="w-2/3 h-96 flex flex-col items-center justify-center space-y-5">
                             <BiMessageSquareX className="text-7xl text-gray-500" />

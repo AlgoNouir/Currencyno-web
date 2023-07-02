@@ -2,17 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { productType } from "../product/slice";
 import { addToCartThunk, loginThunk } from "./thunk";
 
-export enum OrderStatusEnum {
-    "pending",
-    "done",
-}
-
 export interface OrderProduct {
     id: number;
     product: number;
-    price: number;
     count: number;
-    orderStatus: OrderStatusEnum;
 }
 
 export type userType = {

@@ -1,6 +1,6 @@
 import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { OrderProduct, OrderStatusEnum } from "./slice";
+import { OrderProduct } from "./slice";
 
 export const accountThunk = createAsyncThunk(
     "account",
@@ -18,7 +18,6 @@ export const addToCartThunk = createAsyncThunk(
             return {
                 ...actionData,
                 ...response.data,
-                orderStatus: OrderStatusEnum.pending,
             };
         } else {
             return rejectWithValue(response.status);
