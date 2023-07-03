@@ -3,7 +3,12 @@ import { getInitDataThunk } from "./thunk";
 import { changeAccountDataThunk } from "../account/thunk";
 
 export type categoryType = {
-    [key: string]: categoryType | number;
+    [key: string]: {
+        id: number;
+        parent?: number;
+        icon?: any;
+        depth: number;
+    };
 };
 
 const initialState: {
@@ -19,41 +24,34 @@ const initialState: {
     notif: { title: "", message: "", type: "" },
     category: {
         "لوازم جانبی موبایل": {
-            "کابل شارژر": 0,
-            "شارژر فندکی": 1,
-            "شارژر وایرلس": 2,
-            "کابل AUX": 3,
-            هولدر: 4,
-            پاوربانک: 5,
-            "ساعت هوشمند": 6,
-            "ساعت مچی": 7,
-            "هدفون سیمی": 8,
-            "هدفون بلوتوثی": 9,
-            "هندزفری سیمی": 10,
-            "هندزفری بلوتوثی": 11,
-            "اسپیکر بلوتوثی": 12,
-            "اسپیکر سیمی": 13,
-            "موس بیسیم": 14,
-            "موس بلوتوثی": 15,
-            "کیبورد بیسیم": 16,
-            "کیبورد بلوتوثی": 17,
-            "کول پد": 18,
-            "کیف لپتاب": 19,
+            id: 0,
+            depth: 0,
         },
-        مانیتور: {
-            نو: 20,
-            استوک: 21,
+        شارژر: {
+            id: 21,
+            depth: 0,
+            parent: 0,
         },
-        پرینتر: {
-            نو: 22,
-            استوک: 23,
-        },
-        لپتاب: {
-            نو: 24,
-            استوک: 25,
-        },
-        "مینی کیس": 26,
-        "موبایل و تبلت": 27,
+        "شارژر فندکی": { id: 1, depth: 1, parent: 21 },
+        "شارژر وایرلس": { id: 2, depth: 1, parent: 21 },
+        "کابل AUX": { id: 3, depth: 1, parent: 0 },
+        هولدر: { id: 4, depth: 1, parent: 0 },
+        پاوربانک: { id: 5, depth: 1, parent: 21 },
+        "ساعت هوشمند": { id: 6, depth: 1, parent: 0 },
+        "ساعت مچی": { id: 7, depth: 1, parent: 0 },
+        "هدفون سیمی": { id: 8, depth: 1, parent: 0 },
+        "هدفون بلوتوثی": { id: 9, depth: 1, parent: 0 },
+        "هندزفری سیمی": { id: 10, depth: 1, parent: 0 },
+        "هندزفری بلوتوثی": { id: 11, depth: 1, parent: 0 },
+        "اسپیکر بلوتوثی": { id: 12, depth: 1, parent: 0 },
+        "اسپیکر سیمی": { id: 13, depth: 1, parent: 0 },
+        "موس بیسیم": { id: 14, depth: 1, parent: 0 },
+        "موس بلوتوثی": { id: 15, depth: 1, parent: 0 },
+        "کیبورد بیسیم": { id: 16, depth: 1, parent: 0 },
+        "کیبورد بلوتوثی": { id: 17, depth: 1, parent: 0 },
+        "کول پد": { id: 18, depth: 1, parent: 0 },
+        "کیف لپتاب": { id: 19, depth: 1, parent: 0 },
+        "کابل شارژر": { id: 20, depth: 1, parent: 0 },
     },
 };
 

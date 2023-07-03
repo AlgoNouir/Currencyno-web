@@ -223,7 +223,7 @@ export default function Header() {
                             className="flex flex-row items-end justify-center 
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                         >
-                            <p className="text-xl p-1">یک موضوع تست</p>
+                            <p className="text-xl p-1">کاریابی و استخدام</p>
                         </button>
                     </div>
                 </div>
