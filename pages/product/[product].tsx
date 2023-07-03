@@ -162,7 +162,11 @@ export default function ProductPage() {
                                     <button
                                         onClick={() => {
                                             if (user !== undefined) {
-                                                if (count > 0) {
+                                                if (
+                                                    count > 0 ||
+                                                    (inCart !== undefined &&
+                                                        inCart.count !== count)
+                                                ) {
                                                     dispatch(
                                                         addToCartThunk({
                                                             product: product.id,
@@ -173,8 +177,16 @@ export default function ProductPage() {
                                                     dispatch(
                                                         setNotif({
                                                             title: "افزودن به سبد خرید",
-                                                            message: `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`,
-                                                            type: "success",
+                                                            message:
+                                                                inCart ===
+                                                                undefined
+                                                                    ? `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`
+                                                                    : `${product.persianName} با موفقیت ویرایش شد`,
+                                                            type:
+                                                                inCart ===
+                                                                undefined
+                                                                    ? "success"
+                                                                    : "info",
                                                         })
                                                     );
                                                 } else {
@@ -199,13 +211,19 @@ export default function ProductPage() {
                                             }
                                         }}
                                         className={`${
-                                            inCart === undefined
+                                            inCart === undefined ||
+                                            (count === 0 &&
+                                                inCart !== undefined &&
+                                                inCart.count !== count)
                                                 ? "bg-green-700"
                                                 : "bg-accent-200"
                                         } p-5 w-72 rounded-xl`}
                                     >
                                         <p className="text-xl font-bold text-white">
-                                            {inCart === undefined
+                                            {inCart === undefined ||
+                                            (count === 0 &&
+                                                inCart !== undefined &&
+                                                inCart.count !== count)
                                                 ? "افزودن به سبد خرید"
                                                 : "ثبت تغیرات سفارش"}
                                         </p>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productType } from "../product/slice";
-import { addToCartThunk, loginThunk } from "./thunk";
+import { addToCartThunk, changeAccountDataThunk, loginThunk } from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
 
 export interface OrderProduct {
@@ -12,10 +12,10 @@ export interface OrderProduct {
 export type userType = {
     fName: string;
     lName: string;
-    address: [number, number, string];
+    address: string;
     phone: number;
     email?: string;
-    nationalCode?: number;
+    nationalCode?: string;
     products: OrderProduct[];
 };
 
@@ -36,9 +36,7 @@ const accountSlice = createSlice({
                 const product = state.user.products.find(
                     (p) => p.product === action.payload.product
                 );
-                console.log(action.payload);
-
-                if (product) {
+                if (product && action.payload.count !== 0) {
                     state.user.products = [
                         ...state.user.products.filter(
                             (p) => p.product !== action.payload.product
@@ -47,6 +45,12 @@ const accountSlice = createSlice({
                             ...product,
                             count: action.payload.count,
                         },
+                    ];
+                } else if (action.payload.count === 0) {
+                    state.user.products = [
+                        ...state.user.products.filter(
+                            (p) => p.product !== action.payload.product
+                        ),
                     ];
                 } else {
                     state.user.products.push(action.payload);
@@ -61,6 +65,13 @@ const accountSlice = createSlice({
         });
         builder.addCase(cartToOrderThunk.fulfilled, (state) => {
             if (state.user) state.user.products = [];
+        });
+        builder.addCase(changeAccountDataThunk.fulfilled, (state, action) => {
+            if (state.user)
+                state.user = {
+                    ...state.user,
+                    ...action.payload,
+                };
         });
     },
 });

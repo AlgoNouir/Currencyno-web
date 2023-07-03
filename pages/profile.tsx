@@ -1,8 +1,9 @@
 import Header from "@/components/header";
 import Product from "@/components/product";
-import { useAppSelector } from "@/store/HOCs";
+import { useAppDispatch, useAppSelector } from "@/store/HOCs";
+import { changeAccountDataThunk } from "@/store/account/thunk";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { HiOutlineArchiveBoxXMark } from "react-icons/hi2";
 
 const screens = [
@@ -120,11 +121,17 @@ function ProductScreen() {
             </div>
         );
 }
-function Input(props: { title: string }) {
+function Input(props: {
+    title: string;
+    handler: Dispatch<SetStateAction<string>>;
+    value: string;
+}) {
     return (
         <div className="flex flex-col space-y-2 mb-5">
             <label>{props.title}</label>
             <input
+                value={props.value}
+                onChange={(e) => props.handler(e.target.value)}
                 type="text"
                 className="bg-gray-100 p-3 rounded-xl outline-none w-full"
                 placeholder={props.title + " را وارد کنید"}
@@ -134,21 +141,59 @@ function Input(props: { title: string }) {
 }
 
 function SettingScreen() {
+    // redux
+    const user = useAppSelector((store) => store.account.user);
+    const dispatch = useAppDispatch();
+
+    // states
+    const [name, nameHandler] = useState(user?.fName || "");
+    const [family, familyHandler] = useState(user?.lName || "");
+    const [nationalCode, nationalCodeHandler] = useState(
+        user?.nationalCode?.toString() || ""
+    );
+    const [email, emailHandler] = useState(user?.email || "");
+    const [address, addressHandler] = useState(user?.address || "");
+
     return (
         <div className="h-fit w-full bg-white rounded-xl p-5 space-y-10 flex flex-row">
             <div className="w-1/2">
-                <Input title="نام شخص" />
-                <Input title="نام خانوادگی" />
-                <Input title="کد ملی" />
-                <Input title="ایمیل" />
+                <Input value={name} handler={nameHandler} title="نام شخص" />
+                <Input
+                    value={family}
+                    handler={familyHandler}
+                    title="نام خانوادگی"
+                />
+                <Input
+                    value={nationalCode}
+                    handler={nationalCodeHandler}
+                    title="کد ملی"
+                />
+                <Input value={email} handler={emailHandler} title="ایمیل" />
                 <div className="flex flex-col space-y-2 mb-5">
                     <label>آدرس</label>
-                    <textarea className="bg-gray-100 p-3 rounded-xl outline-none w-full h-40" />
+                    <textarea
+                        value={address}
+                        onChange={(e) => addressHandler(e.target.value)}
+                        className="bg-gray-100 p-3 rounded-xl outline-none w-full h-40"
+                    />
                 </div>
             </div>
             <div className="w-1/2 justify-between flex flex-col items-end">
                 <div></div>
-                <button className="bg-prime-100 w-44 p-3 rounded-xl">
+                <button
+                    onClick={() =>
+                        dispatch(
+                            changeAccountDataThunk({
+                                fName: name,
+                                lName: family,
+                                nationalCode,
+                                email,
+                                address,
+                            })
+                        )
+                    }
+                    className="bg-prime-100 w-44 p-3 rounded-xl"
+                >
                     <p className="text-white text-lg">ذخیره تنظیمات</p>
                 </button>
             </div>

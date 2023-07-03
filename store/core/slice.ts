@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getInitDataThunk } from "./thunk";
+import { changeAccountDataThunk } from "../account/thunk";
 
 export type categoryType = {
     [key: string]: categoryType | number;
@@ -77,6 +78,13 @@ const coreSlice = createSlice({
         });
         builder.addCase(getInitDataThunk.pending, (state) => {
             state.serverStatus = "pending";
+        });
+        builder.addCase(changeAccountDataThunk.fulfilled, (state, action) => {
+            state.notif = {
+                type: "success",
+                title: "ثبت تغیرات کاربر",
+                message: "مشخصات کاربر با موفقیت تغییر یافت",
+            };
         });
     },
 });
