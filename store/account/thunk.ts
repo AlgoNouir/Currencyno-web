@@ -24,7 +24,7 @@ export const loginThunk = createAsyncThunk(
     "loginThunk",
     async (actionData: { code: string }, { rejectWithValue }) => {
         const response = await axiosNoUser.get("user");
-        return response.data.user;
+        return response.data;
     }
 );
 

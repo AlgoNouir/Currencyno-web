@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginThunk } from "../account/thunk";
 
 export enum OrderStatusEnum {
     "در حال بررسی سفارش",
@@ -9,9 +10,10 @@ export enum OrderStatusEnum {
 
 export type orderType = {
     id: number;
-    product: number;
+    created_at: Date;
+    price: number;
     count: number;
-    orderStatus: OrderStatusEnum;
+    done: OrderStatusEnum;
 };
 
 const initialState: orderType[] = [];
@@ -20,6 +22,12 @@ const orderSlice = createSlice({
     name: "orderSlice",
     initialState,
     reducers: {},
+    extraReducers(builder) {
+        builder.addCase(
+            loginThunk.fulfilled,
+            (state, action) => action.payload.orders
+        );
+    },
 });
 
 export default orderSlice.reducer;

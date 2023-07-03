@@ -58,10 +58,8 @@ const accountSlice = createSlice({
             }
         });
         builder.addCase(loginThunk.fulfilled, (state, action) => {
-            console.log(action.payload);
-
             state.login = "accepted";
-            state.user = action.payload;
+            state.user = action.payload.user;
         });
         builder.addCase(cartToOrderThunk.fulfilled, (state) => {
             if (state.user) state.user.products = [];

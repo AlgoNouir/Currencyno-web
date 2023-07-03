@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import Product from "@/components/product";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { changeAccountDataThunk } from "@/store/account/thunk";
+import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { HiOutlineArchiveBoxXMark } from "react-icons/hi2";
@@ -202,22 +203,45 @@ function SettingScreen() {
 }
 
 function OrderScreen() {
-    const user = useAppSelector((store) => store.account.user);
-    const products = useAppSelector((store) => store.products);
-    if (user)
-        return (
-            <div className="flex flex-col space-y-5">
-                {user.products.map((OrderProduct) => {
-                    const product = products.find(
-                        (p) => p.id === OrderProduct.product
-                    );
-                    if (product)
-                        return (
-                            <div className="w-full h-44 bg-white rounded-xl">
-                                <div>{OrderProduct.product}</div>
+    const orders = useAppSelector((store) => store.orders);
+
+    return (
+        <div className="relative w-full h-full">
+            <div
+                className="grid grid-cols-2 gap-5 overflow-scroll 
+                absolute top-0 left-0 right-0 bottom-0 scrollbar-hide"
+            >
+                {orders.map((order) => (
+                    <button
+                        className={`w-full ${
+                            order.done === 3 ? "bg-zinc-300" : "bg-white"
+                        } rounded-xl p-5`}
+                    >
+                        <div className="flex flex-row justify-between">
+                            <div className="flex flex-col space-y-5 ">
+                                <div>
+                                    {new Date(order.created_at).toLocaleString(
+                                        "fa"
+                                    )}
+                                </div>
+                                <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">
+                                    <label>
+                                        {`${Intl.NumberFormat("fa-IR").format(
+                                            order.price
+                                        )} تومان`}
+                                    </label>
+                                    <small className="text-gray-600">{`( ${Intl.NumberFormat(
+                                        "fa-IR"
+                                    ).format(order.count)} سفارش )`}</small>
+                                </div>
                             </div>
-                        );
-                })}
+                            <div>
+                                <label>{OrderStatusEnum[order.done]}</label>
+                            </div>
+                        </div>
+                    </button>
+                ))}
             </div>
-        );
+        </div>
+    );
 }
