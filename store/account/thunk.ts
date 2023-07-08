@@ -22,7 +22,10 @@ export const addToCartThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
     "loginThunk",
-    async (actionData: { code: string }, { rejectWithValue }) => {
+    async (
+        actionData: { code: string; phone: number },
+        { rejectWithValue }
+    ) => {
         const response = await axiosNoUser.get("user");
         return response.data;
     }

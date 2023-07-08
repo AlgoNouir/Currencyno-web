@@ -10,7 +10,7 @@ import { loginThunk } from "@/store/account/thunk";
 function LoginModal(props: { handler: any; message: string }) {
     const [sms, smsHandler] = useState(false);
     const [code, codeHandler] = useState("");
-    const [phone, phoneHandler] = useState<string | undefined>();
+    const [phone, phoneHandler] = useState<number | "">();
 
     const dispatch = useAppDispatch();
     return (
@@ -46,9 +46,9 @@ function LoginModal(props: { handler: any; message: string }) {
                             <BsTelephone className="text-xl text-gray-700" />
                             <input
                                 type="text"
-                                value={phone}
+                                value={phone && "0" + phone}
                                 onChange={(e) =>
-                                    phoneHandler("0" + parseInt(e.target.value))
+                                    phoneHandler(parseInt(e.target.value) || "")
                                 }
                                 className="outline-none bg-slate-200 p-2 w-full"
                             />
@@ -59,12 +59,14 @@ function LoginModal(props: { handler: any; message: string }) {
                                 sms
                                     ? () => {}
                                     : () => {
-                                          axiosNoUser
-                                              .get("user/")
-                                              .catch(() =>
-                                                  console.log("error")
-                                              );
-                                          smsHandler(true);
+                                          if (typeof phone === "number") {
+                                              axiosNoUser
+                                                  .post("login/", { phone })
+                                                  .catch(() =>
+                                                      console.log("error")
+                                                  );
+                                              smsHandler(true);
+                                          }
                                       }
                             }
                             className={`${
@@ -97,9 +99,16 @@ function LoginModal(props: { handler: any; message: string }) {
                                 onClick={
                                     sms
                                         ? () => {
-                                              dispatch(loginThunk({ code }));
-                                              props.handler("");
-                                              smsHandler(false);
+                                              if (typeof phone === "number") {
+                                                  dispatch(
+                                                      loginThunk({
+                                                          phone,
+                                                          code,
+                                                      })
+                                                  );
+                                                  props.handler("");
+                                                  smsHandler(false);
+                                              }
                                           }
                                         : () => {}
                                 }
