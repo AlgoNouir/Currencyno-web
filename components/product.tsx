@@ -5,6 +5,8 @@ import Image from "./image";
 
 export default function Product(props: productType) {
     const router = useRouter();
+    console.log(props);
+
     return (
         <button
             onClick={() => router.push(`product/${props.id}`)}

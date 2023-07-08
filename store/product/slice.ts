@@ -7,7 +7,7 @@ export enum produvtDelivery {
 
 export type productType = {
     id: number;
-    image: string;
+    image: string[];
     garanty: string;
     category: number;
     persianName: string;

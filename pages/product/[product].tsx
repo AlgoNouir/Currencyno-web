@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Product from "@/components/product";
+import Carousel from "@/components/carousel";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { addToCartThunk } from "@/store/account/thunk";
 import { setNotif } from "@/store/core/slice";
@@ -64,7 +65,9 @@ export default function ProductPage() {
                 <Header />
                 <div className="space-y-5 p-5 container">
                     <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
-                        <div className="w-1/2"></div>
+                        <div className="w-1/2">
+                            <Carousel images={product.image} />
+                        </div>
                         <div
                             className="w-1/2 p-10 flex
                             items-center justify-between flex-col space-y-7 relative"
