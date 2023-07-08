@@ -32,7 +32,7 @@ const productSlice = createSlice({
     extraReducers(builder) {
         builder.addCase(
             getInitDataThunk.fulfilled,
-            (state, action) => action.payload
+            (state, action) => action.payload.products
         );
     },
 });

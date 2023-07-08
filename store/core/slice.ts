@@ -3,12 +3,9 @@ import { getInitDataThunk } from "./thunk";
 import { changeAccountDataThunk, loginThunk } from "../account/thunk";
 
 export type categoryType = {
-    [key: string]: {
-        id: number;
-        parent?: number;
-        icon?: any;
-        depth: number;
-    };
+    id: number;
+    parent?: number;
+    name: string;
 };
 
 const initialState: {
@@ -18,41 +15,11 @@ const initialState: {
         message: string;
         type: "error" | "success" | "info" | "warning" | "";
     };
-    category: categoryType;
+    category: categoryType[];
 } = {
     serverStatus: "init",
     notif: { title: "", message: "", type: "" },
-    category: {
-        "لوازم جانبی موبایل": {
-            id: 0,
-            depth: 0,
-        },
-        شارژر: {
-            id: 21,
-            depth: 0,
-            parent: 0,
-        },
-        "شارژر فندکی": { id: 1, depth: 1, parent: 21 },
-        "شارژر وایرلس": { id: 2, depth: 1, parent: 21 },
-        "کابل AUX": { id: 3, depth: 1, parent: 0 },
-        هولدر: { id: 4, depth: 1, parent: 0 },
-        پاوربانک: { id: 5, depth: 1, parent: 21 },
-        "ساعت هوشمند": { id: 6, depth: 1, parent: 0 },
-        "ساعت مچی": { id: 7, depth: 1, parent: 0 },
-        "هدفون سیمی": { id: 8, depth: 1, parent: 0 },
-        "هدفون بلوتوثی": { id: 9, depth: 1, parent: 0 },
-        "هندزفری سیمی": { id: 10, depth: 1, parent: 0 },
-        "هندزفری بلوتوثی": { id: 11, depth: 1, parent: 0 },
-        "اسپیکر بلوتوثی": { id: 12, depth: 1, parent: 0 },
-        "اسپیکر سیمی": { id: 13, depth: 1, parent: 0 },
-        "موس بیسیم": { id: 14, depth: 1, parent: 0 },
-        "موس بلوتوثی": { id: 15, depth: 1, parent: 0 },
-        "کیبورد بیسیم": { id: 16, depth: 1, parent: 0 },
-        "کیبورد بلوتوثی": { id: 17, depth: 1, parent: 0 },
-        "کول پد": { id: 18, depth: 1, parent: 0 },
-        "کیف لپتاب": { id: 19, depth: 1, parent: 0 },
-        "کابل شارژر": { id: 20, depth: 1, parent: 0 },
-    },
+    category: [],
 };
 
 const coreSlice = createSlice({
@@ -76,6 +43,11 @@ const coreSlice = createSlice({
         });
         builder.addCase(getInitDataThunk.pending, (state) => {
             state.serverStatus = "pending";
+        });
+        builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
+            console.log(action.payload.category);
+
+            state.category = action.payload.category;
         });
         builder.addCase(changeAccountDataThunk.fulfilled, (state) => {
             state.notif = {
