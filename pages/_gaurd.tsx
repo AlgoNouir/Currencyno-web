@@ -7,10 +7,11 @@ import { ReactNode, useEffect } from "react";
 
 export default function Gaurd(props: { children: ReactNode }) {
     const dispatch = useAppDispatch();
-    const tmp = useAppSelector((store) => store.core);
+    const core = useAppSelector((store) => store.core);
+    const account = useAppSelector((store) => store.account);
 
-    const serverStatus = tmp.serverStatus;
-    const notif = tmp.notif;
+    const serverStatus = core.serverStatus;
+    const notif = core.notif;
 
     const [api, contextHolder] = notification.useNotification();
     const router = useRouter();
@@ -22,6 +23,8 @@ export default function Gaurd(props: { children: ReactNode }) {
         } else if (serverStatus === "disconnect") {
             // router.push("error");
         }
+
+        // show notif in web and delete
         if (notif.type !== "") {
             api[notif.type]({
                 message: notif.title,

@@ -26,8 +26,10 @@ export const loginThunk = createAsyncThunk(
         actionData: { code: string; phone: number },
         { rejectWithValue }
     ) => {
-        const response = await axiosNoUser.get("user");
-        return response.data;
+        const response = await axiosNoUser.post("login/", actionData);
+        const { user, access, orders } = response.data;
+        axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
+        return { user, orders };
     }
 );
 

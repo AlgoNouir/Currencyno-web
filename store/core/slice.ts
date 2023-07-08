@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getInitDataThunk } from "./thunk";
-import { changeAccountDataThunk } from "../account/thunk";
+import { changeAccountDataThunk, loginThunk } from "../account/thunk";
 
 export type categoryType = {
     [key: string]: {
@@ -16,7 +16,7 @@ const initialState: {
     notif: {
         title: string;
         message: string;
-        type: "error" | "success" | "info" | "";
+        type: "error" | "success" | "info" | "warning" | "";
     };
     category: categoryType;
 } = {
@@ -64,7 +64,7 @@ const coreSlice = createSlice({
             action: PayloadAction<{
                 title: string;
                 message: string;
-                type: "error" | "success" | "info" | "";
+                type: "error" | "success" | "info" | "warning" | "";
             }>
         ) => {
             state.notif = action.payload;
@@ -77,12 +77,29 @@ const coreSlice = createSlice({
         builder.addCase(getInitDataThunk.pending, (state) => {
             state.serverStatus = "pending";
         });
-        builder.addCase(changeAccountDataThunk.fulfilled, (state, action) => {
+        builder.addCase(changeAccountDataThunk.fulfilled, (state) => {
             state.notif = {
                 type: "success",
                 title: "ثبت تغیرات کاربر",
                 message: "مشخصات کاربر با موفقیت تغییر یافت",
             };
+        });
+        builder.addCase(loginThunk.fulfilled, (state, action) => {
+            const { user } = action.payload;
+            if (
+                user.lName === undefined ||
+                user.fName === undefined ||
+                user.lName === undefined ||
+                user.email === undefined ||
+                user.address === undefined
+            ) {
+                state.notif = {
+                    type: "warning",
+                    title: "هشدار کامل نبودن مشخصات",
+                    message:
+                        "برای تکمیل ثبت نام خود لطفا مشخصات کاربری خود را کامل کنید",
+                };
+            }
         });
     },
 });
