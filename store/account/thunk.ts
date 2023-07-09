@@ -5,7 +5,7 @@ import { OrderProduct } from "./slice";
 export const addToCartThunk = createAsyncThunk(
     "addToCartThunk",
     async (
-        actionData: { product: number; count: number },
+        actionData: { product: number; count: number; select: number },
         { rejectWithValue }
     ) => {
         const response = await axiosUser.post("cart/", actionData);

@@ -5,6 +5,12 @@ export enum produvtDelivery {
     "تحویل با پست",
 }
 
+export type keeperCounterType = {
+    id: number;
+    amount: number;
+    name: string;
+};
+
 export type productType = {
     id: number;
     image: string[];
@@ -16,7 +22,7 @@ export type productType = {
     offerPrice: number;
     price: number;
     desc: string;
-    keeperCount: number;
+    counts: keeperCounterType[];
     orginal: boolean;
     data: {
         [key: string]: string;

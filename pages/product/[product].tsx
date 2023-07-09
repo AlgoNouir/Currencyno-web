@@ -1,13 +1,21 @@
+// main
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+
+// components & icons
+import { Dropdown } from "antd";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Product from "@/components/product";
 import Carousel from "@/components/carousel";
-import { useAppDispatch, useAppSelector } from "@/store/HOCs";
-import { addToCartThunk } from "@/store/account/thunk";
-import { setNotif } from "@/store/core/slice";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { BiMessageSquareX } from "react-icons/bi";
+
+// redux
+import { useAppDispatch, useAppSelector } from "@/store/HOCs";
+import { setNotif } from "@/store/core/slice";
+import { addToCartThunk } from "@/store/account/thunk";
+import { keeperCounterType } from "@/store/product/slice";
 
 function ProductDetail(props: { name: string; amount: string }) {
     return (
@@ -58,6 +66,7 @@ export default function ProductPage() {
 
     // states
     const [count, countHandler] = useState(inCart?.count || 0);
+    const [select, selectHandler] = useState<keeperCounterType | undefined>();
 
     if (product !== undefined) {
         return (
@@ -73,8 +82,63 @@ export default function ProductPage() {
                             items-center justify-between flex-col space-y-7 relative"
                         >
                             <div className="flex flex-col space-y-5 w-full">
-                                <label className="text-xl font-bold text-right">
-                                    {product.persianName}
+                                <label className="text-right space-x-5 rtl:space-x-reverse">
+                                    <label className="text-xl font-bold">
+                                        {product.persianName}
+                                    </label>
+                                    {product.counts.length > 0 ? (
+                                        <Dropdown
+                                            menu={{
+                                                items: product.counts.map(
+                                                    (p): ItemType => ({
+                                                        key: p.id,
+                                                        label: (
+                                                            <button
+                                                                onClick={() => {
+                                                                    if (
+                                                                        p.amount <
+                                                                        count
+                                                                    )
+                                                                        countHandler(
+                                                                            p.amount
+                                                                        );
+                                                                    selectHandler(
+                                                                        p
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {`${
+                                                                    p.name
+                                                                } - ${Intl.NumberFormat(
+                                                                    "fa-IR"
+                                                                ).format(
+                                                                    p.amount
+                                                                )}
+                                                    عدد`}
+                                                            </button>
+                                                        ),
+                                                    })
+                                                ),
+                                            }}
+                                        >
+                                            <button
+                                                className={`${
+                                                    select === undefined
+                                                        ? "bg-gray-300"
+                                                        : "bg-prime-300"
+                                                } px-5 py-1 rounded-xl`}
+                                            >
+                                                <small>
+                                                    {select === undefined
+                                                        ? "انتخاب کنید"
+                                                        : select.name}
+                                                </small>
+                                            </button>
+                                        </Dropdown>
+                                    ) : (
+                                        <></>
+                                    )}
+
                                     {product.orginal ? (
                                         <></>
                                     ) : (
@@ -154,9 +218,24 @@ export default function ProductPage() {
                                             </p>
                                         </div>
                                         <button
-                                            onClick={() =>
-                                                countHandler((v) => v + 1)
-                                            }
+                                            onClick={() => {
+                                                // TODO fix this and set amount to max person order
+                                                if (
+                                                    (select?.amount || 100000) >
+                                                    count
+                                                ) {
+                                                    countHandler((v) => v + 1);
+                                                } else {
+                                                    dispatch(
+                                                        setNotif({
+                                                            type: "warning",
+                                                            title: "اضافه نشد",
+                                                            message:
+                                                                "شما نمی توانید بیشتر از این مقدار خریداری نمایید",
+                                                        })
+                                                    );
+                                                }
+                                            }}
                                             className="bg-prime-300 w-12 rounded-xl"
                                         >
                                             +
@@ -166,38 +245,58 @@ export default function ProductPage() {
                                         onClick={() => {
                                             if (user !== undefined) {
                                                 if (
-                                                    count > 0 ||
-                                                    (inCart !== undefined &&
-                                                        inCart.count !== count)
+                                                    product.counts.length ===
+                                                        0 ||
+                                                    select !== undefined
                                                 ) {
-                                                    dispatch(
-                                                        addToCartThunk({
-                                                            product: product.id,
-                                                            count,
-                                                        })
-                                                    );
+                                                    if (
+                                                        count > 0 ||
+                                                        (inCart !== undefined &&
+                                                            inCart.count !==
+                                                                count)
+                                                    ) {
+                                                        dispatch(
+                                                            addToCartThunk({
+                                                                product:
+                                                                    product.id,
+                                                                select:
+                                                                    select?.id ||
+                                                                    -1,
+                                                                count,
+                                                            })
+                                                        );
 
-                                                    dispatch(
-                                                        setNotif({
-                                                            title: "افزودن به سبد خرید",
-                                                            message:
-                                                                inCart ===
-                                                                undefined
-                                                                    ? `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`
-                                                                    : `${product.persianName} با موفقیت ویرایش شد`,
-                                                            type:
-                                                                inCart ===
-                                                                undefined
-                                                                    ? "success"
-                                                                    : "info",
-                                                        })
-                                                    );
+                                                        dispatch(
+                                                            setNotif({
+                                                                title: "افزودن به سبد خرید",
+                                                                message:
+                                                                    inCart ===
+                                                                    undefined
+                                                                        ? `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`
+                                                                        : `${product.persianName} با موفقیت ویرایش شد`,
+                                                                type:
+                                                                    inCart ===
+                                                                    undefined
+                                                                        ? "success"
+                                                                        : "info",
+                                                            })
+                                                        );
+                                                    } else {
+                                                        dispatch(
+                                                            setNotif({
+                                                                title: "خطای تعداد",
+                                                                message:
+                                                                    "مقدار محصول مورد نظر شما بایستی بیشتر از ۰ باشد",
+                                                                type: "error",
+                                                            })
+                                                        );
+                                                    }
                                                 } else {
                                                     dispatch(
                                                         setNotif({
-                                                            title: "خطای تعداد",
+                                                            title: "انتختب نوع محصول",
                                                             message:
-                                                                "مقدار محصول مورد نظر شما بایستی بیشتر از ۰ باشد",
+                                                                "لطفا نوع محصول خود را کنار اسم محصول انتخاب کنید",
                                                             type: "error",
                                                         })
                                                     );
