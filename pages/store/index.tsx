@@ -1,12 +1,36 @@
 import Header from "@/components/header";
+import Banner from "@/components/products/banner";
+import ProductLists from "@/components/products/productsList";
 
 export default function MainPage() {
     return (
-        <div>
+        <div className="flex flex-col items-center pt-36">
             <Header />
-            <div className="bg-amber-400 h-screen"></div>
-            <div className="bg-amber-400 h-screen"></div>
-            <div className="bg-amber-400 h-screen"></div>
+            <div className="container p-5 space-y-5">
+                <ProductLists
+                    products={[1, 2, 4, 5, 6]}
+                    title={{ name: "انتخاب هوش مصنوعی" }}
+                />
+                <Banner
+                    images={[
+                        ["1/2", ["", "", ""]],
+                        ["1/2", ""],
+                    ]}
+                />
+                <Banner images={[["full", ["", "", ""]]]} />
+                <Banner
+                    images={[
+                        ["1/2", ["", "", ""]],
+                        ["1/2", ""],
+                    ]}
+                />
+                <Banner
+                    images={[
+                        ["1/2", ["", "", ""]],
+                        ["1/2", ""],
+                    ]}
+                />
+            </div>
         </div>
     );
 }
