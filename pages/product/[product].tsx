@@ -7,7 +7,7 @@ import { Dropdown } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import Product from "@/components/product";
+import Product from "@/components/store/product";
 import Carousel from "@/components/carousel";
 import { BiMessageSquareX } from "react-icons/bi";
 

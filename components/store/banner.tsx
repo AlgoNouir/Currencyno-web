@@ -9,9 +9,7 @@ export default function Banner2(props: {
                 !Array.isArray(img) ? (
                     <div
                         className={`w-${size} grow h-96 bg-primary-700 rounded-xl`}
-                    >
-                        <p>hello</p>
-                    </div>
+                    ></div>
                 ) : (
                     <div className={`w-${size} h-96 rounded-xl`}>
                         <Carousel

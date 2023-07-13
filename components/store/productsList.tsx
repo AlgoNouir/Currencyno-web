@@ -3,6 +3,8 @@ import "react-multi-carousel/lib/styles.css";
 import React from "react";
 import { useRouter } from "next/router";
 import { BsChevronCompactRight } from "react-icons/bs";
+import { productType } from "@/store/product/slice";
+import Product from "./product";
 
 const responsive = {
     superLargeDesktop: {
@@ -12,7 +14,7 @@ const responsive = {
     },
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 3,
+        items: 4,
     },
     tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -25,7 +27,7 @@ const responsive = {
 };
 
 export default function ProductLists(props: {
-    products: number[];
+    products: productType[];
     title?: { name: string; moreDir?: string };
 }) {
     /*
@@ -68,17 +70,12 @@ export default function ProductLists(props: {
                 infinite
                 renderButtonGroupOutside
             >
-                {props.products.map((image, index) => (
+                {props.products.map((product, index) => (
                     <div
                         className="items-center justify-center flex h-full pr-5"
                         key={index}
                     >
-                        <div
-                            className="bg-primary-500 items-center h-96 rounded-xl text-5xl 
-                            font-bold justify-center flex text-white w-full"
-                        >
-                            {index}
-                        </div>
+                        <Product {...product} />
                     </div>
                 ))}
             </Carousel>

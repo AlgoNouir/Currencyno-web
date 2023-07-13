@@ -1,15 +1,18 @@
 import Header from "@/components/header";
 import Banner from "@/components/store/banner";
 import ProductLists from "@/components/store/productsList";
+import { useAppSelector } from "@/store/HOCs";
 
 export default function MainPage() {
+    const products = useAppSelector((store) => store.products);
     return (
         <div className="flex flex-col items-center pt-36">
             <Header />
             <div className="container p-5 space-y-5">
+                <Banner images={[["full", ""]]} />
                 <ProductLists
-                    products={[1, 2, 4, 5, 6]}
-                    title={{ name: "انتخاب هوش مصنوعی" }}
+                    products={products}
+                    // title={{ name: "انتخاب هوش مصنوعی" }}
                 />
                 <Banner
                     images={[
