@@ -130,35 +130,35 @@ export default function Header() {
                     <div className="flex flex-col items-end justify-end h-9">
                         <div className="grid grid-cols-5 gap-5">
                             <button
-                                onClick={() => router.push("/lists/")}
+                                onClick={() => router.push("/store/")}
                                 className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">محصولات دیجیتال</p>
                             </button>
                             <button
-                                onClick={() => router.push("/lists/")}
+                                onClick={() => router.push("/academy/")}
                                 className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کتابخانه اقتصادی</p>
                             </button>
                             <button
-                                onClick={() => router.push("/lists/")}
+                                onClick={() => router.push("/caffeh/")}
                                 className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کافه کارآفرینی</p>
                             </button>
                             <button
-                                onClick={() => router.push("/lists/")}
+                                onClick={() => router.push("/work/")}
                                 className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کاریابی و استخدام</p>
                             </button>
                             <button
-                                onClick={() => router.push("/lists/")}
+                                onClick={() => router.push("/fix/")}
                                 className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
