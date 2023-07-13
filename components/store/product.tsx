@@ -10,7 +10,7 @@ export default function Product(props: productType) {
     return (
         <button
             onClick={() => router.push(`product/${props.id}`)}
-            className="bg-bg-200 rounded-xl p-5 flex flex-col justify-between h-full"
+            className="bg-bg-200 rounded-xl p-5 flex flex-col justify-between h-full w-full"
             dir="rtl"
         >
             <div className="flex flex-col space-y-5">

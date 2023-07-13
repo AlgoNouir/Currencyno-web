@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import { menuDirector } from "@/components/menu";
-import Product from "@/components/product";
+import Product from "@/components/store/product";
 import { useAppSelector } from "@/store/HOCs";
 import { Menu } from "antd";
 import { useCallback, useState } from "react";
@@ -15,8 +15,8 @@ export default function ListsPage() {
     return (
         <div className="flex flex-col space-y-5 h-screen">
             <Header />
-            <div className="flex flex-row space-x-5 rtl:space-x-reverse grow p-5">
-                <div className="bg-bg-200 h-full w-96 rounded-xl overflow-scroll relative scrollbar-hide">
+            <div className="flex flex-row space-x-5 rtl:space-x-reverse grow p-5 pt-36">
+                <div className="bg-bg-200 h-[80vh] w-96 rounded-xl overflow-scroll relative scrollbar-hide">
                     <div className=" absolute top-0 left-0 right-0 bottom-0">
                         <div className="w-full items-center justify-center flex">
                             <button
@@ -39,7 +39,7 @@ export default function ListsPage() {
                         gridTemplateColumns:
                             "repeat(auto-fill, minmax(250px, 1fr))",
                     }}
-                    className="grid w-full gap-5"
+                    className="grid w-full gap-5 overflow-scroll overflow-x-hidden h-[80vh]"
                 >
                     {products
                         .filter(
@@ -47,9 +47,7 @@ export default function ListsPage() {
                                 !(filter !== -1 && item.category !== filter)
                         )
                         .map((item, index) => (
-                            <div className="h-96">
-                                <Product {...item} key={index} />
-                            </div>
+                            <Product {...item} key={index} />
                         ))}
                 </div>
             </div>

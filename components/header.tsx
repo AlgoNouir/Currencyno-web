@@ -46,7 +46,7 @@ export default function Header() {
                     transitionDuration: "500ms",
                     transform: show ? "" : "translate(0, -80px)",
                 }}
-                className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-[9999]"
+                className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-[9999] shadow"
             >
                 <div
                     className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5 
@@ -125,10 +125,10 @@ export default function Header() {
                     </div>
 
                     <div className="flex flex-col items-end justify-end h-9">
-                        <div className="grid grid-cols-4 gap-5">
+                        <div className="grid grid-cols-5 gap-5">
                             <button
                                 onClick={() => router.push("/lists/")}
-                                className="flex flex-row items-end justify-center 
+                                className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">محصولات دیجیتال</p>
@@ -153,6 +153,15 @@ export default function Header() {
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کاریابی و استخدام</p>
+                            </button>
+                            <button
+                                onClick={() => router.push("/lists/")}
+                                className="flex flex-row items-end justify-center 
+                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
+                            >
+                                <p className="text-xl p-1">
+                                    تعمیرات لپتاب، کنسول
+                                </p>
                             </button>
                         </div>
                     </div>

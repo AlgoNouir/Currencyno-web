@@ -18,7 +18,10 @@ export default function Footer() {
                 <Icon />
             </div>
             <div className="border-b w-1/2 border-black/40" />
-            <p>تمام حقوق این وبسایت متعلق به کارنسینو است. ۱۴۰۳</p>
+            <p>
+                تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت است.
+                ۱۴۰۳
+            </p>
         </div>
     );
 }

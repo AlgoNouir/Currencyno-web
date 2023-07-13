@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Banner from "@/components/store/banner";
 import ProductLists from "@/components/store/productsList";
@@ -12,7 +13,7 @@ export default function MainPage() {
                 <Banner images={[["full", ""]]} />
                 <ProductLists
                     products={products}
-                    // title={{ name: "انتخاب هوش مصنوعی" }}
+                    title={{ name: "انتخاب هوش مصنوعی" }}
                 />
                 <Banner
                     images={[
@@ -34,6 +35,7 @@ export default function MainPage() {
                     ]}
                 />
             </div>
+            <Footer />
         </div>
     );
 }
