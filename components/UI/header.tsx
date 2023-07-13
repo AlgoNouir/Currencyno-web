@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
 import LoginModal from "../login";
+import Image from "next/image";
 
 export default function Header() {
     const user = useAppSelector((store) => store.account.user);
@@ -49,7 +50,7 @@ export default function Header() {
                 className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-[9999] shadow"
             >
                 <div
-                    className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5 
+                    className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5
                     items-center space-y-5 pt-5"
                 >
                     <div className="flex flex-row items-center justify-between w-full">
@@ -57,7 +58,9 @@ export default function Header() {
                             <button
                                 onClick={() => router.push("/")}
                                 className="w-12 h-12 bg-red-300 rounded-full"
-                            ></button>
+                            >
+                                <Image src={""} alt="" />
+                            </button>
                             <div
                                 className="flex bg-slate-200 w-fit items-center
                             space-x-3 rounded-xl p-1 rtl:space-x-reverse"
@@ -80,7 +83,7 @@ export default function Header() {
                                               )
                                         : () => router.push("/profile/")
                                 }
-                                className="border p-3 rounded-xl flex flex-row space-x-3 
+                                className="border p-3 rounded-xl flex flex-row space-x-3
                             rtl:space-x-reverse items-center"
                             >
                                 {user === undefined ? (
@@ -107,7 +110,7 @@ export default function Header() {
                             >
                                 {user?.products || 0 > 0 ? (
                                     <div
-                                        className="bg-red-600 rounded-full w-6 h-6 
+                                        className="bg-red-600 rounded-full w-6 h-6
                                 flex items-center justify-center absolute top-0 -right-3"
                                     >
                                         <label className="text-white">
@@ -135,28 +138,28 @@ export default function Header() {
                             </button>
                             <button
                                 onClick={() => router.push("/lists/")}
-                                className="flex flex-row items-end justify-center 
+                                className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کتابخانه اقتصادی</p>
                             </button>
                             <button
                                 onClick={() => router.push("/lists/")}
-                                className="flex flex-row items-end justify-center 
+                                className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کافه کارآفرینی</p>
                             </button>
                             <button
                                 onClick={() => router.push("/lists/")}
-                                className="flex flex-row items-end justify-center 
+                                className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">کاریابی و استخدام</p>
                             </button>
                             <button
                                 onClick={() => router.push("/lists/")}
-                                className="flex flex-row items-end justify-center 
+                                className="flex flex-row items-end justify-center
                             hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
                             >
                                 <p className="text-xl p-1">

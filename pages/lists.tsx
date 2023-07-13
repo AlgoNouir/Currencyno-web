@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "@/components/UI/header";
 import { menuDirector } from "@/components/menu";
 import Product from "@/components/store/product";
 import { useAppSelector } from "@/store/HOCs";
@@ -47,8 +47,8 @@ export default function ListsPage() {
                                 !(filter !== -1 && item.category !== filter)
                         )
                         .map((item, index) => (
-                            <div className="max-h-[450px]">
-                                <Product {...item} key={index} />
+                            <div key={index} className="max-h-[450px]">
+                                <Product {...item} />
                             </div>
                         ))}
                 </div>
