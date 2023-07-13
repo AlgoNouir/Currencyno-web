@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
-import Image from "./image";
+import CustomImage from "./image";
 
 function ImageCarousel(props: { images: string[] }) {
     return (
@@ -15,7 +15,7 @@ function ImageCarousel(props: { images: string[] }) {
                     key={index}
                 >
                     <div>
-                        <Image name={image} />
+                        <CustomImage name={image} />
                     </div>
                 </div>
             ))}

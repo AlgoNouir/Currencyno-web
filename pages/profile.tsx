@@ -1,5 +1,4 @@
-import Header from "@/components/header";
-import Product from "@/components/product";
+import Header from "@/components/UI/header";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
@@ -211,8 +210,9 @@ function OrderScreen() {
                 className="grid grid-cols-2 gap-5 overflow-scroll 
                 absolute top-0 left-0 right-0 bottom-0 scrollbar-hide"
             >
-                {orders.map((order) => (
+                {orders.map((order, index) => (
                     <button
+                        key={index}
                         className={`w-full ${
                             order.done === 3 ? "bg-zinc-300" : "bg-white"
                         } rounded-xl p-5`}

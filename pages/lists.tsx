@@ -9,7 +9,7 @@ import { useCallback, useState } from "react";
 export default function ListsPage() {
     const products = useAppSelector((store) => store.products);
     const category = useAppSelector((store) => store.core.category);
-    const test = useCallback(() => menuDirector(category), []);
+    const test = useCallback(() => menuDirector(category), [category]);
 
     const [filter, filterHandler] = useState(-1);
     return (

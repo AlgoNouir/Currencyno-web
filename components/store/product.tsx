@@ -1,7 +1,7 @@
 import { productType } from "@/store/product/slice";
 import { useRouter } from "next/router";
 import { BiSolidOffer } from "react-icons/bi";
-import Image from "../UI/image";
+import CustomImage from "../UI/image";
 
 export default function Product(props: productType) {
     const router = useRouter();
@@ -15,7 +15,7 @@ export default function Product(props: productType) {
         >
             <div className="flex flex-col space-y-5">
                 <div className="flex items-center justify-center">
-                    <Image name={props.image[0]} />
+                    <CustomImage name={props.image[0]} />
                 </div>
                 <p className="text-center text-gray-600">{props.persianName}</p>
             </div>

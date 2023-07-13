@@ -13,7 +13,7 @@ export default function MainPage() {
                 <Banner images={[["full", ""]]} />
                 <ProductLists
                     products={products}
-                    title={{ name: "انتخاب هوش مصنوعی" }}
+                    title={{ name: "انتخاب هوش مصنوعی", moreDir: "lists" }}
                 />
                 <Banner
                     images={[
