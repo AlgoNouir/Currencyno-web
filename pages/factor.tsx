@@ -96,6 +96,7 @@ export default function FactorPage() {
                                         setNotif({
                                             title: "hello World",
                                             message: "hello world",
+                                            type: "success",
                                         })
                                     );
                                 }}
