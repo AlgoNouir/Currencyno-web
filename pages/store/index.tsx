@@ -1,6 +1,6 @@
 import Header from "@/components/header";
-import Banner from "@/components/products/banner";
-import ProductLists from "@/components/products/productsList";
+import Banner from "@/components/store/banner";
+import ProductLists from "@/components/store/productsList";
 
 export default function MainPage() {
     return (
