@@ -39,7 +39,7 @@ export default function ListsPage() {
                         gridTemplateColumns:
                             "repeat(auto-fill, minmax(250px, 1fr))",
                     }}
-                    className="grid w-full gap-5 overflow-scroll overflow-x-hidden h-[80vh]"
+                    className="grid w-full gap-5 overflow-scroll overflow-x-hidden h-[80vh] scrollbar-hide"
                 >
                     {products
                         .filter(
@@ -47,7 +47,9 @@ export default function ListsPage() {
                                 !(filter !== -1 && item.category !== filter)
                         )
                         .map((item, index) => (
-                            <Product {...item} key={index} />
+                            <div className="max-h-[450px]">
+                                <Product {...item} key={index} />
+                            </div>
                         ))}
                 </div>
             </div>
