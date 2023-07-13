@@ -4,7 +4,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
-import LoginModal from "./login";
+import LoginModal from "../login";
 
 export default function Header() {
     const user = useAppSelector((store) => store.account.user);
@@ -38,7 +38,7 @@ export default function Header() {
                 window.removeEventListener("scroll", controlNavbar);
             };
         }
-    }, [lastScrollY]);
+    }, [controlNavbar, lastScrollY]);
     return (
         <>
             <div

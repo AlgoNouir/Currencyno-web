@@ -1,7 +1,7 @@
 import { productType } from "@/store/product/slice";
 import { useRouter } from "next/router";
 import { BiSolidOffer } from "react-icons/bi";
-import Image from "../image";
+import Image from "../UI/image";
 
 export default function Product(props: productType) {
     const router = useRouter();

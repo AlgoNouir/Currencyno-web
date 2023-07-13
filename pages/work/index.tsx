@@ -1,5 +1,5 @@
-import Footer from "@/components/UI/footer";
-import Header from "@/components/UI/header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import Banner from "@/components/UI/banner";
 import ProductLists from "@/components/store/productsList";
 import { useAppSelector } from "@/store/HOCs";

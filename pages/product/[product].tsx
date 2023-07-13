@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 // components & icons
 import { Dropdown } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
+import Footer from "@/components/UI/footer";
+import Header from "@/components/UI/header";
 import Product from "@/components/store/product";
-import Carousel from "@/components/carousel";
+import Carousel from "@/components/UI/carousel";
 import { BiMessageSquareX } from "react-icons/bi";
 
 // redux
@@ -370,8 +370,8 @@ export default function ProductPage() {
                             <label className="absolute top-10 right-10 z-10 text-white text-xl">
                                 محصولات مشابه
                             </label>
-                            {products.map((item) => (
-                                <div className="w-64 h-96 -mt-32">
+                            {products.map((item, index) => (
+                                <div key={index} className="w-64 h-96 -mt-32">
                                     <Product {...item} />
                                 </div>
                             ))}
