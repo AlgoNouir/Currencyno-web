@@ -72,7 +72,7 @@ export default function ProductPage() {
         return (
             <div className="flex flex-col items-center w-full">
                 <Header />
-                <div className="space-y-5 p-5 container">
+                <div className="space-y-5 p-5 container pt-40">
                     <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
                         <div className="w-1/2">
                             <Carousel images={product.image} />

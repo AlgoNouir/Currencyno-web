@@ -14,7 +14,7 @@ export default function Product(props: productType) {
             dir="rtl"
         >
             <div className="flex flex-col space-y-5">
-                <div className="h-44 flex items-center justify-center">
+                <div className="flex items-center justify-center">
                     <Image name={props.image[0]} />
                 </div>
                 <p className="text-center text-gray-600">{props.persianName}</p>
