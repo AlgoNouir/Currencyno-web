@@ -6,7 +6,14 @@ module.exports = {
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
+        backgroundImage: {
+            caffeePateren:
+                "url(https://currencyno.storage.iran.liara.space/Core/caffehPattern.jpg)",
+        },
         extend: {
+            opacity: {
+                pattern: 0.15,
+            },
             colors: {
                 prime: {
                     100: "#173664",
