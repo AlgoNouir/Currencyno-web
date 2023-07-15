@@ -9,6 +9,8 @@ module.exports = {
         backgroundImage: {
             caffeePateren:
                 "url(https://currencyno.storage.iran.liara.space/Core/caffehPattern.jpg)",
+            academyPattern:
+                "url(https://currencyno.storage.iran.liara.space/Core/academyPattern.jpg)",
         },
         extend: {
             opacity: {

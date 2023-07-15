@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { GrClose } from "react-icons/gr";
 
 export default function Modal(props: {
     handler: any;
@@ -9,7 +9,7 @@ export default function Modal(props: {
 }) {
     return props.open ? (
         <div
-            className="absolute z-10 h-screen top-0 w-screen
+            className="absolute z-[9999999] h-screen top-0 w-screen
             backdrop-blur flex items-center justify-center bg-black/10"
         >
             <div
@@ -23,7 +23,7 @@ export default function Modal(props: {
                         }}
                         className="absolute left-5"
                     >
-                        <AiOutlineArrowLeft className="text-xl" />
+                        <GrClose className="text-xl" />
                     </button>
                     <p className="text-xl">{props.title}</p>
                 </div>

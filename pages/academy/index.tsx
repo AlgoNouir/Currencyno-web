@@ -11,7 +11,7 @@ export default function MainPage() {
     const [reserveModal, reserveModalHandler] = useState(false);
     return (
         <>
-            <div className="flex flex-col items-center pt-36 space-y-5">
+            <div className="flex flex-col items-center pt-36 space-y-5 bg-academyPattern">
                 <Header />
                 <div className="container w-full space-y-5">
                     <div className="grid grid-cols-3 gap-5">

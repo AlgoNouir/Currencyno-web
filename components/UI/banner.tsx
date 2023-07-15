@@ -34,10 +34,7 @@ export default function Banner2(props: { images: (string | string[])[] }) {
                         key={`banner_${index}`}
                         className="rounded-xl overflow-hidden"
                     >
-                        <Carousel
-                            autoplay
-                            dots={{ className: "bg-prime-300/30 p-5" }}
-                        >
+                        <Carousel autoplay dots={{ className: "p-5" }}>
                             {img.map((image, index) => (
                                 <div
                                     className="items-center justify-center flex h-full"
