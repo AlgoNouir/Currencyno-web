@@ -5,11 +5,11 @@ function CustomImage(props: { src: string }) {
     return (
         <Image
             alt={props.src}
-            src={`https://currencyno.storage.iran.liara.space/Banners/${props.src}.png`}
+            src={`https://currencyno.storage.iran.liara.space/Banners/${props.src}`}
             width="0"
             height="0"
             sizes="100vw"
-            className="h-full w-auto"
+            className="w-full h-auto"
         />
     );
 }
@@ -23,7 +23,11 @@ export default function Banner2(props: { images: (string | string[])[] }) {
                         key={`banner_${index}`}
                         className={`grow bg-primary-700 rounded-xl overflow-hidden flex items-center justify-center`}
                     >
-                        <CustomImage src={img} />
+                        {img === "" ? (
+                            <div className="h-96"></div>
+                        ) : (
+                            <CustomImage src={img} />
+                        )}
                     </div>
                 ) : (
                     <div
@@ -40,10 +44,16 @@ export default function Banner2(props: { images: (string | string[])[] }) {
                                     key={index}
                                 >
                                     <div
-                                        className="bg-primary-500 items-center rounded-xl text-5xl 
+                                        className="bg-primary-500 items-center rounded-xl text-5xl
                                         font-bold justify-center flex text-white overflow-hidden"
                                     >
-                                        <CustomImage src={image} />
+                                        {image === "" ? (
+                                            <div className="h-96 flex items-center justify-center">
+                                                <p>{index + 1}</p>
+                                            </div>
+                                        ) : (
+                                            <CustomImage src={image} />
+                                        )}
                                     </div>
                                 </div>
                             ))}

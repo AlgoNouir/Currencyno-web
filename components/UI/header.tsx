@@ -52,7 +52,7 @@ export default function Header() {
                     items-center space-y-5 pt-5"
                 >
                     <div className="flex flex-row items-center justify-between w-full">
-                        <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                        <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
                             <button
                                 onClick={() => router.push("/")}
                                 className="w-14 h-14 rounded-full"
@@ -68,6 +68,9 @@ export default function Header() {
                                     alt="icon"
                                 />
                             </button>
+                            <label className="font-bold text-2xl">
+                                کارنسینو
+                            </label>
                             <div
                                 className="flex bg-slate-200 w-fit items-center
                             space-x-3 rounded-xl p-1 rtl:space-x-reverse"
