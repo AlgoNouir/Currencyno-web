@@ -1,20 +1,34 @@
 import { Carousel } from "antd";
+import Image from "next/image";
 
-export default function Banner2(props: {
-    images: [string, string | string[]][];
-}) {
+function CustomImage(props: { src: string }) {
     return (
-        <div className="w-full flex flex-row space-x-5 rtl:space-x-reverse">
-            {props.images.map(([size, img], index) =>
+        <Image
+            alt={props.src}
+            src={`https://currencyno.storage.iran.liara.space/Banners/${props.src}.png`}
+            width="0"
+            height="0"
+            sizes="100vw"
+            className="h-full w-auto"
+        />
+    );
+}
+
+export default function Banner2(props: { images: (string | string[])[] }) {
+    return (
+        <div className={`grid grid-cols-${props.images.length} gap-5`}>
+            {props.images.map((img, index) =>
                 !Array.isArray(img) ? (
                     <div
                         key={`banner_${index}`}
-                        className={`w-${size} grow h-96 bg-primary-700 rounded-xl`}
-                    ></div>
+                        className={`grow bg-primary-700 rounded-xl overflow-hidden flex items-center justify-center`}
+                    >
+                        <CustomImage src={img} />
+                    </div>
                 ) : (
                     <div
                         key={`banner_${index}`}
-                        className={`w-${size} h-96 rounded-xl`}
+                        className="rounded-xl overflow-hidden"
                     >
                         <Carousel
                             autoplay
@@ -26,10 +40,10 @@ export default function Banner2(props: {
                                     key={index}
                                 >
                                     <div
-                                        className="bg-primary-500 items-center h-96 rounded-xl text-5xl 
-                                        font-bold justify-center flex text-white"
+                                        className="bg-primary-500 items-center rounded-xl text-5xl 
+                                        font-bold justify-center flex text-white overflow-hidden"
                                     >
-                                        {index}
+                                        <CustomImage src={image} />
                                     </div>
                                 </div>
                             ))}

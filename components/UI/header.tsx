@@ -55,9 +55,18 @@ export default function Header() {
                         <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                             <button
                                 onClick={() => router.push("/")}
-                                className="w-12 h-12 bg-red-300 rounded-full"
+                                className="w-14 h-14 rounded-full"
                             >
-                                <Image src={""} alt="" />
+                                <Image
+                                    src={
+                                        "https://currencyno.storage.iran.liara.space/Core/CurrencynoIcon.png"
+                                    }
+                                    width="0"
+                                    height="0"
+                                    sizes="100wv"
+                                    className="w-full h-auto"
+                                    alt="icon"
+                                />
                             </button>
                             <div
                                 className="flex bg-slate-200 w-fit items-center
