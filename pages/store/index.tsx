@@ -10,7 +10,7 @@ export default function MainPage() {
         <div className="flex flex-col items-center pt-36">
             <Header />
             <div className="container p-5 space-y-5">
-                <Banner images={[["1", "2", "3"]]} />
+                <Banner images={[["1.png", "2.png", "3.png"]]} />
                 <ProductLists
                     products={products.filter(
                         (product) =>
@@ -21,7 +21,7 @@ export default function MainPage() {
                     )}
                     title={{ name: "پرفروش ترین ها", moreDir: "lists" }}
                 />
-                <Banner images={["2", "3"]} />
+                <Banner images={["2.png", "3.png"]} />
                 <ProductLists
                     products={products
                         .filter((product) => product.offerPrice !== 0)
@@ -29,7 +29,7 @@ export default function MainPage() {
                         .reverse()}
                     title={{ name: "بیشترین تخفیفات", moreDir: "lists" }}
                 />
-                <Banner images={[["1", "1", "1"]]} />
+                <Banner images={[["1.png", "1.png", "1.png"]]} />
                 <ProductLists
                     products={products.filter(
                         (product) => product.category === 39
