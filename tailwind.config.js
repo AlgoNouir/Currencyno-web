@@ -11,6 +11,10 @@ module.exports = {
                 "url(https://currencyno.storage.iran.liara.space/Core/caffehPattern.jpg)",
             academyPattern:
                 "url(https://currencyno.storage.iran.liara.space/Core/academyPattern.jpg)",
+            fixPattern:
+                "url(https://currencyno.storage.iran.liara.space/Core/fixPattern.jpg)",
+            workPattern:
+                "url(https://currencyno.storage.iran.liara.space/Core/workPattern.jpg)",
         },
         extend: {
             opacity: {
