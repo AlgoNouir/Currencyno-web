@@ -7,9 +7,6 @@ import { Dropdown } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
-import Product from "@/components/store/product";
-import Carousel from "@/components/UI/carousel";
-import { BiMessageSquareX } from "react-icons/bi";
 
 // redux
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
@@ -21,9 +18,10 @@ import Banner from "@/components/UI/banner";
 
 function ProductDetail(props: { name: string; amount: string }) {
     return (
-        <div className="h-44 bg-accent-100/70 rounded-xl flex items-center justify-center relative">
-            <p className="text-xl font-bold">{props.amount}</p>
-            <p className="absolute bottom-5 text-white text-lg">{props.name}</p>
+        <div className="p-5 flex flex-row space-x-5 rtl:space-x-reverse items-center px-10">
+            <div className="w-3 h-3 bg-amber-400 rounded-full" />
+            <p className="text-lg text-gray-500">{props.name}</p>
+            <p className="text-2xl font-bold">{props.amount}</p>
         </div>
     );
 }
@@ -109,14 +107,7 @@ export default function ProductPage() {
                                                                     );
                                                                 }}
                                                             >
-                                                                {`${
-                                                                    p.name
-                                                                } - ${Intl.NumberFormat(
-                                                                    "fa-IR"
-                                                                ).format(
-                                                                    p.amount
-                                                                )}
-                                                    عدد`}
+                                                                {p.name}
                                                             </button>
                                                         ),
                                                     })
@@ -340,20 +331,17 @@ export default function ProductPage() {
                         className="w-full rounded-xl bg-bg-200 p-10
                         flex flex-col space-y-5"
                     >
-                        <label>توضیحات : </label>
+                        <label className="text-xl font-bold">توضیحات :</label>
                         <label className="text-lg">{product.desc}</label>
                     </div>
-                    <div
-                        style={{
-                            gridTemplateColumns:
-                                "repeat(auto-fill, minmax(200px, 1fr))",
-                        }}
-                        className="grid gap-5 mb-10"
-                    >
-                        {product.data === undefined ? (
-                            <></>
-                        ) : (
-                            Object.entries(product.data).map(
+                    {product.data === undefined ? (
+                        <></>
+                    ) : (
+                        <div className="flex flex-col bg-white rounded-xl p-5">
+                            <label className="text-xl font-bold mb-5">
+                                مشخصات محصول :
+                            </label>
+                            {Object.entries(product.data).map(
                                 ([key, value], index) => (
                                     <ProductDetail
                                         key={`productDetail-${index}`}
@@ -361,11 +349,18 @@ export default function ProductPage() {
                                         amount={value}
                                     />
                                 )
-                            )
+                            )}
+                        </div>
+                    )}
+                    <div className="bg-white p-5 rounded-xl">
+                        {products && (
+                            <ProductLists
+                                products={products}
+                                title={{ name: "محصولات مشابه" }}
+                            />
                         )}
                     </div>
-                    {products && <ProductLists products={products} />}
-                    <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                    {/* <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <div className="w-2/3 h-96 flex flex-col items-center justify-center space-y-5">
                             <BiMessageSquareX className="text-7xl text-gray-500" />
                             <p className="text-xl text-gray-700">
@@ -399,7 +394,7 @@ export default function ProductPage() {
                                 <p>ارسال نظر</p>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <Footer />
             </div>
