@@ -17,7 +17,7 @@ export default function ProfilePage() {
     return (
         <div className="h-screen relative pt-32">
             <div className="absolute top-0">
-                <Header />
+                <Header state={0} />
             </div>
             <div className="h-full p-5 flex flex-row space-x-5 rtl:space-x-reverse">
                 <div className="w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-end py-5">
