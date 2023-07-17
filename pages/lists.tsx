@@ -14,7 +14,7 @@ export default function ListsPage() {
     const [filter, filterHandler] = useState(-1);
     return (
         <div className="flex flex-col space-y-5 h-screen">
-            <Header />
+            <Header state={1} />
             <div className="flex flex-row space-x-5 rtl:space-x-reverse grow p-5 pt-36">
                 <div className="bg-bg-200 h-[80vh] w-96 rounded-xl overflow-scroll relative scrollbar-hide">
                     <div className=" absolute top-0 left-0 right-0 bottom-0">
