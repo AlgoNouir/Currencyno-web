@@ -14,7 +14,7 @@ function CustomImage(props: { src: string }) {
     );
 }
 
-export default function Banner2(props: { images: (string | string[])[] }) {
+export default function Banner(props: { images: (string | string[])[] }) {
     return (
         <div className={`grid grid-cols-${props.images.length} gap-5`}>
             {props.images.map((img, index) =>
