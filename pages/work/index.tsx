@@ -6,7 +6,8 @@ import { MdOutlineTask, MdOutlineWorkOutline } from "react-icons/md";
 import Banner from "@/components/UI/banner";
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
-import AddWorkModal from "@/components/work/requestWork";
+import AddWorkModal from "@/components/work/addWork";
+import RequestWorkModal from "@/components/work/requestWork";
 
 function ActionButton(props: {
     handler: Dispatch<SetStateAction<boolean>>;
@@ -53,7 +54,7 @@ export default function MainPage() {
                 </div>
                 <Footer />
             </div>
-            <AddWorkModal open={addWork} handler={addWorkHandler} />
+            <RequestWorkModal open={addWork} handler={addWorkHandler} />
             <AddWorkModal open={requestWork} handler={requestWorkHandler} />
         </>
     );
