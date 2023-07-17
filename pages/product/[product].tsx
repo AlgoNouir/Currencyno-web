@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { setNotif } from "@/store/core/slice";
 import { addToCartThunk } from "@/store/account/thunk";
 import { keeperCounterType } from "@/store/product/slice";
+import ProductLists from "@/components/store/productsList";
+import Banner from "@/components/UI/banner";
 
 function ProductDetail(props: { name: string; amount: string }) {
     return (
@@ -71,11 +73,11 @@ export default function ProductPage() {
     if (product !== undefined) {
         return (
             <div className="flex flex-col items-center w-full">
-                <Header />
+                <Header state={0} />
                 <div className="space-y-5 p-5 container pt-40">
                     <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
                         <div className="w-1/2">
-                            <Carousel images={product.image} />
+                            <Banner images={[product.image]} />
                         </div>
                         <div
                             className="w-1/2 p-10 flex
@@ -362,21 +364,7 @@ export default function ProductPage() {
                             )
                         )}
                     </div>
-                    {products && (
-                        <div
-                            className="bg-prime-200 w-full rounded-xl h-96 relative
-                        justify-end items-end p-5 flex flex-row space-x-5 rtl:space-x-reverse"
-                        >
-                            <label className="absolute top-10 right-10 z-10 text-white text-xl">
-                                محصولات مشابه
-                            </label>
-                            {products.map((item, index) => (
-                                <div key={index} className="w-64 h-96 -mt-32">
-                                    <Product {...item} />
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    {products && <ProductLists products={products} />}
                     <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <div className="w-2/3 h-96 flex flex-col items-center justify-center space-y-5">
                             <BiMessageSquareX className="text-7xl text-gray-500" />

@@ -7,7 +7,7 @@ import { useAppSelector } from "@/store/HOCs";
 import LoginModal from "../login";
 import Image from "next/image";
 
-export default function Header() {
+export default function Header(props: { state: number }) {
     const user = useAppSelector((store) => store.account.user);
     const router = useRouter();
     const [loginModalOpen, loginModalOpenHandler] = useState("");
@@ -83,99 +83,86 @@ export default function Header() {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-row space-x-5 rtl:space-x-reverse">
-                            <button
-                                onClick={
-                                    user === undefined
-                                        ? () =>
-                                              loginModalOpenHandler(
-                                                  "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
-                                              )
-                                        : () => router.push("/profile/")
-                                }
-                                className="border p-3 rounded-xl flex flex-row space-x-3
+                        {props.state === 0 ? (
+                            <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                                <button
+                                    onClick={
+                                        user === undefined
+                                            ? () =>
+                                                  loginModalOpenHandler(
+                                                      "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
+                                                  )
+                                            : () => router.push("/profile/")
+                                    }
+                                    className="border p-3 rounded-xl flex flex-row space-x-3
                             rtl:space-x-reverse items-center"
-                            >
-                                {user === undefined ? (
-                                    <></>
-                                ) : (
-                                    <BsFillPersonFill className="text-2xl text-gray-600" />
-                                )}
-                                <p>
-                                    {user === undefined
-                                        ? "ورود یا ثبت نام"
-                                        : `${user.fName} ${user.lName}`}
-                                </p>
-                            </button>
-                            <button
-                                className="relative"
-                                onClick={
-                                    user === undefined
-                                        ? () =>
-                                              loginModalOpenHandler(
-                                                  "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
-                                              )
-                                        : () => router.push("/profile")
-                                }
-                            >
-                                {user?.products || 0 > 0 ? (
-                                    <div
-                                        className="bg-red-600 rounded-full w-6 h-6
+                                >
+                                    {user === undefined ? (
+                                        <></>
+                                    ) : (
+                                        <BsFillPersonFill className="text-2xl text-gray-600" />
+                                    )}
+                                    <p>
+                                        {user === undefined
+                                            ? "ورود یا ثبت نام"
+                                            : `${user.fName} ${user.lName}`}
+                                    </p>
+                                </button>
+                                <button
+                                    className="relative"
+                                    onClick={
+                                        user === undefined
+                                            ? () =>
+                                                  loginModalOpenHandler(
+                                                      "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
+                                                  )
+                                            : () => router.push("/profile")
+                                    }
+                                >
+                                    {user?.products || 0 > 0 ? (
+                                        <div
+                                            className="bg-red-600 rounded-full w-6 h-6
                                 flex items-center justify-center absolute top-0 -right-3"
-                                    >
-                                        <label className="text-white">
-                                            {Intl.NumberFormat("fa-IR").format(
-                                                user?.products.length || 0
-                                            )}
-                                        </label>
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
-                                <PiBasketLight className="text-3xl" />
-                            </button>
-                        </div>
+                                        >
+                                            <label className="text-white">
+                                                {Intl.NumberFormat(
+                                                    "fa-IR"
+                                                ).format(
+                                                    user?.products.length || 0
+                                                )}
+                                            </label>
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <PiBasketLight className="text-3xl" />
+                                </button>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
 
-                    <div className="flex flex-col items-end justify-end h-9">
+                    <div className="flex flex-col items-end justify-end">
                         <div className="grid grid-cols-5 gap-5">
-                            <button
-                                onClick={() => router.push("/store/")}
-                                className="flex flex-row items-end justify-center
-                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
-                            >
-                                <p className="text-xl p-1">محصولات دیجیتال</p>
-                            </button>
-                            <button
-                                onClick={() => router.push("/academy/")}
-                                className="flex flex-row items-end justify-center
-                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
-                            >
-                                <p className="text-xl p-1">کتابخانه اقتصادی</p>
-                            </button>
-                            <button
-                                onClick={() => router.push("/caffeh/")}
-                                className="flex flex-row items-end justify-center
-                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
-                            >
-                                <p className="text-xl p-1">کافه کارآفرینی</p>
-                            </button>
-                            <button
-                                onClick={() => router.push("/work/")}
-                                className="flex flex-row items-end justify-center
-                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
-                            >
-                                <p className="text-xl p-1">کاریابی و استخدام</p>
-                            </button>
-                            <button
-                                onClick={() => router.push("/fix/")}
-                                className="flex flex-row items-end justify-center
-                            hover:border-b-2 hover:pb-2 border-prime-100 transition-all"
-                            >
-                                <p className="text-xl p-1">
-                                    تعمیرات لپتاب، کنسول
-                                </p>
-                            </button>
+                            {[
+                                { name: "محصولات دیجیتال", url: "/store/" },
+                                { name: "کتابخانه اقتصادی", url: "/academy/" },
+                                { name: "کافه کارآفرینی", url: "/coffee/" },
+                                { name: "کاریابی و استخدام", url: "/work/" },
+                                { name: "تعمیرات لپتاب، کنسول", url: "/fix/" },
+                            ].map((txt, index) => (
+                                <button
+                                    key={index}
+                                    disabled={index === props.state}
+                                    onClick={() => router.push(txt.url)}
+                                    className="flex flex-row items-end justify-center transition-all
+                                    hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
+                                    border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
+                                >
+                                    <p className="text-xl p-1">{txt.name}</p>
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>

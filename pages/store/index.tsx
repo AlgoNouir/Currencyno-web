@@ -7,8 +7,8 @@ import { useAppSelector } from "@/store/HOCs";
 export default function MainPage() {
     const products = useAppSelector((store) => store.products);
     return (
-        <div className="flex flex-col items-center pt-36">
-            <Header />
+        <div className="flex flex-col items-center pt-36 bg-storePattern">
+            <Header state={0} />
             <div className="container p-5 space-y-5">
                 <Banner images={[["1.png", "2.png", "3.png"]]} />
                 <ProductLists

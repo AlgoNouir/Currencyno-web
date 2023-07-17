@@ -5,7 +5,7 @@ import Header from "@/components/UI/header";
 export default function MainPage() {
     return (
         <div className="flex flex-col items-center pt-36 bg-fixPattern">
-            <Header />
+            <Header state={4} />
             <div className="p-5 space-y-5 container">
                 <Banner images={[""]} />
                 <Banner images={[""]} />

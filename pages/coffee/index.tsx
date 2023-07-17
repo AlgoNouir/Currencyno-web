@@ -25,7 +25,7 @@ export default function MainPage() {
     return (
         <>
             <div className="flex flex-col items-center pt-36 bg-caffeePateren">
-                <Header />
+                <Header state={2} />
                 <div className="container w-full p-5 space-y-5">
                     <Banner
                         images={[

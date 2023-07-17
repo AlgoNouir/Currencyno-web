@@ -12,7 +12,7 @@ export default function MainPage() {
     return (
         <>
             <div className="flex flex-col items-center pt-36 space-y-5 bg-academyPattern">
-                <Header />
+                <Header state={1} />
                 <div className="container w-full space-y-5">
                     <div className="grid grid-cols-3 gap-5">
                         <button className="bg-amber-400 h-24 rounded-xl">
