@@ -29,7 +29,7 @@ export default function FixRequestModal(props: {
             <div className="space-x-5 flex flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
                 <div className="flex flex-col space-y-5">
                     <Image
-                        src="https://currencyno.storage.iran.liara.space/Banners/caffeh/topBanners/reserveCaffee.jpg"
+                        src="https://currencyno.storage.iran.liara.space/Banners/fix/requestVector.jpg"
                         width="0"
                         height="0"
                         sizes="100vw"
@@ -37,8 +37,8 @@ export default function FixRequestModal(props: {
                         className="h-auto w-full opacity-50"
                     />
                     <label className="text-center text-xl font-bold text-gray-600">
-                        جهت رزرو کافه کارآفرینی برای مراسمات جلسات کاری و تولد و
-                        ایونت های مافیا مشخصات خود را وارد کنید
+                        جهت درخواست تعمیرات لوازم الکتریکی و الکترونیکی خود
+                        مشخصات خود را در فیلد های مقابل وارد کنید.
                     </label>
                 </div>
                 <div className="flex flex-col space-y-5 items-center">
