@@ -51,11 +51,17 @@ export default function Header(props: { state: number }) {
                     className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5
                     items-center space-y-5 pt-5"
                 >
-                    <div className="flex flex-row items-center justify-between w-full">
+                    <div
+                        style={{
+                            justifyContent:
+                                props.state === 0 ? "space-between" : "center",
+                        }}
+                        className="flex flex-row items-center justify-between w-full"
+                    >
                         <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
                             <button
                                 onClick={() => router.push("/")}
-                                className="w-14 h-14 rounded-full"
+                                className=" flex flex-row items-center space-x-5 rtl:space-x-reverse"
                             >
                                 <Image
                                     src={
@@ -64,24 +70,33 @@ export default function Header(props: { state: number }) {
                                     width="0"
                                     height="0"
                                     sizes="100wv"
-                                    className="w-full h-auto"
+                                    className="w-14 h-14 rounded-full"
                                     alt="icon"
                                 />
+                                <div>
+                                    <p className="font-bold text-2xl ">
+                                        کارنسینو
+                                    </p>
+                                    <small className="font-bold">
+                                        فروشگاه آنلاین و مجموعه خدماتی
+                                    </small>
+                                </div>
                             </button>
-                            <label className="font-bold text-2xl">
-                                کارنسینو
-                            </label>
-                            <div
-                                className="flex bg-slate-200 w-fit items-center
+                            {props.state === 0 ? (
+                                <div
+                                    className="flex bg-slate-200 w-fit items-center
                             space-x-3 rounded-xl p-1 rtl:space-x-reverse"
-                            >
-                                <AiOutlineSearch className="text-2xl text-gray-700" />
-                                <input
-                                    placeholder="محصول خود را جست و جو کنید ..."
-                                    type="text"
-                                    className="outline-none bg-slate-200 p-2 w-96"
-                                />
-                            </div>
+                                >
+                                    <AiOutlineSearch className="text-2xl text-gray-700" />
+                                    <input
+                                        placeholder="محصول خود را جست و جو کنید ..."
+                                        type="text"
+                                        className="outline-none bg-slate-200 p-2 w-96"
+                                    />
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                         {props.state === 0 ? (
                             <div className="flex flex-row space-x-5 rtl:space-x-reverse">

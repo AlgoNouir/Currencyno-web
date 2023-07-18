@@ -34,7 +34,15 @@ export default function MainPage() {
                             </label>
                         </button>
                     </div>
-                    <Banner images={["academy/2.png"]} />
+                    <Banner
+                        images={[
+                            [
+                                "academy/8.jpg",
+                                "academy/9.jpg",
+                                "academy/10.jpg",
+                            ],
+                        ]}
+                    />
                     <ProductLists
                         products={products.filter(
                             (product) => product.category === 42

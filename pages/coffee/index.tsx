@@ -30,8 +30,8 @@ export default function MainPage() {
                     <Banner
                         images={[
                             [
-                                "caffeh/topBanners/1.jpg",
                                 "caffeh/topBanners/2.jpg",
+                                "caffeh/topBanners/1.jpg",
                                 "caffeh/topBanners/3.jpg",
                             ],
                         ]}
@@ -69,6 +69,9 @@ export default function MainPage() {
                             "6.jpg",
                             "10.jpg",
                             "8.jpg",
+                            "9.jpg",
+                            "11.jpg",
+                            "7.jpg",
                         ].map((image, index) => (
                             <ImageBaner key={index} image={image} />
                         ))}
@@ -100,9 +103,15 @@ export default function MainPage() {
                             تون باشین و لذت ببرین!
                         </label>
                     </div>
-                    <Banner images={[["", "", "", ""]]} />
-                    <Banner images={["", ""]} />
-                    <Banner images={[["", "", "", ""]]} />
+                    <Banner images={["caffeh/topBanners/5.jpg"]} />
+                    <Banner
+                        images={[
+                            [
+                                "caffeh/topBanners/6.jpg",
+                                "caffeh/topBanners/4.jpg",
+                            ],
+                        ]}
+                    />
                 </div>
                 <Footer />
             </div>

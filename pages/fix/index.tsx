@@ -24,9 +24,9 @@ export default function MainPage() {
                             کلیک کنید
                         </label>
                     </button>
-                    <Banner images={[["", "", "", ""]]} />
+                    <Banner images={["fix/1.png"]} />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-xl leading-10 text-justify">
+                        <label className="text-2xl leading-loose text-justify">
                             بررسی کامل سخت افزار سیستم و تمام مشکلات احتمالی به
                             وجود آمده در رابطه با سخت افزار کامپیوتر و لپتاپ ها
                             در برند های مختلف اعم از ، تعمیر لپ تاپ های ایسوس
@@ -48,10 +48,8 @@ export default function MainPage() {
                             ترین هزینه به مشتریان عزیز ارائه می نماید.
                         </label>
                     </div>
-                    <Banner images={[""]} />
-                    <div className="bg-amber-300 rounded-xl p-5" />
                     <TextBanner
-                        images={""}
+                        images={"fix/4.png"}
                         text="
                     تعمیرات لپ تاپ ، کامپیوتر ، موبایل و کنسول بازی دغدغه ی
                     بسیاری از کاربرانی است که از این دستگاه استفاده می کنند.
@@ -62,11 +60,10 @@ export default function MainPage() {
                     مشاوره تعمیرات شخت افزار و نرم افزار با شماره زیر تماس
                     حاصل فرمایید."
                     />
-                    <div className="bg-amber-300 rounded-xl p-5" />
 
-                    <Banner images={[""]} />
+                    <Banner images={["fix/2.png"]} />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-xl leading-10 text-justify">
+                        <label className="text-2xl leading-loose text-justify">
                             از آن‌جایی که عیب‌یابی اصولی مهم‌ترین مرحله از پروسه
                             تعمیرات هر دستگاهی به حساب می‌آید، تکنسین‌های
                             نمایندگی تعمیرات لپ تاپ، دقت بالایی را صرف عیب‌یابی
@@ -83,8 +80,7 @@ export default function MainPage() {
                             می‌توانید با نمایندگی تعمیر لپ تاپ تماس بگیرید.
                         </label>
                     </div>
-                    <Banner images={[["", "", "", ""]]} />
-                    <Banner images={[""]} />
+                    <Banner images={["fix/3.jpg"]} />
                 </div>
                 <Footer />
             </div>
