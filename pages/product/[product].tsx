@@ -14,7 +14,7 @@ import { setNotif } from "@/store/core/slice";
 import { addToCartThunk } from "@/store/account/thunk";
 import { keeperCounterType } from "@/store/product/slice";
 import ProductLists from "@/components/store/productsList";
-import Banner from "@/components/UI/banner";
+import ImageCarousel from "@/components/UI/carousel";
 
 function ProductDetail(props: { name: string; amount: string }) {
     return (
@@ -75,7 +75,7 @@ export default function ProductPage() {
                 <div className="space-y-5 p-5 container pt-40">
                     <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
                         <div className="w-1/2">
-                            <Banner images={[product.image]} />
+                            <ImageCarousel images={[product.image]} />
                         </div>
                         <div
                             className="w-1/2 p-10 flex

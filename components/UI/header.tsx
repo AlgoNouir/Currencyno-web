@@ -45,7 +45,7 @@ export default function Header(props: { state: number }) {
                     transitionDuration: "500ms",
                     transform: show ? "" : "translate(0, -80px)",
                 }}
-                className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-[9999] shadow"
+                className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-20 shadow"
             >
                 <div
                     className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5

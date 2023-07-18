@@ -15,7 +15,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
         <></>
     ) : (
         <div
-            className="absolute z-10 h-screen top-0 w-screen 
+            className="absolute h-screen top-0 w-screen z-50
             backdrop-blur flex items-center justify-center bg-black/10"
         >
             <div
