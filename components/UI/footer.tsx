@@ -1,4 +1,4 @@
-import { BsFillTelephoneFill, BsInstagram } from "react-icons/bs";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import Image from "next/image";
 
 function Icon(props: { text: string; icon: any }) {
@@ -35,6 +35,24 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col space-y-5">
                     <Icon
+                        text="نماد اعتماد"
+                        icon={
+                            <a
+                                referrerPolicy="origin"
+                                target="_blank"
+                                href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
+                            >
+                                <img
+                                    referrerPolicy="origin"
+                                    src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
+                                    alt=""
+                                    style={{ cursor: "pointer" }}
+                                    id="gBjq7O5O8goWmRHZYK1Y"
+                                />
+                            </a>
+                        }
+                    />
+                    <Icon
                         text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
                         icon={
                             <Image
@@ -61,20 +79,7 @@ export default function Footer() {
                         }
                     />
                 </div>
-                <div className="h-96 rounded-xl w-96/run/media/nora/06BA7C38BA7C2679/متن تعمیرات.docx overflow-hidden">
-                    {/* <a
-                        referrerPolicy="origin"
-                        target="_blank"
-                        href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                    >
-                        <img
-                            referrerPolicy="origin"
-                            src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                            alt=""
-                            style={{ cursor: "pointer" }}
-                            id="gBjq7O5O8goWmRHZYK1Y"
-                        />
-                    </a> */}
+                <div className="h-96 rounded-xl w-96 overflow-hidden">
                     <div
                         style={{
                             overflow: "hidden",
