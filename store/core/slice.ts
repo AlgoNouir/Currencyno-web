@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getInitDataThunk } from "./thunk";
+import { academyOrderThunk, coffeeOrderThunk, fixOrderThunk, getInitDataThunk, jobOfferOrderThunk, jobRequestOrderThunk } from "./thunk";
 import { changeAccountDataThunk, loginThunk } from "../account/thunk";
 
 export type categoryType = {
@@ -73,6 +73,11 @@ const coreSlice = createSlice({
                 };
             }
         });
+        builder.addCase(fixOrderThunk.fulfilled, () => {})
+        builder.addCase(coffeeOrderThunk.fulfilled, () => {})
+        builder.addCase(jobOfferOrderThunk.fulfilled, () => {})
+        builder.addCase(jobRequestOrderThunk.fulfilled, () => {})
+        builder.addCase(academyOrderThunk.fulfilled, () => {})
     },
 });
 
