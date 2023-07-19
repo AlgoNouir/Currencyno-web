@@ -4,6 +4,7 @@ import { loginThunk } from "@/store/account/thunk";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
+import PhoneInput from "../UI/phoneInput";
 
 export default function LoginModal(props: { handler: any; message: string }) {
     const [sms, smsHandler] = useState(false);
@@ -31,6 +32,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
                         className="absolute left-5"
                     >
                         <AiOutlineArrowLeft className="text-xl" />
+                        <PhoneInput phone={phone} handler={phoneHandler} />
                     </button>
                     <p>ورود به حساب کاربری</p>
                 </div>
@@ -44,14 +46,6 @@ export default function LoginModal(props: { handler: any; message: string }) {
                         space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
                         >
                             <BsTelephone className="text-xl text-gray-700" />
-                            <input
-                                type="text"
-                                value={phone && "0" + phone}
-                                onChange={(e) =>
-                                    phoneHandler(parseInt(e.target.value) || "")
-                                }
-                                className="outline-none bg-slate-200 p-2 w-full"
-                            />
                         </div>
                         <button
                             disabled={sms}

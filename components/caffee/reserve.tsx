@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Modal from "../UI/modal";
 import Input from "../UI/input";
+import { useAppDispatch } from "@/store/HOCs";
+import { coffeeOrderThunk } from "@/store/core/thunk";
+import { useState } from "react";
+import PhoneInput from "../UI/phoneInput";
 
 export default function ReserveModal(props: { handler: any; open: boolean }) {
+    const dispatch = useAppDispatch();
+    const [name, nameHandler] = useState("");
+    const [phone, phoneHandler] = useState<number | "">();
+
     return (
         <Modal {...props} title="رزرو کافه کارآفرینی">
             <div className="space-x-5 flex flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
@@ -22,10 +30,28 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
                 </div>
                 <div className="flex flex-col space-y-5 items-center">
                     <div className="space-y-5">
-                        <Input title="نام و نام خانوادگی" />
-                        <Input title="شماره تلفن" />
+                        <Input
+                            value={name}
+                            handler={nameHandler}
+                            title="نام و نام خانوادگی"
+                        />
+                        <PhoneInput
+                            phone={phone}
+                            handler={phoneHandler}
+                            title="شماره تلفن"
+                        />
                     </div>
-                    <button className="bg-amber-400 p-5 rounded-xl w-44 text-xl">
+                    <button
+                        onClick={() => {
+                            if (
+                                phone !== undefined &&
+                                name !== undefined &&
+                                phone !== ""
+                            )
+                                dispatch(coffeeOrderThunk({ name, phone }));
+                        }}
+                        className="bg-amber-400 p-5 rounded-xl w-44 text-xl"
+                    >
                         ارسال درخواست
                     </button>
                 </div>
