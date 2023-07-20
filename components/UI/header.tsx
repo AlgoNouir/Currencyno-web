@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
 import LoginModal from "../login";
 import Image from "next/image";
+import { Dropdown } from "antd";
 
 export default function Header(props: { state: number }) {
     const user = useAppSelector((store) => store.account.user);
+    const category = useAppSelector((store) => store.core.category);
     const router = useRouter();
     const [loginModalOpen, loginModalOpenHandler] = useState("");
 
@@ -166,18 +168,50 @@ export default function Header(props: { state: number }) {
                                 { name: "کافه کارآفرینی", url: "/coffee/" },
                                 { name: "کاریابی و استخدام", url: "/work/" },
                                 { name: "تعمیرات لپتاب، کنسول", url: "/fix/" },
-                            ].map((txt, index) => (
-                                <button
-                                    key={index}
-                                    disabled={index === props.state}
-                                    onClick={() => router.push(txt.url)}
-                                    className="flex flex-row items-end justify-center transition-all
+                            ].map((txt, index) =>
+                                index === 0 ? (
+                                    <Dropdown
+                                        placement="bottomCenter"
+                                        menu={{
+                                            items: category
+                                                .filter((c) => c.parent)
+                                                .map((c) => ({
+                                                    label: c.name,
+                                                    key: c.id,
+                                                    // children: {
+                                                    //     label: "hello",
+                                                    // },
+                                                })),
+                                        }}
+                                    >
+                                        <button
+                                            key={index}
+                                            disabled={index === props.state}
+                                            onClick={() => router.push(txt.url)}
+                                            className="flex flex-row items-end justify-center transition-all
                                     hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
                                     border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
-                                >
-                                    <p className="text-xl p-1">{txt.name}</p>
-                                </button>
-                            ))}
+                                        >
+                                            <p className="text-xl p-1">
+                                                {txt.name}
+                                            </p>
+                                        </button>
+                                    </Dropdown>
+                                ) : (
+                                    <button
+                                        key={index}
+                                        disabled={index === props.state}
+                                        onClick={() => router.push(txt.url)}
+                                        className="flex flex-row items-end justify-center transition-all
+                                    hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
+                                    border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
+                                    >
+                                        <p className="text-xl p-1">
+                                            {txt.name}
+                                        </p>
+                                    </button>
+                                )
+                            )}
                         </div>
                     </div>
                 </div>

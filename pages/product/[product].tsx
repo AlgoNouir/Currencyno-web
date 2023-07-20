@@ -70,10 +70,10 @@ export default function ProductPage() {
 
     if (product !== undefined) {
         return (
-            <div className="flex flex-col items-center w-full">
+            <div className="flex flex-col items-center w-full bg-primary-50">
                 <Header state={0} />
                 <div className="space-y-5 p-5 container pt-40">
-                    <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200">
+                    <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200 shadow-xl">
                         <div className="w-1/2">
                             <ImageCarousel images={[product.image]} />
                         </div>
@@ -328,7 +328,7 @@ export default function ProductPage() {
                         </div>
                     </div>
                     <div
-                        className="w-full rounded-xl bg-bg-200 p-10
+                        className="w-full rounded-xl bg-bg-200 shadow-xl p-10
                         flex flex-col space-y-5"
                     >
                         <label className="text-xl font-bold">توضیحات :</label>
@@ -367,7 +367,7 @@ export default function ProductPage() {
                                 در حال حاضر نظری برای این محصول ثبت نشده است
                             </p>
                         </div>
-                        <div className="bg-bg-200 rounded-xl w-1/3  relative overflow-hidden space-y-5 p-5 flex flex-col items-center">
+                        <div className="bg-bg-200 shadow-xl rounded-xl w-1/3  relative overflow-hidden space-y-5 p-5 flex flex-col items-center">
                             {user === undefined ? (
                                 <div className="absolute flex-col space-y-5 backdrop-blur w-full h-full rounded-xl flex items-center justify-center">
                                     <p className="text-gray-700 text-xl">

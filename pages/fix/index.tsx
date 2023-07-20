@@ -3,7 +3,9 @@ import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import TextBanner from "@/components/UI/textBanner";
 import FixRequestModal from "@/components/fix/reserve";
+import { Collapse } from "antd";
 import { useState } from "react";
+import { BiLabel } from "react-icons/bi";
 
 export default function MainPage() {
     const [modal, modalHandler] = useState(false);
@@ -16,37 +18,59 @@ export default function MainPage() {
                         onClick={() => modalHandler(true)}
                         className="bg-rose-400 w-full p-5 space-x-5 rtl:space-x-reverse rounded-xl flex items-center justify-center relative"
                     >
-                        <div className="absolute animate-ping bg-rose-500/10 rounded-full w-1/2 h-full"></div>
+                        <div className="absolute animate-ping bg-rose-500/30 rounded-full w-1/2 h-full"></div>
                         <label className="text-3xl font-bold">
-                            عیب یابی لپ تاپ و مشاوره رایگان قبل از تعمیر لپ تاپ
-                        </label>
-                        <label className="font-bold -rotate-12">
-                            کلیک کنید
+                            جهت مشاوره رایگان و درخواست تعمیرات از اینجا اقدام
+                            کنید
                         </label>
                     </button>
                     <Banner images={["fix/1.png"]} />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
-                            بررسی کامل سخت افزار سیستم و تمام مشکلات احتمالی به
-                            وجود آمده در رابطه با سخت افزار کامپیوتر و لپتاپ ها
-                            در برند های مختلف اعم از ، تعمیر لپ تاپ های ایسوس
-                            (Asus)، دل(Dell) ، اچ پی(hp) و غیره خدمات تعمیرات
-                            کامپیوتر، لپ تاپ موبایل و کنسول های بازی (ps-xbox)
-                            تعمیرات تخصصی لپ تاپ با گارانتی ویژه یکی از سرویس
-                            های مرکز سخت افزار این مجموعه است. این مجموعه ضمن
-                            برخورداری از تجهیزات پیشرفته جهت تعمیر انواع لپ تاپ
-                            و استفاده از نوین ترین متدهای روز دنیا، شرایط را
-                            برای تعمیر لپ تاپ   در برندهای مختلف مهیا نموده است.
-                            این مجموعه با تجهیز فضای خویش به پیشرفته‌ترین
-                            ابزارآلات عیب‌یابی و تعمیر لپ تاپ در تلاش است تا
-                            بالاترین سطح کیفی خدمات را به مشتریان و مراجعان
-                            ارائه نماید. کارشناسان حاضر در مجموعه کارنسینو با
-                            بهره گیری از سال ها تجربه در امر تعمیرات سخت افزار و
-                            استفاده از بروزترین تجهیزات الکترونیکی، کلیه تعمیرات
-                            سخت افزاری و نرم افزاری انواع لپ تاپ ، کامپیوتر ،
-                            موبایل و کنسول بازی را با قطعات اورجینال و مناسب
-                            ترین هزینه به مشتریان عزیز ارائه می نماید.
-                        </label>
+                        <Collapse
+                            ghost
+                            items={[
+                                {
+                                    key: 1,
+                                    label: (
+                                        <p className="text-2xl font-bold">
+                                            درباره ما
+                                        </p>
+                                    ),
+                                    children: (
+                                        <label className="text-2xl leading-loose text-justify">
+                                            بررسی کامل سخت افزار سیستم و تمام
+                                            مشکلات احتمالی به وجود آمده در رابطه
+                                            با سخت افزار کامپیوتر و لپتاپ ها در
+                                            برند های مختلف اعم از ، تعمیر لپ تاپ
+                                            های ایسوس (Asus)، دل(Dell) ، اچ
+                                            پی(hp) و غیره خدمات تعمیرات
+                                            کامپیوتر، لپ تاپ موبایل و کنسول های
+                                            بازی (ps-xbox) تعمیرات تخصصی لپ
+                                            تاپ با گارانتی ویژه یکی از سرویس های
+                                            مرکز سخت افزار این مجموعه است. این
+                                            مجموعه ضمن برخورداری از تجهیزات
+                                            پیشرفته جهت تعمیر انواع لپ تاپ و
+                                            استفاده از نوین ترین متدهای روز
+                                            دنیا، شرایط را برای تعمیر لپ
+                                            تاپ   در برندهای مختلف مهیا نموده
+                                            است. این مجموعه با تجهیز فضای خویش
+                                            به پیشرفته‌ترین ابزارآلات عیب‌یابی و
+                                            تعمیر لپ تاپ در تلاش است تا بالاترین
+                                            سطح کیفی خدمات را به مشتریان و
+                                            مراجعان ارائه نماید. کارشناسان حاضر
+                                            در مجموعه کارنسینو با بهره گیری از
+                                            سال ها تجربه در امر تعمیرات سخت
+                                            افزار و استفاده از بروزترین تجهیزات
+                                            الکترونیکی، کلیه تعمیرات سخت افزاری
+                                            و نرم افزاری انواع لپ تاپ ، کامپیوتر
+                                            ، موبایل و کنسول بازی را با قطعات
+                                            اورجینال و مناسب ترین هزینه به
+                                            مشتریان عزیز ارائه می نماید.
+                                        </label>
+                                    ),
+                                },
+                            ]}
+                        />
                     </div>
                     <TextBanner
                         images={"fix/4.png"}

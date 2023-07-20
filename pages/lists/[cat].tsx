@@ -3,7 +3,8 @@ import { menuDirector } from "@/components/menu";
 import Product from "@/components/store/product";
 import { useAppSelector } from "@/store/HOCs";
 import { Menu } from "antd";
-import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 // TODO get all data in init
 export default function ListsPage() {
@@ -11,7 +12,16 @@ export default function ListsPage() {
     const category = useAppSelector((store) => store.core.category);
     const test = useCallback(() => menuDirector(category), [category]);
 
+    const router = useRouter();
+    const { cat } = router.query;
+
     const [filter, filterHandler] = useState(-1);
+
+    useEffect(() => {
+        const tmp = typeof cat === "string" ? parseInt(cat) : -1;
+        filterHandler(tmp);
+    }, [filterHandler, cat]);
+
     return (
         <div className="flex flex-col space-y-5 h-screen">
             <Header state={1} />

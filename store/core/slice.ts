@@ -52,8 +52,6 @@ const coreSlice = createSlice({
             state.serverStatus = "pending";
         });
         builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
-            console.log(action.payload.category);
-
             state.category = action.payload.category;
         });
         builder.addCase(changeAccountDataThunk.fulfilled, (state) => {

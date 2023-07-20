@@ -5,7 +5,6 @@ import CustomImage from "../UI/image";
 
 export default function Product(props: productType) {
     const router = useRouter();
-    console.log(props);
 
     return (
         <button
