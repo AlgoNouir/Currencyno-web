@@ -1,5 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { academyOrderThunk, coffeeOrderThunk, fixOrderThunk, getInitDataThunk, jobOfferOrderThunk, jobRequestOrderThunk } from "./thunk";
+import {
+    academyOrderThunk,
+    coffeeOrderThunk,
+    fixOrderThunk,
+    getInitDataThunk,
+    jobOfferOrderThunk,
+    jobRequestOrderThunk,
+} from "./thunk";
 import { changeAccountDataThunk, loginThunk } from "../account/thunk";
 
 export type categoryType = {
@@ -73,11 +80,41 @@ const coreSlice = createSlice({
                 };
             }
         });
-        builder.addCase(fixOrderThunk.fulfilled, () => {})
-        builder.addCase(coffeeOrderThunk.fulfilled, () => {})
-        builder.addCase(jobOfferOrderThunk.fulfilled, () => {})
-        builder.addCase(jobRequestOrderThunk.fulfilled, () => {})
-        builder.addCase(academyOrderThunk.fulfilled, () => {})
+        builder.addCase(fixOrderThunk.fulfilled, (state) => {
+            state.notif = {
+                type: "success",
+                title: "درخواست موفق",
+                message: "درخواست شما با موفقیت ثبت شد",
+            };
+        });
+        builder.addCase(coffeeOrderThunk.fulfilled, (state) => {
+            state.notif = {
+                type: "success",
+                title: "درخواست موفق",
+                message: "درخواست شما با موفقیت ثبت شد",
+            };
+        });
+        builder.addCase(jobOfferOrderThunk.fulfilled, (state) => {
+            state.notif = {
+                type: "success",
+                title: "درخواست موفق",
+                message: "درخواست شما با موفقیت ثبت شد",
+            };
+        });
+        builder.addCase(jobRequestOrderThunk.fulfilled, (state) => {
+            state.notif = {
+                type: "success",
+                title: "درخواست موفق",
+                message: "درخواست شما با موفقیت ثبت شد",
+            };
+        });
+        builder.addCase(academyOrderThunk.fulfilled, (state) => {
+            state.notif = {
+                type: "success",
+                title: "درخواست موفق",
+                message: "درخواست شما با موفقیت ثبت شد",
+            };
+        });
     },
 });
 

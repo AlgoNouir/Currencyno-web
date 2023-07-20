@@ -32,7 +32,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
                         className="absolute left-5"
                     >
                         <AiOutlineArrowLeft className="text-xl" />
-                        <PhoneInput phone={phone} handler={phoneHandler} />
+                        <PhoneInput value={phone} handler={phoneHandler} />
                     </button>
                     <p>ورود به حساب کاربری</p>
                 </div>

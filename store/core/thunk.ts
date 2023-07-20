@@ -22,9 +22,8 @@ export const coffeeOrderThunk = createAsyncThunk(
         { rejectWithValue }
     ) => {
         const response = await axiosNoUser.post("coffee/", actionData);
-        console.log(response.data);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return response.data;
         } else {
             return rejectWithValue(response.status);
@@ -50,7 +49,7 @@ export const jobOfferOrderThunk = createAsyncThunk(
         const response = await axiosNoUser.post("jobOffer/", actionData);
         console.log(response.data);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return response.data;
         } else {
             return rejectWithValue(response.status);
@@ -66,8 +65,6 @@ export const jobRequestOrderThunk = createAsyncThunk(
             email: string;
             phone: number;
             landlinePhone: number;
-            organName: string;
-            organWork: string;
             cityName: string;
             provinceName: string;
             edjLevel: string;
@@ -79,7 +76,7 @@ export const jobRequestOrderThunk = createAsyncThunk(
         const response = await axiosNoUser.post("jobRequest/", actionData);
         console.log(response.data);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return response.data;
         } else {
             return rejectWithValue(response.status);
@@ -93,15 +90,15 @@ export const academyOrderThunk = createAsyncThunk(
         actionData: {
             name: string;
             phone: number;
-            birthday: number;
-            nationalCode: number;
+            birthday?: number;
+            nationalCode?: number;
         },
         { rejectWithValue }
     ) => {
         const response = await axiosNoUser.post("academy/", actionData);
         console.log(response.data);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return response.data;
         } else {
             return rejectWithValue(response.status);
@@ -118,7 +115,7 @@ export const fixOrderThunk = createAsyncThunk(
         const response = await axiosNoUser.post("fix/", actionData);
         console.log(response.data);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             return response.data;
         } else {
             return rejectWithValue(response.status);

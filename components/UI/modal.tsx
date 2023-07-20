@@ -9,7 +9,7 @@ export default function Modal(props: {
 }) {
     return props.open ? (
         <div
-            className="fixed z-[9999999] h-screen top-0 w-screen
+            className="fixed z-30 h-screen top-0 w-screen
             backdrop-blur flex items-center justify-center bg-black/10"
         >
             <div

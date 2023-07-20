@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/store/HOCs";
 import { coffeeOrderThunk } from "@/store/core/thunk";
 import { useState } from "react";
 import PhoneInput from "../UI/phoneInput";
+import { setNotif } from "@/store/core/slice";
 
 export default function ReserveModal(props: { handler: any; open: boolean }) {
     const dispatch = useAppDispatch();
@@ -36,7 +37,7 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
                             title="نام و نام خانوادگی"
                         />
                         <PhoneInput
-                            phone={phone}
+                            value={phone}
                             handler={phoneHandler}
                             title="شماره تلفن"
                         />
@@ -47,8 +48,21 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
                                 phone !== undefined &&
                                 name !== undefined &&
                                 phone !== ""
-                            )
+                            ) {
                                 dispatch(coffeeOrderThunk({ name, phone }));
+                                props.handler(false);
+                                nameHandler("");
+                                phoneHandler("");
+                            } else {
+                                dispatch(
+                                    setNotif({
+                                        type: "error",
+                                        title: "مشکل در ارسال اطلاعات",
+                                        message:
+                                            "لطفا همه فیلد ها را به درستی پر کنید",
+                                    })
+                                );
+                            }
                         }}
                         className="bg-amber-400 p-5 rounded-xl w-44 text-xl"
                     >

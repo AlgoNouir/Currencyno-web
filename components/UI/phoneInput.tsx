@@ -1,5 +1,5 @@
 export default function PhoneInput(props: {
-    phone?: number | "";
+    value?: number | "";
     handler: any;
     title?: string;
 }) {
@@ -12,7 +12,7 @@ export default function PhoneInput(props: {
             )}
             <input
                 type="text"
-                value={props.phone && "0" + props.phone}
+                value={props.value && "0" + props.value}
                 onChange={(e) => props.handler(parseInt(e.target.value) || "")}
                 className="bg-gray-100 p-5 rounded-xl w-96"
             />
