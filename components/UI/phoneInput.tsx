@@ -14,7 +14,7 @@ export default function PhoneInput(props: {
                 type="text"
                 value={props.value && "0" + props.value}
                 onChange={(e) => props.handler(parseInt(e.target.value) || "")}
-                className="bg-gray-100 p-5 rounded-xl w-96"
+                className="bg-gray-100 p-5 rounded-xl  sm:w-96 w-80"
             />
         </div>
     );

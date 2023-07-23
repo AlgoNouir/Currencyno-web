@@ -14,7 +14,7 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
 
     return (
         <Modal {...props} title="رزرو کافه کارآفرینی">
-            <div className="space-x-5 flex flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
+            <div className="lg:space-x-5 space-y-5 flex flex-col lg:flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
                 <div className="flex flex-col space-y-5">
                     <Image
                         src="https://currencyno.storage.iran.liara.space/Banners/caffeh/topBanners/reserveCaffee.jpg"

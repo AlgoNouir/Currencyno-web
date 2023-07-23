@@ -13,10 +13,10 @@ export default function Modal(props: {
             backdrop-blur flex items-center justify-center bg-black/10"
         >
             <div
-                className="bg-bg-200 rounded-xl relative w-1/2
-                space-y-5 flex flex-col items-center px-5 pb-10"
+                className="bg-bg-200 rounded-xl relative xl:w-1/2 max-lg:h-full
+                space-y-5 flex flex-col items-center px-5 pb-10 overflow-scroll"
             >
-                <div className="flex flex-row items-center justify-center p-5">
+                <div className="flex flex-row items-center justify-center p-5 w-full">
                     <button
                         onClick={() => {
                             props.handler(false);

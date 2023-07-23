@@ -26,7 +26,7 @@ export default function MainPage() {
         <>
             <div className="flex flex-col items-center pt-36 bg-caffeePateren">
                 <Header state={2} />
-                <div className="container w-full p-5 space-y-5">
+                <div className="container w-full  sm:px-5 py-5 space-y-5">
                     <Banner
                         images={[
                             [
@@ -36,8 +36,11 @@ export default function MainPage() {
                             ],
                         ]}
                     />
-                    <div className="bg-white p-10 text-3xl leading-relaxed flex flex-col space-y-5 items-center justify-center">
-                        <label className="text-4xl font-bold">
+                    <div
+                        className="bg-white p-10 leading-relaxed flex flex-col space-y-5 items-center justify-center
+                        sm:text-2xl lg:text-3xl"
+                    >
+                        <label className="sm:text-4xl font-bold">
                             کافه کارآفرینی
                         </label>
                         <label className="text-center">
@@ -48,18 +51,18 @@ export default function MainPage() {
                             عزیز میباشد. این محیط اغلب میزبان اساتید موسیقی
                             استان میباشد که موسیقی زنده سولو نواخته میشود
                         </label>
-                        <div className="flex flex-row justify-between text-5xl items-center space-x-5 rtl:space-x-reverse">
+                        <div className="flex flex-row justify-between text-2xl sm:text-3xl lg:text-5xl items-center space-x-5 rtl:space-x-reverse">
                             <FaRegHandPointLeft />
                             <button
                                 onClick={() => reserveHandler(true)}
-                                className="bg-amber-400 p-5 rounded-xl text-3xl"
+                                className="bg-amber-400 p-5 rounded-xl text-xs"
                             >
                                 برای مراسمات رزور کنید
                             </button>
                             <FaRegHandPointRight />
                         </div>
                     </div>
-                    <div className="grid grid-cols-4 w-full h-full gap-5">
+                    <div className="grid grid-cols-4 w-full h-full gap-2 sm:gap-5">
                         {[
                             "1.jpg",
                             "2.jpg",
@@ -89,16 +92,16 @@ export default function MainPage() {
                             "حضور صاحبان کسب و کار موفق در کافه کارآفرین",
                         ].map((d, index) => (
                             <div
-                                className="flex flex-row items-center space-x-5 rtl:space-x-reverse"
+                                className="flex flex-row items-center space-x-5 rtl:space-x-reverse text-sm sm:text-xl"
                                 key={`data_${index}`}
                             >
-                                <AiFillCheckCircle className="text-5xl text-green-400" />
+                                <AiFillCheckCircle className="sm:text-5xl text-green-400" />
                                 <label>{d}</label>
                             </div>
                         ))}
                     </div>
                     <div className="bg-amber-300 p-10 space-y-5 rounded-xl text-3xl items-center justify-center flex">
-                        <label className="text-center">
+                        <label className="text-center text-xs sm:text-lg ">
                             همه روزه از ساعت 10 صبح تا 11 شب می تونید تو کافه
                             تون باشین و لذت ببرین!
                         </label>

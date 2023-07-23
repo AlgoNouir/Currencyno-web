@@ -4,10 +4,12 @@ import Image from "next/image";
 function Icon(props: { text: string; icon: any }) {
     return (
         <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
-            <div className="w-16 h-16 items-center justify-center flex text-3xl">
+            <div className="sm:w-16 w-9 sm:h-16 h-9 items-center justify-center flex text-3xl">
                 {props.icon}
             </div>
-            <label className="text-2xl font-bold">{props.text}</label>
+            <label className="text-sm sm:text-2xl font-bold">
+                {props.text}
+            </label>
         </div>
     );
 }
@@ -18,9 +20,9 @@ export default function Footer() {
             className="bg-bg-300 rounded-t-xl w-screen flex 
             items-center justify-end flex-col p-5 pt-16 space-y-5"
         >
-            <div className="flex flex-row w-full items-center justify-between px-24">
-                <div className="w-1/3 space-y-5 flex flex-col">
-                    <p className="text-2xl text-justify">
+            <div className="flex flex-col sm:flex-row w-full items-center justify-between sm:px-24 max-sm:space-y-5">
+                <div className="sm:w-1/3 w-full space-y-5 flex flex-col">
+                    <p className="text-sm sm:text-2xl text-justify">
                         مجموعه کارنسینو با بیش از یک دهه فعالیت و تجربه در ارائه
                         خدمات فروش لوازم جانبی کامپیوتر و موبایل ، فروش لپ تاپ
                         استوک و تعمیرات انواع کامپیوتر، لپ تاپ،موبایل، و کنسول
@@ -64,7 +66,7 @@ export default function Footer() {
                     <Icon
                         text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
                         icon={
-                            <div className="h-16 w-16 items-center justify-center flex rounded-xl bg-green-400 text-3xl text-white">
+                            <div className="sm:w-16 w-9 sm:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg sm:text-3xl text-white">
                                 <BsFillTelephoneFill />
                             </div>
                         }
@@ -115,10 +117,13 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <p>
-                تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت است.
-                ۱۴۰۳
-            </p>
+            <div className="flex sm:flex-row flex-col items-center justify-center max-sm:space-y-2">
+                <p className="text-center">
+                    تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت
+                    است. ۱۴۰۳
+                </p>
+                <small>طراحی شده توسط مهدی نوری</small>
+            </div>
         </div>
     );
 }

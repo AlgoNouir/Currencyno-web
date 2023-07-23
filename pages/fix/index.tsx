@@ -19,7 +19,7 @@ export default function MainPage() {
                         className="bg-rose-400 w-full p-5 space-x-5 rtl:space-x-reverse rounded-xl flex items-center justify-center relative"
                     >
                         <div className="absolute animate-ping bg-rose-500/30 rounded-full w-1/2 h-full"></div>
-                        <label className="text-3xl font-bold">
+                        <label className="text-sm sm:text-3xl font-bold">
                             جهت مشاوره رایگان و درخواست تعمیرات از اینجا اقدام
                             کنید
                         </label>
@@ -40,7 +40,7 @@ export default function MainPage() {
 
                     <Banner images={["fix/2.png"]} />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
+                        <label className="md:text-2xl text-sm md:leading-loose text-justify">
                             از آن‌جایی که عیب‌یابی اصولی مهم‌ترین مرحله از پروسه
                             تعمیرات هر دستگاهی به حساب می‌آید، تکنسین‌های
                             نمایندگی تعمیرات لپ تاپ، دقت بالایی را صرف عیب‌یابی
@@ -70,7 +70,7 @@ export default function MainPage() {
                                         </p>
                                     ),
                                     children: (
-                                        <label className="text-2xl leading-loose text-justify">
+                                        <label className="md:text-2xl md:leading-loose text-justify">
                                             بررسی کامل سخت افزار سیستم و تمام
                                             مشکلات احتمالی به وجود آمده در رابطه
                                             با سخت افزار کامپیوتر و لپتاپ ها در

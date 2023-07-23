@@ -16,7 +16,7 @@ function ActionButton(props: {
 }) {
     return (
         <button
-            className="bg-amber-400 grow text-3xl p-5 rounded-xl flex items-center 
+            className="bg-amber-400 grow text-xl font-bold md:text-3xl p-5 rounded-xl flex items-center 
             justify-center space-x-5 rtl:space-x-reverse"
             onClick={() => props.handler(true)}
         >
@@ -35,7 +35,7 @@ export default function MainPage() {
                 <Header state={3} />
                 <div className="p-5 space-y-5 container">
                     <Banner images={[["", "", "", ""]]} />
-                    <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                    <div className="flex flex-col max-md:space-y-5 md:flex-row md:space-x-5 rtl:space-x-reverse">
                         <ActionButton
                             icon={<MdOutlineWorkOutline />}
                             title="درج آگهی استخدام"
@@ -48,7 +48,7 @@ export default function MainPage() {
                         />
                     </div>
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
+                        <label className="text-sm sm:text-xl lg:text-2xl leading-loose text-justify">
                             علی‌رغم وجود معضل بیکاری در کشور و سیل عظیم افراد
                             تحصیل‌کرده جویای کار، یافتن نیروی متخصص و کارآمد
                             برای کارفرمایان چندان آسان نیست.بنابراین اگر شما

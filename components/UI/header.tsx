@@ -50,7 +50,7 @@ export default function Header(props: { state: number }) {
                 className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-20 shadow"
             >
                 <div
-                    className="bg-bg-200/50 container backdrop-blur-xl flex flex-col px-5
+                    className=" container flex flex-col px-5
                     items-center space-y-5 pt-5"
                 >
                     <div
@@ -87,7 +87,7 @@ export default function Header(props: { state: number }) {
                             {props.state === 0 ? (
                                 <div
                                     className="flex bg-slate-200 w-fit items-center
-                            space-x-3 rounded-xl p-1 rtl:space-x-reverse"
+                                    space-x-3 rounded-xl p-1 rtl:space-x-reverse"
                                 >
                                     <AiOutlineSearch className="text-2xl text-gray-700" />
                                     <input
@@ -160,14 +160,14 @@ export default function Header(props: { state: number }) {
                         )}
                     </div>
 
-                    <div className="flex flex-col items-end justify-end">
+                    <div className="flex-col items-end justify-end">
                         <div className="grid grid-cols-5 gap-5">
                             {[
                                 { name: "محصولات دیجیتال", url: "/store/" },
                                 { name: "کتابخانه اقتصادی", url: "/academy/" },
                                 { name: "کافه کارآفرینی", url: "/coffee/" },
-                                { name: "کاریابی و استخدام", url: "/work/" },
-                                { name: "تعمیرات لپتاب، کنسول", url: "/fix/" },
+                                { name: "کاریابی استخدام", url: "/work/" },
+                                { name: "تعمیرات الکترونیکی", url: "/fix/" },
                             ].map((txt, index) =>
                                 index === 0 ? (
                                     <Dropdown
@@ -192,7 +192,7 @@ export default function Header(props: { state: number }) {
                                     hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
                                     border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
                                         >
-                                            <p className="text-xl p-1">
+                                            <p className="sm:text-xl text-xs p-1">
                                                 {txt.name}
                                             </p>
                                         </button>
@@ -206,7 +206,7 @@ export default function Header(props: { state: number }) {
                                     hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
                                     border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
                                     >
-                                        <p className="text-xl p-1">
+                                        <p className="sm:text-xl text-xs p-1">
                                             {txt.name}
                                         </p>
                                     </button>

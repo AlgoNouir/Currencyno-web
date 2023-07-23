@@ -24,7 +24,7 @@ export default function RequestWorkModal(props: {
     return (
         <Modal {...props} title="درج آگهی استخدام جدید">
             <div className="flex flex-col items-center space-y-10">
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <Input
                         value={name}
                         handler={nameHandler}
