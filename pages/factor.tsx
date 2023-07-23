@@ -1,3 +1,4 @@
+import { axiosUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { setNotif } from "@/store/core/slice";
 import { cartToOrderThunk } from "@/store/order/thunk";
@@ -89,16 +90,15 @@ export default function FactorPage() {
                                 بازگشت
                             </button>
                             <button
-                                onClick={() => {
-                                    router.push("/");
-                                    dispatch(cartToOrderThunk());
-                                    dispatch(
-                                        setNotif({
-                                            title: "hello World",
-                                            message: "hello world",
-                                            type: "success",
-                                        })
-                                    );
+                                onClick={async () => {
+                                    const response = await axiosUser
+                                        .post("test/")
+                                        .then((res) =>
+                                            router.push(res.data.url)
+                                        )
+                                        .catch((error) =>
+                                            console.log(error.response.data)
+                                        );
                                 }}
                                 className="bg-green-600 px-7 py-2 rounded-xl text-white"
                             >

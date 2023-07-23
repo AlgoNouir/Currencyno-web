@@ -16,7 +16,7 @@ export const axiosUser = axios.create({
 
 // If request was failed with 401, trying to refresh the AccessToken
 createAuthRefreshInterceptor(axiosUser, (failedRequest) =>
-    axiosNoUser.post("user/token/refresh").then((response) => {
+    axiosNoUser.post("user-refresh/").then((response) => {
         const { accessToken } = response.data;
         const bearer = `Bearer ${accessToken}`;
 

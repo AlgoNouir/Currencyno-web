@@ -32,7 +32,6 @@ export default function LoginModal(props: { handler: any; message: string }) {
                         className="absolute left-5"
                     >
                         <AiOutlineArrowLeft className="text-xl" />
-                        <PhoneInput value={phone} handler={phoneHandler} />
                     </button>
                     <p>ورود به حساب کاربری</p>
                 </div>
@@ -41,12 +40,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
                         style={{ direction: "ltr" }}
                         className="space-x-2 flex flex-row w-fit"
                     >
-                        <div
-                            className="flex bg-slate-200 items-center
-                        space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
-                        >
-                            <BsTelephone className="text-xl text-gray-700" />
-                        </div>
+                        <PhoneInput value={phone} handler={phoneHandler} />
                         <button
                             disabled={sms}
                             onClick={
@@ -56,10 +50,10 @@ export default function LoginModal(props: { handler: any; message: string }) {
                                           if (typeof phone === "number") {
                                               axiosNoUser
                                                   .post("login/", { phone })
-                                                  .catch(() =>
-                                                      console.log("error")
+                                                  .then(() => smsHandler(true))
+                                                  .catch((error) =>
+                                                      console.log(error)
                                                   );
-                                              smsHandler(true);
                                           }
                                       }
                             }
@@ -94,6 +88,8 @@ export default function LoginModal(props: { handler: any; message: string }) {
                                     sms
                                         ? () => {
                                               if (typeof phone === "number") {
+                                                  console.log("send sms");
+
                                                   dispatch(
                                                       loginThunk({
                                                           phone,
