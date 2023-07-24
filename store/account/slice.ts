@@ -76,6 +76,7 @@ const accountSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.login = "accepted";
       state.user = action.payload.user;
+      state.products = action.payload.user.products;
     });
     builder.addCase(cartToOrderThunk.fulfilled, (state) => {
       if (state.user) state.products = [];
