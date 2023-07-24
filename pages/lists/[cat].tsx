@@ -23,10 +23,10 @@ export default function ListsPage() {
     }, [filterHandler, cat]);
 
     return (
-        <div className="flex flex-col space-y-5 h-screen">
-            <Header state={1} />
-            <div className="flex flex-row space-x-5 rtl:space-x-reverse grow p-5 pt-36">
-                <div className="bg-bg-200 h-[80vh] w-96 rounded-xl overflow-scroll relative scrollbar-hide">
+        <div className="flex flex-col xl:space-y-5 h-screen">
+            <Header state={0} />
+            <div className="flex flex-row xl:space-x-5 rtl:space-x-reverse grow p-5 xl:pt-36">
+                <div className="bg-bg-200 h-[80vh] w-96 rounded-xl overflow-scroll relative scrollbar-hide max-xl:hidden">
                     <div className=" absolute top-0 left-0 right-0 bottom-0">
                         <div className="w-full items-center justify-center flex">
                             <button
@@ -49,7 +49,7 @@ export default function ListsPage() {
                         gridTemplateColumns:
                             "repeat(auto-fill, minmax(250px, 1fr))",
                     }}
-                    className="grid w-full gap-5 overflow-scroll overflow-x-hidden h-[80vh] scrollbar-hide"
+                    className="grid w-full gap-5 overflow-scroll overflow-x-hidden xl:h-[80vh] scrollbar-hide"
                 >
                     {products
                         .filter(

@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 export default function Page404() {
     const router = useRouter();
     return (
-        <div className="flex items-center justify-center h-screen flex-col space-y-16">
-            <label className="text-4xl text-gray-500">
+        <div className="flex items-center justify-center h-screen flex-col space-y-16 bg-caffeePateren">
+            <label className="text-xl sm:text-4xl text-primary-900">
                 نتونستیم صفحه مورد نظر شما رو پیدا کنیم :(
             </label>
-            <div className="grid grid-cols-5 gap-5">
+            <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-5">
                 <button
                     onClick={() => router.push("/store/")}
                     className="flex flex-row items-end justify-center hover:bg-primary-500

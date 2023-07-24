@@ -2,20 +2,24 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { PiBasketLight } from "react-icons/pi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
 import LoginModal from "../login";
 import Image from "next/image";
-import { Dropdown } from "antd";
+import { Drawer, Dropdown, Menu } from "antd";
+import { FiMenu } from "react-icons/fi";
+import { menuDirector } from "../menu";
 
 export default function Header(props: { state: number }) {
     const user = useAppSelector((store) => store.account.user);
     const category = useAppSelector((store) => store.core.category);
     const router = useRouter();
     const [loginModalOpen, loginModalOpenHandler] = useState("");
-
+    const [menu, menuHandler] = useState(false);
     const [show, setShow] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+
+    const test = useCallback(() => menuDirector(category), [category]);
 
     useEffect(() => {
         const controlNavbar = () => {
@@ -49,16 +53,20 @@ export default function Header(props: { state: number }) {
                 }}
                 className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow"
             >
+                <button
+                    onClick={() => menuHandler(true)}
+                    className="absolute p-3 font-bold text-3xl right-1 bottom-0 xl:hidden "
+                >
+                    <FiMenu />
+                </button>
                 <div
                     className=" container flex flex-col px-5
                     items-center space-y-5 pt-5"
                 >
                     <div
-                        style={{
-                            justifyContent:
-                                props.state === 0 ? "space-between" : "center",
-                        }}
-                        className="flex sm:flex-row items-center justify-between w-full flex-col"
+                        className={`flex flex-row items-center ${
+                            props.state === 0 ? "xl:justify-between" : ""
+                        }  justify-center w-full`}
                     >
                         <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
                             <button
@@ -86,14 +94,14 @@ export default function Header(props: { state: number }) {
                             </button>
                             {props.state === 0 ? (
                                 <div
-                                    className="flex bg-slate-200 w-fit items-center
-                                    space-x-3 rounded-xl p-1 rtl:space-x-reverse"
+                                    className=" bg-slate-200 w-fit items-center
+                                    space-x-3 rounded-xl p-1 rtl:space-x-reverse xl:flex hidden"
                                 >
                                     <AiOutlineSearch className="text-2xl text-gray-700" />
                                     <input
                                         placeholder="محصول خود را جست و جو کنید ..."
                                         type="text"
-                                        className="outline-none bg-slate-200 p-2 w-96 sm:visible hidden"
+                                        className="outline-none bg-slate-200 p-2 w-96"
                                     />
                                 </div>
                             ) : (
@@ -101,7 +109,7 @@ export default function Header(props: { state: number }) {
                             )}
                         </div>
                         {props.state === 0 ? (
-                            <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                            <div className="xl:flex hidden flex-row space-x-5 rtl:space-x-reverse">
                                 <button
                                     onClick={
                                         user === undefined
@@ -159,7 +167,6 @@ export default function Header(props: { state: number }) {
                             <></>
                         )}
                     </div>
-
                     <div className="flex-col items-end justify-end">
                         <div className="grid grid-cols-5 gap-5">
                             {[
@@ -189,8 +196,8 @@ export default function Header(props: { state: number }) {
                                             disabled={index === props.state}
                                             onClick={() => router.push(txt.url)}
                                             className="flex flex-row items-end justify-center transition-all
-                                    hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
-                                    border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
+                                        hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
+                                        border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
                                         >
                                             <p className="sm:text-xl text-xs p-1">
                                                 {txt.name}
@@ -216,6 +223,83 @@ export default function Header(props: { state: number }) {
                     </div>
                 </div>
             </div>
+            <Drawer open={menu} onClose={() => menuHandler(false)}>
+                <div className="space-y-5">
+                    <div className="flex flex-row space-x-5 rtl:space-x-reverse w-full justify-between">
+                        <button
+                            onClick={
+                                user === undefined
+                                    ? () => {
+                                          loginModalOpenHandler(
+                                              "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
+                                          );
+                                          menuHandler(false);
+                                      }
+                                    : () => router.push("/profile/")
+                            }
+                            className="border p-3 rounded-xl flex flex-row space-x-3
+                            rtl:space-x-reverse items-center"
+                        >
+                            {user === undefined ? (
+                                <></>
+                            ) : (
+                                <BsFillPersonFill className="text-2xl text-gray-600" />
+                            )}
+                            <p>
+                                {user === undefined
+                                    ? "ورود یا ثبت نام"
+                                    : `${user.fName} ${user.lName}`}
+                            </p>
+                        </button>
+                        <button
+                            className="relative"
+                            onClick={
+                                user === undefined
+                                    ? () =>
+                                          loginModalOpenHandler(
+                                              "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
+                                          )
+                                    : () => router.push("/profile")
+                            }
+                        >
+                            {user?.products || 0 > 0 ? (
+                                <div
+                                    className="bg-red-600 rounded-full w-6 h-6
+                                flex items-center justify-center absolute top-0 -right-3"
+                                >
+                                    <label className="text-white">
+                                        {Intl.NumberFormat("fa-IR").format(
+                                            user?.products.length || 0
+                                        )}
+                                    </label>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
+                            <PiBasketLight className="text-3xl" />
+                        </button>
+                    </div>
+                    <div
+                        className=" bg-slate-200 items-center w-full space-x-3
+                    rounded-xl p-1 rtl:space-x-reverse flex"
+                    >
+                        <AiOutlineSearch className="text-2xl text-gray-700" />
+                        <input
+                            placeholder="محصول خود را جست و جو کنید ..."
+                            type="text"
+                            className="outline-none bg-slate-200 p-2 w-full"
+                        />
+                    </div>
+                    <Menu
+                        onClick={(e) => {
+                            router.push(`/lists/${e.key}`);
+                            menuHandler(false);
+                        }}
+                        mode="inline"
+                        items={test()}
+                    />
+                </div>
+            </Drawer>
             <LoginModal
                 message={loginModalOpen}
                 handler={loginModalOpenHandler}

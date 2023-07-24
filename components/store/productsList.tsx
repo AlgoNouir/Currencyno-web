@@ -46,7 +46,7 @@ export default function ProductLists(props: {
                 <></>
             ) : (
                 <div className="flex flex-row justify-between items-center mb-5">
-                    <label className="text-2xl font-bold">
+                    <label className="text-lg sm:text-2xl font-bold">
                         {props.title.name}
                     </label>
                     {props.title.moreDir === undefined ? (

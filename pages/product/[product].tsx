@@ -72,13 +72,13 @@ export default function ProductPage() {
         return (
             <div className="flex flex-col items-center w-full bg-primary-50">
                 <Header state={0} />
-                <div className="space-y-5 p-5 container pt-40">
-                    <div className="flex flex-row space-x- rtl:space-x-reverse h-96 rounded-xl bg-bg-200 shadow-xl">
-                        <div className="w-1/2">
+                <div className="space-y-5 p-5 sm:container pt-40">
+                    <div className="flex flex-col xl:flex-row space-y-5 xl:space-y-0 xl:space-x-5 rtl:space-x-reverse rounded-xl bg-bg-200 shadow-xl">
+                        <div className="xl:w-1/2">
                             <ImageCarousel images={[product.image]} />
                         </div>
                         <div
-                            className="w-1/2 p-10 flex
+                            className="xl:w-1/2 p-10 flex
                             items-center justify-between flex-col space-y-7 relative"
                         >
                             <div className="flex flex-col space-y-5 w-full">
@@ -144,8 +144,8 @@ export default function ProductPage() {
                                     {product.garanty}
                                 </label>
                             </div>
-                            <div className="w-full flex flex-row space-x-5 items-center justify-between">
-                                <div className="flex flex-row w-full items-center space-x-5 rtl:space-x-reverse">
+                            <div className="w-full flex flex-col space-y-5 sm:space-y-0 sm:flex-row space-x-5 items-center justify-center sm:justify-between">
+                                <div className="flex flex-row w-full justify-center items-center space-x-5 rtl:space-x-reverse">
                                     {product.offerPrice > 0 ? (
                                         <Offer
                                             amount={
@@ -332,7 +332,7 @@ export default function ProductPage() {
                         flex flex-col space-y-5"
                     >
                         <label className="text-xl font-bold">توضیحات :</label>
-                        <label className="text-lg">{product.desc}</label>
+                        <p className="text-lg text-justify">{product.desc}</p>
                     </div>
                     {product.data === undefined ? (
                         <></>
@@ -352,14 +352,16 @@ export default function ProductPage() {
                             )}
                         </div>
                     )}
-                    <div className="bg-white p-5 rounded-xl">
-                        {products && (
+                    {products !== undefined && products?.length > 0 ? (
+                        <div className="bg-white p-5 rounded-xl">
                             <ProductLists
                                 products={products}
                                 title={{ name: "محصولات مشابه" }}
                             />
-                        )}
-                    </div>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                     {/* <div className="flex flex-row space-x-5 rtl:space-x-reverse">
                         <div className="w-2/3 h-96 flex flex-col items-center justify-center space-y-5">
                             <BiMessageSquareX className="text-7xl text-gray-500" />

@@ -13,7 +13,7 @@ export default function MainPage() {
         <>
             <div className="flex flex-col items-center pt-36 space-y-5 bg-academyPattern">
                 <Header state={1} />
-                <div className="container w-full space-y-5">
+                <div className="sm:container p-5 w-full space-y-5">
                     <div className="grid sm:grid-cols-3 gap-5">
                         <button className="bg-amber-400 h-24 rounded-xl">
                             <label className="text-lg sm:text-2xl font-bold">
@@ -90,7 +90,7 @@ export default function MainPage() {
                             کمک کنید.
                         </p>
                     </div>
-                    <ProductLists
+                    {/* <ProductLists
                         products={products.filter(
                             (product) => product.category === 42
                         )}
@@ -98,7 +98,7 @@ export default function MainPage() {
                             name: "فیلم های آموزشی بازار های مالی",
                             moreDir: "/lists",
                         }}
-                    />
+                    /> */}
                     <div className="bg-amber-300 rounded-xl p-5">
                         <p className="text-2xl text-center leading-loose">
                             بنابراین، اگر به دنبال ارتقای دانش و مهارت‌های خود

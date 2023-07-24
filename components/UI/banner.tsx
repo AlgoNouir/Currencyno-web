@@ -23,7 +23,7 @@ export default function Banner(props: { images: (string | string[])[] }) {
                 !Array.isArray(img) ? (
                     <div
                         key={`banner_${index}`}
-                        className={`grow bg-primary-700 rounded-xl overflow-hidden flex items-center justify-center`}
+                        className="grow bg-primary-700 rounded-xl overflow-hidden flex items-center justify-center"
                     >
                         {img === "" ? (
                             <div className="h-96"></div>
