@@ -4,10 +4,10 @@ import Image from "next/image";
 function Icon(props: { text: string; icon: any }) {
     return (
         <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
-            <div className="sm:w-16 w-9 sm:h-16 h-9 items-center justify-center flex text-3xl">
+            <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex text-3xl">
                 {props.icon}
             </div>
-            <label className="text-sm sm:text-2xl font-bold">
+            <label className="text-sm sm:text-lg xl:text-2xl font-bold">
                 {props.text}
             </label>
         </div>
@@ -17,12 +17,12 @@ function Icon(props: { text: string; icon: any }) {
 export default function Footer() {
     return (
         <div
-            className="bg-bg-300 rounded-t-xl w-screen flex 
+            className="bg-bg-300 rounded-t-xl w-screen flex overflow-hidden
             items-center justify-end flex-col p-5 pt-16 space-y-5"
         >
-            <div className="flex flex-col sm:flex-row w-full items-center justify-between sm:px-24 max-sm:space-y-5">
-                <div className="sm:w-1/3 w-full space-y-5 flex flex-col">
-                    <p className="text-sm sm:text-2xl text-justify">
+            <div className="flex flex-col lg:flex-row w-full items-center justify-between lg:px-10 max-lg:space-y-5 lg:space-x-5 rtl:space-x-reverse">
+                <div className="lg:w-1/3 w-full space-y-5 flex flex-col">
+                    <p className="text-sm sm:text-lg xl:text-2xl text-justify">
                         مجموعه کارنسینو با بیش از یک دهه فعالیت و تجربه در ارائه
                         خدمات فروش لوازم جانبی کامپیوتر و موبایل ، فروش لپ تاپ
                         استوک و تعمیرات انواع کامپیوتر، لپ تاپ،موبایل، و کنسول
@@ -35,94 +35,96 @@ export default function Footer() {
                         پاسخگوی شما هستیم .
                     </p>
                 </div>
-                <div className="flex flex-col space-y-5">
-                    <Icon
-                        text="نماد اعتماد"
-                        icon={
-                            <a
-                                referrerPolicy="origin"
-                                target="_blank"
-                                href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                            >
-                                <img
+                <div className="flex flex-col items-center xl:justify-evenly xl:w-2/3 justify-center sm:flex-row space-y-5 sm:space-y-0 sm:space-x-5 rtl:space-x-reverse">
+                    <div className="flex flex-col space-y-5">
+                        <Icon
+                            text="نماد اعتماد"
+                            icon={
+                                <a
                                     referrerPolicy="origin"
-                                    src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                                    alt=""
-                                    style={{ cursor: "pointer" }}
-                                    id="gBjq7O5O8goWmRHZYK1Y"
+                                    target="_blank"
+                                    href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
+                                >
+                                    <img
+                                        referrerPolicy="origin"
+                                        src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
+                                        alt=""
+                                        style={{ cursor: "pointer" }}
+                                        id="gBjq7O5O8goWmRHZYK1Y"
+                                    />
+                                </a>
+                            }
+                        />
+                        <Icon
+                            text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
+                            icon={
+                                <Image
+                                    src={require("@/public/eita.png")}
+                                    alt="ایتا"
                                 />
-                            </a>
-                        }
-                    />
-                    <Icon
-                        text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
-                        icon={
-                            <Image
-                                src={require("@/public/eita.png")}
-                                alt="ایتا"
-                            />
-                        }
-                    />
-                    <Icon
-                        text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
-                        icon={
-                            <div className="sm:w-16 w-9 sm:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg sm:text-3xl text-white">
-                                <BsFillTelephoneFill />
-                            </div>
-                        }
-                    />
-                    <Icon
-                        text="currencyno_plus"
-                        icon={
-                            <Image
-                                src={require("@/public/instaLogo.png")}
-                                alt="اینیستاگرام"
-                            />
-                        }
-                    />
-                </div>
-                <div className="h-96 rounded-xl w-96 overflow-hidden">
-                    <div
-                        style={{
-                            overflow: "hidden",
-                            maxWidth: "100%",
-                            width: "500px",
-                            height: "500px",
-                        }}
-                    >
+                            }
+                        />
+                        <Icon
+                            text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
+                            icon={
+                                <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg lg:text-3xl text-white">
+                                    <BsFillTelephoneFill />
+                                </div>
+                            }
+                        />
+                        <Icon
+                            text="currencyno_plus"
+                            icon={
+                                <Image
+                                    src={require("@/public/instaLogo.png")}
+                                    alt="اینیستاگرام"
+                                />
+                            }
+                        />
+                    </div>
+                    <div className="h-96 rounded-xl w-96 overflow-hidden">
                         <div
-                            id="g-mapdisplay"
                             style={{
-                                height: "100%",
-                                width: "100%",
+                                overflow: "hidden",
                                 maxWidth: "100%",
+                                width: "500px",
+                                height: "500px",
                             }}
                         >
-                            <iframe
+                            <div
+                                id="g-mapdisplay"
                                 style={{
                                     height: "100%",
                                     width: "100%",
-                                    border: "0",
+                                    maxWidth: "100%",
                                 }}
-                                src="https://www.google.com/maps/embed/v1/search?q=38.24185415827948,48.29008340835571&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
-                            ></iframe>
+                            >
+                                <iframe
+                                    style={{
+                                        height: "100%",
+                                        width: "100%",
+                                        border: "0",
+                                    }}
+                                    src="https://www.google.com/maps/embed/v1/search?q=38.24185415827948,48.29008340835571&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                                ></iframe>
+                            </div>
+                            <a
+                                className="google-map-code-enabler"
+                                href="https://www.bootstrapskins.com/themes"
+                                id="enable-map-data"
+                            >
+                                premium bootstrap themes
+                            </a>
                         </div>
-                        <a
-                            className="google-map-code-enabler"
-                            href="https://www.bootstrapskins.com/themes"
-                            id="enable-map-data"
-                        >
-                            premium bootstrap themes
-                        </a>
                     </div>
                 </div>
             </div>
-            <div className="flex sm:flex-row flex-col items-center justify-center max-sm:space-y-2">
+            <div className="flex lg:flex-row flex-col items-center justify-center max-lg:space-y-2 lg:space-x-2 rtl:space-x-reverse">
                 <p className="text-center">
                     تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت
                     است. ۱۴۰۳
                 </p>
-                <small>طراحی شده توسط مهدی نوری</small>
+                <small className="text-center">طراحی شده توسط مهدی نوری</small>
             </div>
         </div>
     );

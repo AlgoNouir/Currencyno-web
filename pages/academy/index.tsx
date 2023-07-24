@@ -14,14 +14,14 @@ export default function MainPage() {
             <div className="flex flex-col items-center pt-36 space-y-5 bg-academyPattern">
                 <Header state={1} />
                 <div className="container w-full space-y-5">
-                    <div className="grid grid-cols-3 gap-5">
+                    <div className="grid sm:grid-cols-3 gap-5">
                         <button className="bg-amber-400 h-24 rounded-xl">
-                            <label className="text-2xl font-bold">
+                            <label className="text-lg sm:text-2xl font-bold">
                                 خرید کتاب های اقتصادی و بازار های مالی
                             </label>
                         </button>
                         <button className="bg-amber-400 h-24 rounded-xl">
-                            <label className="text-2xl font-bold">
+                            <label className="text-lg sm:text-2xl font-bold">
                                 ویدیو های آموزشی بازار های مالی
                             </label>
                         </button>
@@ -29,7 +29,7 @@ export default function MainPage() {
                             onClick={() => reserveModalHandler(true)}
                             className="bg-amber-400 h-24 rounded-xl"
                         >
-                            <label className="text-2xl font-bold">
+                            <label className="text-lg sm:text-2xl font-bold">
                                 رزرو خدمات فضای اشتراکی
                             </label>
                         </button>
@@ -53,7 +53,7 @@ export default function MainPage() {
                         }}
                     />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
+                        <p className="sm:text-2xl text-lg leading-loose text-justify">
                             آیا به دنبال افزایش دانش و مهارت‌های خود در زمینه
                             اقتصاد و مالی هستید؟ آیا به دنبال بهبود عملکرد
                             شرکت‌تان و افزایش راندمان کاری همکارانتان می‌باشید؟
@@ -64,7 +64,7 @@ export default function MainPage() {
                             مدیران و علاقمندان می‌پردازد. این موسسه با هدف
                             افزایش دانش و مهارت‌های افراد در زمینه اقتصادی و
                             مالی تاسیس شده است.
-                        </label>
+                        </p>
                     </div>
                     <Banner
                         images={[
@@ -72,7 +72,7 @@ export default function MainPage() {
                         ]}
                     />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
+                        <p className="sm:text-2xl text-lg leading-loose text-justify">
                             در آکادمی اقتصادی و مالی کارنسینو ، دوره‌های متنوعی
                             از جمله دوره‌های مدیریت مالی، تحلیل و برنامه‌ریزی
                             مالی، مدیریت ریسک، بازاریابی و فروش، مدیریت منابع
@@ -88,7 +88,7 @@ export default function MainPage() {
                             خواهید بود تا دانش و مهارت‌های خود را در زمینه
                             اقتصاد و مالی بهبود دهید و به بهبود عملکرد شرکت خود
                             کمک کنید.
-                        </label>
+                        </p>
                     </div>
                     <ProductLists
                         products={products.filter(
@@ -100,12 +100,12 @@ export default function MainPage() {
                         }}
                     />
                     <div className="bg-amber-300 rounded-xl p-5">
-                        <label className="text-2xl leading-loose text-justify">
+                        <p className="text-2xl text-center leading-loose">
                             بنابراین، اگر به دنبال ارتقای دانش و مهارت‌های خود
                             در زمینه اقتصاد و مالی هستید و به دنبال بهبود عملکرد
                             شرکت‌تان می‌باشید، آکادمی اقتصادی و مالی می‌تواند
                             گزینه مناسبی برای شما باشد.
-                        </label>
+                        </p>
                     </div>
                 </div>
                 <Footer />

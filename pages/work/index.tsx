@@ -33,7 +33,7 @@ export default function MainPage() {
         <>
             <div className="flex flex-col items-center pt-36 bg-workPattern">
                 <Header state={3} />
-                <div className="p-5 space-y-5 container">
+                <div className="p-5 space-y-5 sm:container">
                     <Banner images={[["", "", "", ""]]} />
                     <div className="flex flex-col max-md:space-y-5 md:flex-row md:space-x-5 rtl:space-x-reverse">
                         <ActionButton

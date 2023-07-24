@@ -1,19 +1,35 @@
-import Banner from "./banner";
+import Image from "next/image";
 
 export default function TextBanner(props: {
-    images: string | string[];
+    images: string;
     text: string;
     reverse?: boolean;
 }) {
     return (
-        <div className="flex md:flex-row flex-col items-center justify-center space-y-5 md:space-y-0 md:space-x-5 rtl:space-x-reverse h-fit">
-            <div className="md:w-1/2 w-full bg-amber-300 p-5 md:p-12 md:h-96 rounded-xl flex">
-                <label className="md:text-2xl text-justify rounded-xl md:leading-10">
+        <div
+            className="flex xl:flex-row flex-col items-center justify-center space-y-5 
+            xl:space-y-0 xl:space-x-5 rtl:space-x-reverse h-fit"
+        >
+            <div className="xl:w-1/2 w-full bg-amber-300 p-5 xl:p-12  rounded-xl flex">
+                <label className="xl:text-2xl text-justify rounded-xl xl:leading-10">
                     {props.text}
                 </label>
             </div>
-            <div className="w-full md:w-1/2">
-                <Banner images={[props.images]} />
+            <div className="w-full xl:w-1/2 h-full">
+                <div className="grow bg-primary-700 rounded-xl h-full overflow-hidden flex items-center justify-center">
+                    {props.images === "" ? (
+                        <div className="h-96"></div>
+                    ) : (
+                        <Image
+                            alt={props.images}
+                            src={`https://currencyno.storage.iran.liara.space/${props.images}`}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="h-full w-auto"
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ export default function MainPage() {
         <>
             <div className="flex flex-col items-center pt-36 bg-fixPattern">
                 <Header state={4} />
-                <div className="p-5 space-y-5 container">
+                <div className="p-5 space-y-5 sm:container">
                     <button
                         onClick={() => modalHandler(true)}
                         className="bg-rose-400 w-full p-5 space-x-5 rtl:space-x-reverse rounded-xl flex items-center justify-center relative"

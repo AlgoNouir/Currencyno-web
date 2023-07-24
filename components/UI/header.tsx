@@ -47,7 +47,7 @@ export default function Header(props: { state: number }) {
                     transitionDuration: "500ms",
                     transform: show ? "" : "translate(0, -80px)",
                 }}
-                className="fixed flex items-center justify-center w-screen bg-white top-0 h-36 z-20 shadow"
+                className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow"
             >
                 <div
                     className=" container flex flex-col px-5
@@ -58,7 +58,7 @@ export default function Header(props: { state: number }) {
                             justifyContent:
                                 props.state === 0 ? "space-between" : "center",
                         }}
-                        className="flex flex-row items-center justify-between w-full"
+                        className="flex sm:flex-row items-center justify-between w-full flex-col"
                     >
                         <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
                             <button
@@ -93,7 +93,7 @@ export default function Header(props: { state: number }) {
                                     <input
                                         placeholder="محصول خود را جست و جو کنید ..."
                                         type="text"
-                                        className="outline-none bg-slate-200 p-2 w-96"
+                                        className="outline-none bg-slate-200 p-2 w-96 sm:visible hidden"
                                     />
                                 </div>
                             ) : (

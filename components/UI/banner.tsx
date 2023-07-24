@@ -16,7 +16,9 @@ function CustomImage(props: { src: string }) {
 
 export default function Banner(props: { images: (string | string[])[] }) {
     return (
-        <div className={`grid grid-cols-${props.images.length} gap-5`}>
+        <div
+            className={`grid grid-cols-1 sm:grid-cols-${props.images.length} gap-5`}
+        >
             {props.images.map((img, index) =>
                 !Array.isArray(img) ? (
                     <div
