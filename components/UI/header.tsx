@@ -11,7 +11,8 @@ import { FiMenu } from "react-icons/fi";
 import { menuDirector } from "../menu";
 
 export default function Header(props: { state: number }) {
-    const user = useAppSelector((store) => store.account.user);
+    const tmp = useAppSelector((store) => store.account);
+    const user = tmp.user;
     const category = useAppSelector((store) => store.core.category);
     const router = useRouter();
     const [loginModalOpen, loginModalOpenHandler] = useState("");
@@ -144,7 +145,7 @@ export default function Header(props: { state: number }) {
                                             : () => router.push("/profile")
                                     }
                                 >
-                                    {user?.products || 0 > 0 ? (
+                                    {tmp.products.length > 0 ? (
                                         <div
                                             className="bg-red-600 rounded-full w-6 h-6
                                 flex items-center justify-center absolute top-0 -right-3"
@@ -153,7 +154,7 @@ export default function Header(props: { state: number }) {
                                                 {Intl.NumberFormat(
                                                     "fa-IR"
                                                 ).format(
-                                                    user?.products.length || 0
+                                                    tmp.products.length || 0
                                                 )}
                                             </label>
                                         </div>
@@ -262,14 +263,14 @@ export default function Header(props: { state: number }) {
                                     : () => router.push("/profile")
                             }
                         >
-                            {user?.products || 0 > 0 ? (
+                            {tmp.products.length > 0 ? (
                                 <div
                                     className="bg-red-600 rounded-full w-6 h-6
                                 flex items-center justify-center absolute top-0 -right-3"
                                 >
                                     <label className="text-white">
                                         {Intl.NumberFormat("fa-IR").format(
-                                            user?.products.length || 0
+                                            tmp.products.length
                                         )}
                                     </label>
                                 </div>
