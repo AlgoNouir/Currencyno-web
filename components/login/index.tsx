@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { loginThunk } from "@/store/account/thunk";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { BsTelephone } from "react-icons/bs";
 import PhoneInput from "../UI/phoneInput";
+import { setNotif } from "@/store/core/slice";
 
 export default function LoginModal(props: { handler: any; message: string }) {
   const [sms, smsHandler] = useState(false);
@@ -16,7 +16,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
     <></>
   ) : (
     <div
-      className="absolute h-screen top-0 w-screen z-50
+      className="fixed h-screen top-0 w-screen z-50
             backdrop-blur flex items-center justify-center bg-black/10"
     >
       <div
@@ -35,7 +35,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
           </button>
           <p>ورود به حساب کاربری</p>
         </div>
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col space-y-5 items-center justify-center">
           <div
             style={{ direction: "ltr" }}
             className="space-x-2 flex flex-row w-fit"
@@ -43,21 +43,17 @@ export default function LoginModal(props: { handler: any; message: string }) {
             <PhoneInput value={phone} handler={phoneHandler} />
             <button
               disabled={sms}
-              onClick={
-                sms
-                  ? () => {}
-                  : () => {
-                      if (typeof phone === "number") {
-                        axiosNoUser
-                          .post("login/", { phone })
-                          .then(() => smsHandler(true))
-                          .catch((error) => console.log(error));
-                      }
-                    }
-              }
+              onClick={() => {
+                if (typeof phone === "number") {
+                  axiosNoUser
+                    .post("login/", { phone })
+                    .then(() => smsHandler(true))
+                    .catch((error) => console.log(error));
+                }
+              }}
               className={`${
                 sms ? "bg-prime-200 " : "bg-green-400"
-              } p-3 rounded-xl w-44`}
+              } p-3 rounded-xl w-44 disabled:bg-black/30`}
             >
               <p>{sms ? "ارسال مجدد" : "دریافت کد تایید"}</p>
             </button>
@@ -71,7 +67,6 @@ export default function LoginModal(props: { handler: any; message: string }) {
                 className="flex bg-slate-200 items-center
                         space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
               >
-                <BsTelephone className="text-xl text-gray-700" />
                 <input
                   type="text"
                   value={code}
@@ -80,25 +75,30 @@ export default function LoginModal(props: { handler: any; message: string }) {
                 />
               </div>
               <button
-                onClick={
-                  sms
-                    ? () => {
-                        if (typeof phone === "number") {
-                          console.log("send sms");
-
-                          dispatch(
-                            loginThunk({
-                              phone,
-                              code,
-                              products,
-                            })
-                          );
-                          props.handler("");
-                          smsHandler(false);
-                        }
-                      }
-                    : () => {}
-                }
+                onClick={() => {
+                  if (
+                    typeof phone === "number" &&
+                    phone?.toString()[0] === "9"
+                  ) {
+                    dispatch(
+                      loginThunk({
+                        phone,
+                        code,
+                        products,
+                      })
+                    );
+                    props.handler("");
+                    smsHandler(false);
+                  } else {
+                    dispatch(
+                      setNotif({
+                        type: "error",
+                        title: "خطای شماره تلفن",
+                        message: "لطفا شماره تلفن خود را به درستی وارد کنید",
+                      })
+                    );
+                  }
+                }}
                 className="p-3 rounded-xl w-44 bg-prime-300"
               >
                 <p>تایید کد</p>
