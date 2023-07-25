@@ -24,7 +24,7 @@ export default function MainPage() {
             (product) =>
               product.counts.reduce((obj, p) => p.amount + obj, 0) < 4
           )}
-          title={{ name: "پرفروش ترین ها", moreDir: "lists" }}
+          title={{ name: "پرفروش ترین ها", moreDir: "lists/all" }}
         />
         <Banner images={[{ src: "store/2.jpg" }]} />
         <ProductLists
@@ -32,12 +32,12 @@ export default function MainPage() {
             .filter((product) => product.offerPrice !== 0)
             .sort((product) => product.offerPrice - product.price)
             .reverse()}
-          title={{ name: "بیشترین تخفیفات", moreDir: "lists" }}
+          title={{ name: "بیشترین تخفیفات", moreDir: "lists/all" }}
         />
         <Banner images={[[{ src: "store/3.jpg" }, { src: "store/6.png" }]]} />
         <ProductLists
           products={products.filter((product) => product.category === 39)}
-          title={{ name: "لپتاب استوک", moreDir: "lists" }}
+          title={{ name: "لپتاب استوک", moreDir: "lists/all" }}
         />
       </div>
       <Footer />

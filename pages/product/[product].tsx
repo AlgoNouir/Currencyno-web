@@ -87,6 +87,20 @@ export default function ProductPage() {
                   <label className="text-xl font-bold">
                     {product.persianName}
                   </label>
+
+                  {product.Orginal ? (
+                    <></>
+                  ) : (
+                    <small className="m-2 text-white bg-slate-300 p-1 rounded-xl absolute top-3 left-3">
+                      غیر اصل
+                    </small>
+                  )}
+                </label>
+                <label className="text-gray-500 font-bold">
+                  {product.garanty}
+                </label>
+                <div>
+                  <label>رنگ : </label>
                   {product.counts.length > 0 ? (
                     <Dropdown
                       menu={{
@@ -120,18 +134,7 @@ export default function ProductPage() {
                   ) : (
                     <></>
                   )}
-
-                  {product.orginal ? (
-                    <></>
-                  ) : (
-                    <small className="m-2 text-white bg-slate-300 p-1 rounded-xl absolute top-3 left-3">
-                      غیر اصل
-                    </small>
-                  )}
-                </label>
-                <label className="text-gray-500 font-bold">
-                  {product.garanty}
-                </label>
+                </div>
               </div>
               <div
                 className="w-full flex flex-col space-y-5 sm:space-y-0 sm:flex-row space-x-5 

@@ -27,6 +27,8 @@ export const loginThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     const response = await axiosNoUser.post("login/", actionData);
+    console.log(response.data);
+
     const { user, access, orders } = response.data;
     axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
     return { user, orders };

@@ -1,7 +1,5 @@
 import { axiosUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
-import { setNotif } from "@/store/core/slice";
-import { cartToOrderThunk } from "@/store/order/thunk";
 import { useRouter } from "next/router";
 
 export default function FactorPage() {
@@ -16,10 +14,10 @@ export default function FactorPage() {
   if (userProducts.length > 0)
     return (
       <div
-        className="flex flex-row items-center h-screen p-14
-            justify-between space-x-5 rtl:space-x-reverse"
+        className="flex flex-col lg:flex-row items-center h-screen p-5 sm:p-14 max-lg:h-fit
+            justify-between space-y-5 lg:space-y-0 lg:space-x-5 rtl:space-x-reverse"
       >
-        <div className="space-y-5 w-1/2 h-full rounded-xl overflow-scroll">
+        <div className="space-y-5 w-full lg:w-1/2 h-full rounded-xl overflow-scroll">
           {userProducts.map((item) => {
             const product = products.find((p) => p.id === item.product);
             if (product)
@@ -45,10 +43,14 @@ export default function FactorPage() {
           })}
         </div>
         <div
-          className="bg-white w-1/2 h-full rounded-xl
-                    p-5 flex flex-col justify-end"
+          className="bg-white w-full lg:w-1/2 h-full rounded-xl
+          p-5 flex flex-col justify-between max-lg:space-y-5"
         >
-          <div className="w-full flex items-end justify-between">
+          <p className="text-xl font-bold">
+            مرجوع کالا صرفا تنها در زمانی مقدور است که بسته بندی کالا باز نشده
+            باشد.
+          </p>
+          <div className="w-full flex flex-col sm:flex-row sm:items-end sm:justify-between max-sm:space-y-5">
             <div className="flex flex-col space-y-2">
               <small>مجموع :</small>
               <div className="flex items-center space-x-2 rtl:space-x-reverse">

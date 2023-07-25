@@ -20,7 +20,7 @@ export default function ProfilePage() {
         <Header state={0} />
       </div>
       <div className="h-full p-5 flex flex-row space-x-5 rtl:space-x-reverse">
-        <div className="w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-end py-5">
+        <div className="sm:w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-end py-5">
           {screens.map((s, index) => (
             <button
               key={`screen-${index}`}
@@ -57,7 +57,7 @@ function ProductScreen() {
         <HiOutlineArchiveBoxXMark className="text-[150px]" />
         <label>در حال حاضر شما محصولی سفارش نداده اید</label>
         <button
-          onClick={() => router.push("/lists")}
+          onClick={() => router.push("/lists/all")}
           className="bg-prime-100 p-5 rounded-xl"
         >
           <p className="text-white">مشاهده لیست محصولات</p>
@@ -73,7 +73,7 @@ function ProductScreen() {
         <button
           onClick={() => router.push("factor")}
           className="absolute bottom-14 text-white
-                    bg-prime-100 px-16 py-2 rounded-xl left-14"
+          bg-prime-100 px-16 py-2 rounded-xl left-14"
         >
           سفارش نهایی
         </button>
@@ -143,8 +143,8 @@ function SettingScreen() {
   const [address, addressHandler] = useState(user?.address || "");
 
   return (
-    <div className="h-fit w-full bg-white rounded-xl p-5 space-y-10 flex flex-row">
-      <div className="w-1/2">
+    <div className="h-fit w-full bg-white rounded-xl p-5 space-y-10 flex flex-col sm:flex-row">
+      <div className="w-full sm:w-1/2">
         <Input value={name} handler={nameHandler} title="نام شخص" />
         <Input value={family} handler={familyHandler} title="نام خانوادگی" />
         <Input
@@ -162,8 +162,7 @@ function SettingScreen() {
           />
         </div>
       </div>
-      <div className="w-1/2 justify-between flex flex-col items-end">
-        <div></div>
+      <div className="sm:w-1/2 justify-between flex flex-col items-end">
         <button
           onClick={() =>
             dispatch(
