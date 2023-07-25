@@ -116,7 +116,6 @@ export default function Footer() {
         <p className="text-center">
           تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت است. ۱۴۰۳
         </p>
-        <small className="text-center">طراحی شده توسط مهدی نوری</small>
       </div>
     </div>
   );
