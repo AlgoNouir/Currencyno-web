@@ -7,7 +7,7 @@ function Icon(props: { text: string; icon: any }) {
       <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex text-3xl">
         {props.icon}
       </div>
-      <label className="text-sm sm:text-lg xl:text-2xl font-bold">
+      <label className="text-xs sm:text-sm xl:text-xl font-bold">
         {props.text}
       </label>
     </div>
@@ -22,7 +22,7 @@ export default function Footer() {
     >
       <div className="flex flex-col lg:flex-row w-full items-center justify-between lg:px-10 max-lg:space-y-5 lg:space-x-5 rtl:space-x-reverse">
         <div className="lg:w-1/3 w-full space-y-5 flex flex-col">
-          <p className="text-sm sm:text-lg xl:text-2xl text-justify">
+          <p className="text-xs sm:text-sm xl:text-xl text-justify">
             مجموعه کارنسینو با بیش از یک دهه فعالیت و تجربه در ارائه خدمات فروش
             لوازم جانبی کامپیوتر و موبایل ، فروش لپ تاپ استوک و تعمیرات انواع
             کامپیوتر، لپ تاپ،موبایل، و کنسول های بازی می باشد. این فروشگاه با
