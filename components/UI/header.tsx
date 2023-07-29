@@ -132,14 +132,7 @@ export default function Header(props: { state: number }) {
                 </button>
                 <button
                   className="relative"
-                  onClick={
-                    user === undefined
-                      ? () =>
-                          loginModalOpenHandler(
-                            "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
-                          )
-                      : () => router.push("/profile")
-                  }
+                  onClick={() => router.push("/profile")}
                 >
                   {tmp.products.length > 0 ? (
                     <div

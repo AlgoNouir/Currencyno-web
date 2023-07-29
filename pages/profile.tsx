@@ -1,4 +1,5 @@
 import Header from "@/components/UI/header";
+import LoginModal from "@/components/login";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
@@ -48,22 +49,24 @@ export default function ProfilePage() {
 
 function ProductScreen() {
   const router = useRouter();
-  const user = useAppSelector((store) => store.account.user);
   const userProducts = useAppSelector((store) => store.account.products);
+  const user = useAppSelector((store) => store.account.user);
   const products = useAppSelector((store) => store.products);
-  if (user)
-    return userProducts.length === 0 ? (
-      <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
-        <HiOutlineArchiveBoxXMark className="text-[150px]" />
-        <label>در حال حاضر شما محصولی سفارش نداده اید</label>
-        <button
-          onClick={() => router.push("/lists/all")}
-          className="bg-prime-100 p-5 rounded-xl"
-        >
-          <p className="text-white">مشاهده لیست محصولات</p>
-        </button>
-      </div>
-    ) : (
+  const [loginMessage, loginMessageHandler] = useState("");
+
+  return userProducts.length === 0 ? (
+    <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
+      <HiOutlineArchiveBoxXMark className="text-[150px]" />
+      <label>در حال حاضر شما محصولی سفارش نداده اید</label>
+      <button
+        onClick={() => router.push("/lists/all")}
+        className="bg-prime-100 p-5 rounded-xl"
+      >
+        <p className="text-white">مشاهده لیست محصولات</p>
+      </button>
+    </div>
+  ) : (
+    <>
       <div
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
@@ -71,7 +74,14 @@ function ProductScreen() {
         className="grid w-full gap-5"
       >
         <button
-          onClick={() => router.push("factor")}
+          onClick={
+            user === undefined
+              ? () =>
+                  loginMessageHandler(
+                    "شما برای خرید کردن بایستی ابتدا وارد شوید"
+                  )
+              : () => router.push("factor")
+          }
           className="absolute bottom-14 text-white
           bg-prime-100 px-16 py-2 rounded-xl left-14"
         >
@@ -107,7 +117,11 @@ function ProductScreen() {
             );
         })}
       </div>
-    );
+      <div className="fixed right-0 left-0 top-0 bottom-0 z-20">
+        <LoginModal message={loginMessage} handler={loginMessageHandler} />
+      </div>
+    </>
+  );
 }
 function Input(props: {
   title: string;
