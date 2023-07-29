@@ -7,8 +7,9 @@ function Section(props: { title: string; data: categoryType[] }) {
   return props.data.length > 0 ? (
     <div className="flex flex-col space-y-2 w-44">
       <p className="border-b-2 pb-2">{props.title}</p>
-      {props.data.map((cat) => (
+      {props.data.map((cat, index) => (
         <button
+          key={`item-${index}`}
           className="bg-primary-200 p-2 rounded-xl hover:bg-primary-100 transition-all"
           onClick={() => router.push(`/lists/${cat.id}`)}
         >
@@ -32,8 +33,9 @@ export default function MegaMenu() {
       >
         {category
           .filter((cat) => cat.parent === null)
-          .map((cat) => (
+          .map((cat, index) => (
             <Section
+              key={`section-${index}`}
               title={cat.name}
               data={category.filter((catcat) => cat.id === catcat.parent)}
             />
