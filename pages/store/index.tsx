@@ -37,7 +37,7 @@ export default function MainPage() {
         <Banner images={[[{ src: "store/3.jpg" }, { src: "store/6.png" }]]} />
         <ProductLists
           products={products.filter((product) => product.category === 39)}
-          title={{ name: "لپتاب استوک", moreDir: "lists/all" }}
+          title={{ name: "لبتاپ استوک", moreDir: "lists/all" }}
         />
       </div>
       <Footer />

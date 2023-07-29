@@ -46,7 +46,7 @@ export default function ProductLists(props: {
           <></>
         ) : (
           <div className="flex flex-row justify-between items-center mb-5">
-            <label className="text-lg sm:text-2xl font-bold">
+            <label className="text-lg sm:text-3xl font-bold">
               {props.title.name}
             </label>
             {props.title.moreDir === undefined ? (
@@ -54,7 +54,7 @@ export default function ProductLists(props: {
             ) : (
               <button
                 onClick={() => router.push(props.title?.moreDir || "")}
-                className="px-5 py-2 text-black bg-slate-300 rounded-full"
+                className="px-5 py-2 text-black bg-slate-300 rounded-full text-lg sm:text-xl text-sm sm:w-44 font-bold"
               >
                 مشاهده بیشتر
               </button>
