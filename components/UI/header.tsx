@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useAppSelector } from "@/store/HOCs";
 import LoginModal from "../login";
 import Image from "next/image";
-import { Drawer, Dropdown, Menu } from "antd";
+import { AutoComplete, Drawer, Dropdown, Menu } from "antd";
 import { FiMenu } from "react-icons/fi";
 import { menuDirector } from "../menu";
 import MegaMenu from "../megamenu";
@@ -15,8 +15,10 @@ export default function Header(props: { state: number }) {
   const tmp = useAppSelector((store) => store.account);
   const user = tmp.user;
   const category = useAppSelector((store) => store.core.category);
+  const products = useAppSelector((store) => store.products);
   const router = useRouter();
   const [loginModalOpen, loginModalOpenHandler] = useState("");
+  const [options, setOptions] = useState<{ value: string }[]>([]);
   const [menu, menuHandler] = useState(false);
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -262,9 +264,16 @@ export default function Header(props: { state: number }) {
                     rounded-xl p-1 rtl:space-x-reverse flex"
           >
             <AiOutlineSearch className="text-2xl text-gray-700" />
-            <input
+            <AutoComplete
+              options={options}
+              onSearch={(text) =>
+                setOptions(
+                  products
+                    .filter((p) => p.persianName.includes(text))
+                    .map((p) => ({ value: p.persianName }))
+                )
+              }
               placeholder="محصول خود را جست و جو کنید ..."
-              type="text"
               className="outline-none bg-slate-200 p-2 w-full"
             />
           </div>
