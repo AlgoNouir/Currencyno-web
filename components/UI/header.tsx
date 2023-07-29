@@ -15,10 +15,8 @@ export default function Header(props: { state: number }) {
   const tmp = useAppSelector((store) => store.account);
   const user = tmp.user;
   const category = useAppSelector((store) => store.core.category);
-  const products = useAppSelector((store) => store.products);
   const router = useRouter();
   const [loginModalOpen, loginModalOpenHandler] = useState("");
-  const [options, setOptions] = useState<{ value: string }[]>([]);
   const [menu, menuHandler] = useState(false);
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -100,11 +98,8 @@ export default function Header(props: { state: number }) {
                                     space-x-3 rounded-xl p-1 rtl:space-x-reverse xl:flex hidden"
                 >
                   <AiOutlineSearch className="text-2xl text-gray-700" />
-                  <input
-                    placeholder="محصول خود را جست و جو کنید ..."
-                    type="text"
-                    className="outline-none bg-slate-200 p-2 w-96"
-                  />
+
+                  <SearchConsole />
                 </div>
               ) : (
                 <></>
@@ -264,18 +259,7 @@ export default function Header(props: { state: number }) {
                     rounded-xl p-1 rtl:space-x-reverse flex"
           >
             <AiOutlineSearch className="text-2xl text-gray-700" />
-            <AutoComplete
-              options={options}
-              onSearch={(text) =>
-                setOptions(
-                  products
-                    .filter((p) => p.persianName.includes(text))
-                    .map((p) => ({ value: p.persianName }))
-                )
-              }
-              placeholder="محصول خود را جست و جو کنید ..."
-              className="outline-none bg-slate-200 p-2 w-full"
-            />
+            <SearchConsole />
           </div>
           <Menu
             onClick={(e) => {
@@ -289,5 +273,35 @@ export default function Header(props: { state: number }) {
       </Drawer>
       <LoginModal message={loginModalOpen} handler={loginModalOpenHandler} />
     </>
+  );
+}
+
+function SearchConsole() {
+  const products = useAppSelector((store) => store.products);
+  const [options, setOptions] = useState<{ value: string; id: number }[]>([]);
+  const router = useRouter();
+
+  return (
+    <AutoComplete
+      options={options}
+      bordered={false}
+      onSelect={(obj) => {
+        router.push(
+          `/product/${
+            products.find((product) => product.persianName === obj)?.id
+          }`
+        );
+        setOptions([]);
+      }}
+      onSearch={(text) =>
+        setOptions(
+          products
+            .filter((p) => p.persianName.includes(text))
+            .map((p) => ({ value: p.persianName, id: p.id }))
+        )
+      }
+      placeholder="محصول خود را جست و جو کنید ..."
+      className="outline-none p-2 w-96"
+    />
   );
 }
