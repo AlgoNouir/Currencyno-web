@@ -63,7 +63,7 @@ export default function ProductPage() {
     tmp.filter((p) => p.category === product.category && p.id !== product.id);
 
   // states
-  const [count, countHandler] = useState(inCart?.count || 0);
+  const [count, countHandler] = useState(inCart?.count || 1);
   const [select, selectHandler] = useState<keeperCounterType | undefined>();
 
   if (product !== undefined) {
