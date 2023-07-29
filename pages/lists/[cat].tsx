@@ -1,3 +1,4 @@
+import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import { menuDirector } from "@/components/menu";
 import Product from "@/components/store/product";
@@ -26,7 +27,7 @@ export default function ListsPage() {
   }, [filterHandler, cat]);
 
   return (
-    <div className="flex flex-col xl:space-y-5 h-screen">
+    <div className="flex flex-col xl:space-y-5">
       <Header state={0} />
       <div className="flex flex-row xl:space-x-5 rtl:space-x-reverse grow p-5 pt-36">
         <div className="bg-bg-200 h-[80vh] w-96 rounded-xl overflow-scroll relative scrollbar-hide max-xl:hidden">
@@ -62,6 +63,7 @@ export default function ListsPage() {
             ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
