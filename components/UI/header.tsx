@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Drawer, Dropdown, Menu } from "antd";
 import { FiMenu } from "react-icons/fi";
 import { menuDirector } from "../menu";
+import MegaMenu from "../megamenu";
 
 export default function Header(props: { state: number }) {
   const tmp = useAppSelector((store) => store.account);
@@ -52,7 +53,7 @@ export default function Header(props: { state: number }) {
           transitionDuration: "500ms",
           transform: show ? "" : "translate(0, -80px)",
         }}
-        className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow"
+        className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow "
       >
         <button
           onClick={() => menuHandler(true)}
@@ -61,7 +62,7 @@ export default function Header(props: { state: number }) {
           <FiMenu />
         </button>
         <div
-          className=" container flex flex-col px-5
+          className=" container flex flex-col px-5 relative
                     items-center space-y-5 pt-5"
         >
           <div
@@ -164,7 +165,7 @@ export default function Header(props: { state: number }) {
               <></>
             )}
           </div>
-          <div className="flex-col items-end justify-end">
+          <div className="flex-col items-center justify-center ">
             <div className="grid grid-cols-5 gap-5">
               {[
                 { name: "محصولات دیجیتال", url: "/store/" },
@@ -174,32 +175,17 @@ export default function Header(props: { state: number }) {
                 { name: "تعمیرات الکترونیکی", url: "/fix/" },
               ].map((txt, index) =>
                 index === 0 ? (
-                  <Dropdown
+                  <button
                     key={index}
-                    placement="bottomCenter"
-                    menu={{
-                      items: category
-                        .filter((c) => c.parent)
-                        .map((c) => ({
-                          label: c.name,
-                          key: c.id,
-                          // children: {
-                          //     label: "hello",
-                          // },
-                        })),
-                    }}
+                    disabled={index === props.state}
+                    onClick={() => router.push(txt.url)}
+                    className="flex flex-row items-end justify-center transition-all group
+                    hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
+                    border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
                   >
-                    <button
-                      key={index}
-                      disabled={index === props.state}
-                      onClick={() => router.push(txt.url)}
-                      className="flex flex-row items-end justify-center transition-all
-                                        hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
-                                        border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
-                    >
-                      <p className="sm:text-xl text-xs p-1">{txt.name}</p>
-                    </button>
-                  </Dropdown>
+                    <MegaMenu />
+                    <p className="sm:text-xl text-xs p-1">{txt.name}</p>
+                  </button>
                 ) : (
                   <button
                     key={index}
