@@ -1,6 +1,7 @@
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import LoginModal from "@/components/login";
+import SettingDataModal from "@/components/store/settingData";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
@@ -55,6 +56,7 @@ function ProductScreen() {
   const user = useAppSelector((store) => store.account.user);
   const products = useAppSelector((store) => store.products);
   const [loginMessage, loginMessageHandler] = useState("");
+  const [settingData, settingDataHandler] = useState(false);
 
   return userProducts.length === 0 ? (
     <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
@@ -82,6 +84,19 @@ function ProductScreen() {
                   loginMessageHandler(
                     "شما برای خرید کردن بایستی ابتدا وارد شوید"
                   )
+              : user.lName === undefined ||
+                user.fName === undefined ||
+                user.lName === undefined ||
+                user.email === undefined ||
+                user.address === undefined ||
+                user.lName === null ||
+                user.fName === null ||
+                user.lName === null ||
+                user.email === null ||
+                user.address === null
+              ? () => {
+                  settingDataHandler(true);
+                }
               : () => router.push("factor")
           }
           className="absolute bottom-14 text-white z-20
@@ -119,13 +134,8 @@ function ProductScreen() {
             );
         })}
       </div>
-      {loginMessage === "" ? (
-        ""
-      ) : (
-        <div className="fixed right-0 left-0 top-0 bottom-0 z-20">
-          <LoginModal message={loginMessage} handler={loginMessageHandler} />
-        </div>
-      )}
+      <LoginModal message={loginMessage} handler={loginMessageHandler} />
+      <SettingDataModal open={settingData} handler={settingDataHandler} />
     </>
   );
 }
@@ -148,7 +158,7 @@ function Input(props: {
   );
 }
 
-function SettingScreen() {
+export function SettingScreen() {
   // redux
   const user = useAppSelector((store) => store.account.user);
   const dispatch = useAppDispatch();
@@ -210,7 +220,7 @@ function OrderScreen() {
   return (
     <div className="relative w-full h-full">
       <div
-        className="grid grid-cols-2 gap-5 overflow-scroll 
+        className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
                 absolute top-0 left-0 right-0 bottom-0 scrollbar-hide"
       >
         {orders.map((order, index) => (
@@ -218,9 +228,9 @@ function OrderScreen() {
             key={index}
             className={`w-full ${
               order.done === 3 ? "bg-zinc-300" : "bg-white"
-            } rounded-xl p-5`}
+            } rounded-xl p-5 h-32`}
           >
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col items-center justify-center sm:items-end sm:justify-between sm:flex-row">
               <div className="flex flex-col space-y-5 ">
                 <div>{new Date(order.created_at).toLocaleString("fa")}</div>
                 <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">

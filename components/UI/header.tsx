@@ -218,7 +218,18 @@ export default function Header(props: { state: number }) {
               <p>
                 {user === undefined
                   ? "ورود یا ثبت نام"
-                  : `${user.fName} ${user.lName}`}
+                  : user.lName === undefined ||
+                    user.fName === undefined ||
+                    user.lName === undefined ||
+                    user.email === undefined ||
+                    user.address === undefined ||
+                    user.lName === null ||
+                    user.fName === null ||
+                    user.lName === null ||
+                    user.email === null ||
+                    user.address === null
+                  ? `${user.fName} ${user.lName}`
+                  : ""}
               </p>
             </button>
             <button
