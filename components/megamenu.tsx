@@ -26,7 +26,7 @@ export default function MegaMenu() {
   const category = useAppSelector((store) => store.core.category);
 
   return (
-    <div className=" flex items-center justify-end top-12 fixed w-screen group-hover:visible collapse">
+    <div className=" items-center justify-end top-12 fixed w-screen group-hover:flex hidden">
       <div
         className=" shadow-xl rounded-xl p-5 flex flex-row
        bg-white space-x-5 rtl:space-x-reverse"

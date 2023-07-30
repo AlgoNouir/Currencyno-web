@@ -1,3 +1,4 @@
+import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import LoginModal from "@/components/login";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
@@ -43,6 +44,7 @@ export default function ProfilePage() {
           <div className="h-full w-full">{screen.component}</div>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 }
@@ -82,7 +84,7 @@ function ProductScreen() {
                   )
               : () => router.push("factor")
           }
-          className="absolute bottom-14 text-white
+          className="absolute bottom-14 text-white z-20
           bg-prime-100 px-16 py-2 rounded-xl left-14"
         >
           سفارش نهایی
@@ -117,9 +119,13 @@ function ProductScreen() {
             );
         })}
       </div>
-      <div className="fixed right-0 left-0 top-0 bottom-0 z-20">
-        <LoginModal message={loginMessage} handler={loginMessageHandler} />
-      </div>
+      {loginMessage === "" ? (
+        ""
+      ) : (
+        <div className="fixed right-0 left-0 top-0 bottom-0 z-20">
+          <LoginModal message={loginMessage} handler={loginMessageHandler} />
+        </div>
+      )}
     </>
   );
 }
