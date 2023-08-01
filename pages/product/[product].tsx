@@ -16,6 +16,8 @@ import { keeperCounterType } from "@/store/product/slice";
 import ProductLists from "@/components/store/productsList";
 import ImageCarousel from "@/components/UI/carousel";
 import { addOfflineProduct } from "@/store/account/slice";
+import { HiBuildingStorefront } from "react-icons/hi2";
+import { BsFillBoxSeamFill } from "react-icons/bs";
 
 function ProductDetail(props: { name: string; amount: string }) {
   return (
@@ -125,6 +127,14 @@ export default function ProductPage() {
                     <></>
                   )}
                 </div>
+                <div className="flex flex-row text-prime-200/50 space-x-2 rtl:space-x-reverse items-center">
+                  <HiBuildingStorefront className="text-xl" />
+                  <label>ارسال از انبار کارنسینو</label>
+                </div>
+                <div className="flex flex-row text-prime-200/50 space-x-2 rtl:space-x-reverse items-center">
+                  <BsFillBoxSeamFill className="text-xl" />
+                  <label>موجود در انبار کارنسینو</label>
+                </div>
               </div>
               <div
                 className="w-full flex flex-col space-y-5 sm:space-y-0 sm:flex-row space-x-5 
@@ -132,7 +142,7 @@ export default function ProductPage() {
               >
                 {select === undefined ? (
                   <div className="flex items-center justify-center w-full h-20">
-                    <label className="text-5xl font-bold text-gray-300`">
+                    <label className="text-5xl font-bold text-gray-300">
                       ناموجود :(
                     </label>
                   </div>
