@@ -16,7 +16,7 @@ export default function LoginModal(props: { handler: any; message: string }) {
     <></>
   ) : (
     <div
-      className="fixed h-screen top-0 w-screen z-50
+      className="fixed h-screen top-0 w-screen z-50 bottom-0 left-0 right-0
             backdrop-blur flex items-center justify-center bg-black/10"
     >
       <div

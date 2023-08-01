@@ -8,7 +8,11 @@ import { changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
-import { HiOutlineArchiveBoxXMark } from "react-icons/hi2";
+import { BiCheckShield } from "react-icons/bi";
+import {
+  HiBuildingStorefront,
+  HiOutlineArchiveBoxXMark,
+} from "react-icons/hi2";
 
 const screens = [
   { id: 0, name: "سبد خرید", component: <ProductScreen /> },
@@ -71,13 +75,104 @@ function ProductScreen() {
       </button>
     </div>
   ) : (
-    <>
+    <div className="flex flex-row space-x-5 rtl:space-x-reverse h-full">
       <div
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         }}
         className="grid w-full gap-5"
       >
+        {userProducts.map((p, index) => {
+          const product = products.find((pp) => pp.id === p.product);
+          const select = product?.counts.find((s) => s.id === p.select);
+          if (product)
+            return (
+              <button
+                onClick={() => router.push(`product/${product.id}`)}
+                className="relative bg-prime-300 rounded-xl h-fit"
+              >
+                <div className="absolute top-3 right-3">
+                  {select !== undefined ? (
+                    <div className="bg-gray-200 p-2 rounded-xl">
+                      {select.name}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div className="h-96">
+                  <Product {...product} />
+                </div>
+                <div className="bg-white z-0 rounded-xl p-2 border-4 border-primary-500 space-y-2">
+                  <div className="flex flex-row items-center justify-start font-bold space-x-2 rtl:space-x-reverse text-primary-700">
+                    <BiCheckShield className="text-xl" />
+                    <label className="text-sm">{product.garanty}</label>
+                  </div>
+                  <div className="flex flex-row text-primary-700 font-bold space-x-2 rtl:space-x-reverse items-center">
+                    <HiBuildingStorefront className="text-xl" />
+                    <label className="text-sm">ارسال از انبار کارنسینو</label>
+                  </div>
+                  <div className="flex flex-row items-end justify-between ">
+                    <label>
+                      {`${Intl.NumberFormat("fa-IR").format(p.count)} عدد`}
+                    </label>
+                    <label>
+                      {`${Intl.NumberFormat("fa-IR").format(
+                        p.count * product.price
+                      )} تومان`}
+                    </label>
+                  </div>
+                </div>
+              </button>
+            );
+        })}
+      </div>
+      <div className="bg-white w-96 h-fit space-y-14 rounded-xl p-5 justify-items-center">
+        <div className="grid grid-cols-3 gap-y-5 font-bold text-xl">
+          <label className="text-gray-500">قیمت کل</label>
+          <label className="text-gray-500">
+            {Intl.NumberFormat("fa-IR").format(
+              userProducts.reduce((obj, product) => {
+                const tmp = products?.find((p) => p.id === product.product);
+                if (tmp) return obj + tmp.price * product.count;
+                return 0;
+              }, 0)
+            )}
+          </label>
+          <small className="text-gray-500">تومان</small>
+          <label className="text-red-500">تخفیف</label>
+          <label className="text-red-500">
+            {Intl.NumberFormat("fa-IR").format(
+              userProducts.reduce((obj, product) => {
+                const tmp = products?.find((p) => p.id === product.product);
+                if (tmp)
+                  return (
+                    obj +
+                    (tmp.offerPrice === 0 ? 0 : tmp.price - tmp.offerPrice) *
+                      product.count
+                  );
+                return 0;
+              }, 0)
+            )}
+          </label>
+          <small className="text-red-500">تومان</small>
+          <label className="border-t border-red-700 pt-4">جمع</label>
+          <label className="border-t border-red-700 pt-4">
+            {Intl.NumberFormat("fa-IR").format(
+              userProducts.reduce((obj, product) => {
+                const tmp = products?.find((p) => p.id === product.product);
+                if (tmp)
+                  return (
+                    obj +
+                    (tmp.offerPrice === 0 ? tmp.price : tmp.offerPrice) *
+                      product.count
+                  );
+                return 0;
+              }, 0)
+            )}
+          </label>
+          <small className="border-t border-red-700 pt-4">تومان</small>
+        </div>
         <button
           onClick={
             user === undefined
@@ -100,42 +195,15 @@ function ProductScreen() {
                 }
               : () => router.push("factor")
           }
-          className="absolute bottom-14 text-white z-20
-          bg-prime-100 px-16 py-2 rounded-xl left-14"
+          className="bottom-14 text-white z-20 w-full
+          bg-prime-200 px-16 py-3 rounded-xl left-14"
         >
-          سفارش نهایی
+          <p className="text-xl font-bold">سفارش نهایی</p>
         </button>
-        {userProducts.map((p, index) => {
-          const product = products.find((pp) => pp.id === p.product);
-          if (product)
-            return (
-              <button
-                onClick={() => router.push(`product/${product.id}`)}
-                className="relative bg-prime-300 rounded-xl"
-              >
-                <div className="h-96">
-                  <Product {...product} />
-                </div>
-                <div
-                  className="bg-prime-300 z-0 rounded-xl flex 
-                                    flex-row items-end justify-between p-2"
-                >
-                  <label>
-                    {`${Intl.NumberFormat("fa-IR").format(p.count)} عدد`}
-                  </label>
-                  <label>
-                    {`${Intl.NumberFormat("fa-IR").format(
-                      p.count * product.price
-                    )} تومان`}
-                  </label>
-                </div>
-              </button>
-            );
-        })}
       </div>
       <LoginModal message={loginMessage} handler={loginMessageHandler} />
       <SettingDataModal open={settingData} handler={settingDataHandler} />
-    </>
+    </div>
   );
 }
 function Input(props: {
