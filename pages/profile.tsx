@@ -1,6 +1,7 @@
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import LoginModal from "@/components/login";
+import Product from "@/components/store/product";
 import SettingDataModal from "@/components/store/settingData";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { changeAccountDataThunk } from "@/store/account/thunk";
@@ -45,7 +46,7 @@ export default function ProfilePage() {
           <div className="h-full w-full">{screen.component}</div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
@@ -110,25 +111,23 @@ function ProductScreen() {
             return (
               <button
                 onClick={() => router.push(`product/${product.id}`)}
-                className="relative"
+                className="relative bg-prime-300 rounded-xl"
               >
-                <div
-                  className="bg-white h-44 w-full rounded-xl flex-col space-y-2
-                                    absolute z-10 flex items-center justify-center"
-                >
-                  <label className="text-xl">{product.persianName}</label>
-                  <label className="text-gray-700">{product.englishName}</label>
+                <div className="h-96">
+                  <Product {...product} />
                 </div>
                 <div
-                  className="bg-prime-300 h-56 z-0 rounded-xl flex 
+                  className="bg-prime-300 z-0 rounded-xl flex 
                                     flex-row items-end justify-between p-2"
                 >
                   <label>
                     {`${Intl.NumberFormat("fa-IR").format(p.count)} عدد`}
                   </label>
-                  <label>{`${Intl.NumberFormat("fa-IR").format(
-                    p.count * product.price
-                  )} تومان`}</label>
+                  <label>
+                    {`${Intl.NumberFormat("fa-IR").format(
+                      p.count * product.price
+                    )} تومان`}
+                  </label>
                 </div>
               </button>
             );

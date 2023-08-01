@@ -21,10 +21,10 @@ import { BsFillBoxSeamFill } from "react-icons/bs";
 
 function ProductDetail(props: { name: string; amount: string }) {
   return (
-    <div className="p-5 flex flex-row space-x-5 rtl:space-x-reverse items-center px-10">
+    <div className="p-5 flex flex-row space-x-5 rtl:space-x-reverse items-center px-10 border-b">
       <div className="w-3 h-3 bg-amber-400 rounded-full" />
       <p className="text-lg text-gray-500">{props.name}</p>
-      <p className="text-2xl font-bold">{props.amount}</p>
+      <p className="text-2xl font-bold text-gray-600">{props.amount}</p>
     </div>
   );
 }
