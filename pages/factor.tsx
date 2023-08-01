@@ -1,7 +1,20 @@
 import { axiosUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
+function CustomImage(props: { src: string }) {
+  return (
+    <Image
+      alt={props.src}
+      src={`https://currencyno.storage.iran.liara.space/${props.src}`}
+      width="0"
+      height="0"
+      sizes="100vw"
+      className="w-full h-auto"
+    />
+  );
+}
 export default function FactorPage() {
   // main
   const router = useRouter();
@@ -23,16 +36,23 @@ export default function FactorPage() {
             if (product)
               return (
                 <div className="bg-white rounded-xl space-y-5 p-5 flex flex-col">
-                  <div>
-                    <p className="text-xl font-bold">{product.persianName}</p>
-                    <p className="text-gray-700">{product.englishName}</p>
+                  <div className="flex flex-row space-x-5 rtl:space-x-reverse">
+                    <div className="w-20 h-20">
+                      <CustomImage src={product.image[0]} />
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold">{product.persianName}</p>
+                      <p className="text-gray-700">{product.englishName}</p>
+                    </div>
                   </div>
                   <div className="flex flex-row justify-between">
                     <div></div>
                     <div className="flex flex-row items-center space-x-2 rtl:space-x-reverse">
-                      <p className="text-lg font-bold">
+                      <p className="text-2xl font-bold">
                         {Intl.NumberFormat("fa-IR").format(
-                          product.price * item.count
+                          (product.offerPrice === 0
+                            ? product.price
+                            : product.offerPrice) * item.count
                         )}
                       </p>
                       <small className="text-gray-700">تومان</small>
@@ -46,10 +66,18 @@ export default function FactorPage() {
           className="bg-white w-full lg:w-1/2 h-full rounded-xl
           p-5 flex flex-col justify-between max-lg:space-y-5"
         >
-          <p className="text-xl font-bold">
-            مرجوع کالا صرفا تنها در زمانی مقدور است که بسته بندی کالا باز نشده
-            باشد.
-          </p>
+          <div className="space-y-5">
+            {[
+              "مرجوع کالا صرفا تنها در زمانی مقدور است که بسته بندی کالا باز نشده باشد.",
+              "جهت استفاده از خدمات جدید کارنسینو شامل آنباکس و تست محصول و ارسال ویدیو محصول شما قبل از ارسال لطفا با واحد پشتیبانی تماس بگیرید",
+              "سفارش شما در اولین زمان تحویل اداره پست خواهد شد",
+            ].map((data) => (
+              <div className="flex flex-row items-center justify-start space-x-5 rtl:space-x-reverse">
+                <div className="bg-amber-500 h-5 w-5 rounded-full"></div>
+                <p className="text-xl">{data}</p>
+              </div>
+            ))}
+          </div>
           <div className="w-full flex flex-col sm:flex-row sm:items-end sm:justify-between max-sm:space-y-5">
             <div className="flex flex-col space-y-2">
               <small>مجموع :</small>
