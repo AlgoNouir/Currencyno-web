@@ -110,8 +110,9 @@ export default function ProductPage() {
                 <div>
                   <label>رنگ : </label>
                   {product.counts.length > 0 ? (
-                    product.counts.map((p) => (
+                    product.counts.map((p, index) => (
                       <button
+                        key={`button-${index}`}
                         onClick={() => selectHandler(p)}
                         className={`${
                           select?.id === p.id ? "border-4" : ""
