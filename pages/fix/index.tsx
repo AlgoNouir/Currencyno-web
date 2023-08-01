@@ -5,7 +5,6 @@ import TextBanner from "@/components/UI/textBanner";
 import FixRequestModal from "@/components/fix/reserve";
 import { Collapse } from "antd";
 import { useState } from "react";
-import { BiLabel } from "react-icons/bi";
 
 export default function MainPage() {
   const [modal, modalHandler] = useState(false);
@@ -23,9 +22,9 @@ export default function MainPage() {
               جهت مشاوره رایگان و درخواست تعمیرات از اینجا اقدام کنید
             </label>
           </button>
-          <Banner images={[{ src: "fix/1.png" }]} />
+          <Banner images={[{ src: "fix/1.jpg" }]} />
           <TextBanner
-            images={"fix/4.png"}
+            images={"fix/4.jpg"}
             text="
                     تعمیرات لپ تاپ ، کامپیوتر ، موبایل و کنسول بازی دغدغه ی
                     بسیاری از کاربرانی است که از این دستگاه استفاده می کنند.
@@ -37,7 +36,7 @@ export default function MainPage() {
                     حاصل فرمایید."
           />
 
-          <Banner images={[{ src: "fix/2.png" }]} />
+          <Banner images={[{ src: "fix/2.jpg" }]} />
           <div className="bg-amber-300 rounded-xl p-5">
             <label className="md:text-2xl text-sm md:leading-loose text-justify">
               از آن‌جایی که عیب‌یابی اصولی مهم‌ترین مرحله از پروسه تعمیرات هر

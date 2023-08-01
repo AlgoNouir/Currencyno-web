@@ -1,5 +1,5 @@
 // main
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components & icons
@@ -62,9 +62,17 @@ export default function ProductPage() {
     product &&
     tmp.filter((p) => p.category === product.category && p.id !== product.id);
 
+  const selected =
+    product?.counts.find((p) => p.id === inCart?.select) ||
+    (product?.counts.filter((p) => p.amount > 0) || []).length >= 1
+      ? product?.counts.filter((p) => p.amount > 0)[0]
+      : undefined;
+
   // states
   const [count, countHandler] = useState(inCart?.count || 1);
-  const [select, selectHandler] = useState<keeperCounterType | undefined>();
+  const [select, selectHandler] = useState<keeperCounterType | undefined>(
+    selected
+  );
 
   if (product !== undefined) {
     return (
@@ -102,35 +110,16 @@ export default function ProductPage() {
                 <div>
                   <label>رنگ : </label>
                   {product.counts.length > 0 ? (
-                    <Dropdown
-                      menu={{
-                        items: product.counts.map(
-                          (p): ItemType => ({
-                            key: p.id,
-                            label: (
-                              <button
-                                onClick={() => {
-                                  if (p.amount < count) countHandler(p.amount);
-                                  selectHandler(p);
-                                }}
-                              >
-                                {p.name}
-                              </button>
-                            ),
-                          })
-                        ),
-                      }}
-                    >
+                    product.counts.map((p) => (
                       <button
+                        onClick={() => selectHandler(p)}
                         className={`${
-                          select === undefined ? "bg-gray-300" : "bg-prime-300"
-                        } px-5 py-1 rounded-xl`}
+                          select?.id === p.id ? "border-4" : ""
+                        } px-5 py-1 rounded-xl bg-gray-300 border-primary-500`}
                       >
-                        <small>
-                          {select === undefined ? "انتخاب کنید" : select.name}
-                        </small>
+                        <p className="text-xl">{p.name}</p>
                       </button>
-                    </Dropdown>
+                    ))
                   ) : (
                     <></>
                   )}
@@ -140,156 +129,168 @@ export default function ProductPage() {
                 className="w-full flex flex-col space-y-5 sm:space-y-0 sm:flex-row space-x-5 
                                 items-center justify-center sm:justify-between"
               >
-                <div className="flex flex-row w-full justify-center items-center space-x-5 rtl:space-x-reverse">
-                  {product.offerPrice > 0 ? (
-                    <Offer
-                      amount={
-                        Math.round(
-                          (-1000 * (product.offerPrice - product.price)) /
-                            product.price
-                        ) / 10
-                      }
-                    />
-                  ) : (
-                    <></>
-                  )}
-                  <div>
-                    {product.offerPrice > 0 ? (
-                      <del className="text-xl text-red-700">
-                        {Intl.NumberFormat("fa-IR").format(product.price)}
-                      </del>
-                    ) : (
-                      <></>
-                    )}
-                    <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
-                      <p className="text-4xl font-bold">
-                        {Intl.NumberFormat("fa-IR").format(
-                          product.offerPrice > 0
-                            ? product.offerPrice
-                            : product.price
+                {select === undefined ? (
+                  <div className="flex items-center justify-center w-full h-20">
+                    <label className="text-5xl font-bold text-gray-300`">
+                      ناموجود :(
+                    </label>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex flex-row w-full justify-center items-center space-x-5 rtl:space-x-reverse">
+                      {product.offerPrice > 0 ? (
+                        <Offer
+                          amount={Math.round(
+                            (-100 * (product.offerPrice - product.price)) /
+                              product.price
+                          )}
+                        />
+                      ) : (
+                        <></>
+                      )}
+                      <div>
+                        {product.offerPrice > 0 ? (
+                          <del className="text-xl text-red-700">
+                            {Intl.NumberFormat("fa-IR").format(product.price)}
+                          </del>
+                        ) : (
+                          <></>
                         )}
-                      </p>
+                        <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
+                          <p className="text-4xl font-bold">
+                            {Intl.NumberFormat("fa-IR").format(
+                              product.offerPrice > 0
+                                ? product.offerPrice
+                                : product.price
+                            )}
+                          </p>
 
-                      <small className="text-xl">تومان</small>
+                          <small className="text-xl">تومان</small>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="flex flex-col space-y-3">
-                  <div
-                    style={{
-                      direction: "ltr",
-                    }}
-                    className="flex flex-rowx space-x-5"
-                  >
-                    <button
-                      onClick={() => {
-                        if (count > 0) countHandler((v) => v - 1);
-                      }}
-                      className="bg-prime-300 w-12 rounded-xl"
-                    >
-                      -
-                    </button>
-                    <div className="grow flex items-center justify-center">
-                      <p>{Intl.NumberFormat("fa-IR").format(count)}</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        // TODO fix this and set amount to max person order
-                        if ((select?.amount || 100000) > count) {
-                          countHandler((v) => v + 1);
-                        } else {
-                          dispatch(
-                            setNotif({
-                              type: "warning",
-                              title: "اضافه نشد",
-                              message:
-                                "شما نمی توانید بیشتر از این مقدار خریداری نمایید",
-                            })
-                          );
-                        }
-                      }}
-                      className="bg-prime-300 w-12 rounded-xl"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <button
-                    onClick={() => {
-                      if (product.counts.length === 0 || select !== undefined) {
-                        if (
-                          count > 0 ||
-                          (inCart !== undefined && inCart.count !== count)
-                        ) {
-                          // check is online or offline
-                          if (account.user !== undefined) {
-                            dispatch(
-                              addToCartThunk({
-                                product: product.id,
-                                select: select?.id || -1,
-                                count,
-                              })
-                            );
+                    <div className="flex flex-col space-y-3">
+                      <div
+                        style={{
+                          direction: "ltr",
+                        }}
+                        className="flex flex-rowx space-x-5"
+                      >
+                        <button
+                          onClick={() => {
+                            if (count > 0) countHandler((v) => v - 1);
+                          }}
+                          className="bg-prime-300 w-12 rounded-xl"
+                        >
+                          -
+                        </button>
+                        <div className="grow flex items-center justify-center">
+                          <p>{Intl.NumberFormat("fa-IR").format(count)}</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            // TODO fix this and set amount to max person order
+                            if ((select?.amount || 100000) > count) {
+                              countHandler((v) => v + 1);
+                            } else {
+                              dispatch(
+                                setNotif({
+                                  type: "warning",
+                                  title: "اضافه نشد",
+                                  message:
+                                    "شما نمی توانید بیشتر از این مقدار خریداری نمایید",
+                                })
+                              );
+                            }
+                          }}
+                          className="bg-prime-300 w-12 rounded-xl"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => {
+                          if (
+                            product.counts.length === 0 ||
+                            select !== undefined
+                          ) {
+                            if (
+                              count > 0 ||
+                              (inCart !== undefined && inCart.count !== count)
+                            ) {
+                              // check is online or offline
+                              if (account.user !== undefined) {
+                                dispatch(
+                                  addToCartThunk({
+                                    product: product.id,
+                                    select: select?.id || -1,
+                                    count,
+                                  })
+                                );
 
-                            dispatch(
-                              setNotif({
-                                title: "افزودن به سبد خرید",
-                                message:
-                                  inCart === undefined
-                                    ? `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`
-                                    : `${product.persianName} با موفقیت ویرایش شد`,
-                                type: inCart === undefined ? "success" : "info",
-                              })
-                            );
+                                dispatch(
+                                  setNotif({
+                                    title: "افزودن به سبد خرید",
+                                    message:
+                                      inCart === undefined
+                                        ? `${product.persianName} با موفقیت به سبد خرید شما افزوده شد`
+                                        : `${product.persianName} با موفقیت ویرایش شد`,
+                                    type:
+                                      inCart === undefined ? "success" : "info",
+                                  })
+                                );
+                              } else {
+                                dispatch(
+                                  addOfflineProduct({
+                                    id: -1,
+                                    product: product.id,
+                                    select: select?.id || -1,
+                                    count,
+                                  })
+                                );
+                              }
+                            } else {
+                              dispatch(
+                                setNotif({
+                                  title: "خطای تعداد",
+                                  message:
+                                    "مقدار محصول مورد نظر شما بایستی بیشتر از ۰ باشد",
+                                  type: "error",
+                                })
+                              );
+                            }
                           } else {
                             dispatch(
-                              addOfflineProduct({
-                                id: -1,
-                                product: product.id,
-                                select: select?.id || -1,
-                                count,
+                              setNotif({
+                                title: "انتختب نوع محصول",
+                                message:
+                                  "لطفا نوع محصول خود را کنار اسم محصول انتخاب کنید",
+                                type: "error",
                               })
                             );
                           }
-                        } else {
-                          dispatch(
-                            setNotif({
-                              title: "خطای تعداد",
-                              message:
-                                "مقدار محصول مورد نظر شما بایستی بیشتر از ۰ باشد",
-                              type: "error",
-                            })
-                          );
-                        }
-                      } else {
-                        dispatch(
-                          setNotif({
-                            title: "انتختب نوع محصول",
-                            message:
-                              "لطفا نوع محصول خود را کنار اسم محصول انتخاب کنید",
-                            type: "error",
-                          })
-                        );
-                      }
-                    }}
-                    className={`${
-                      inCart === undefined ||
-                      (count === 0 &&
-                        inCart !== undefined &&
-                        inCart.count !== count)
-                        ? "bg-green-700"
-                        : "bg-accent-200"
-                    } p-5 w-72 rounded-xl`}
-                  >
-                    <p className="text-xl font-bold text-white">
-                      {inCart === undefined ||
-                      (count === 0 &&
-                        inCart !== undefined &&
-                        inCart.count !== count)
-                        ? "افزودن به سبد خرید"
-                        : "ثبت تغیرات سفارش"}
-                    </p>
-                  </button>
-                </div>
+                        }}
+                        className={`${
+                          inCart === undefined ||
+                          (count === 0 &&
+                            inCart !== undefined &&
+                            inCart.count !== count)
+                            ? "bg-green-700"
+                            : "bg-accent-200"
+                        } p-5 w-72 rounded-xl`}
+                      >
+                        <p className="text-xl font-bold text-white">
+                          {inCart === undefined ||
+                          (count === 0 &&
+                            inCart !== undefined &&
+                            inCart.count !== count)
+                            ? "افزودن به سبد خرید"
+                            : "ثبت تغیرات سفارش"}
+                        </p>
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
