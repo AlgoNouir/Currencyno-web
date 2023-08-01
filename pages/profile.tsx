@@ -247,7 +247,7 @@ export function SettingScreen() {
         <Input
           value={nationalCode}
           handler={nationalCodeHandler}
-          title="کد ملی"
+          title="کد پستی"
         />
         <Input value={email} handler={emailHandler} title="ایمیل" />
         <div className="flex flex-col space-y-2 mb-5">

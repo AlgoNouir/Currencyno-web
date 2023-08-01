@@ -162,7 +162,7 @@ export default function Header(props: { state: number }) {
                 { name: "کتابخانه اقتصادی", url: "/academy/" },
                 { name: "کافه کارآفرینی", url: "/coffee/" },
                 { name: "کاریابی استخدام", url: "/work/" },
-                { name: "تعمیرات الکترونیکی", url: "/fix/" },
+                { name: "تعمیرات لپتاپ", url: "/fix/" },
               ].map((txt, index) =>
                 index === 0 ? (
                   <button

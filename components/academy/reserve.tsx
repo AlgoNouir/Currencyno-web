@@ -46,7 +46,7 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
                         <Input
                             value={nationalCode}
                             handler={nationalCodeHandler}
-                            title="کد ملی"
+                            title="کد پستی"
                         />
                         <Input
                             value={birthday}
