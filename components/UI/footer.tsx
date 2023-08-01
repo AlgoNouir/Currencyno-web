@@ -70,7 +70,7 @@ export default function Footer() {
               icon={
                 <Image
                   src={require("@/public/instaLogo.png")}
-                  alt="اینیستاگرام"
+                  alt="اینستاگرام"
                 />
               }
             />

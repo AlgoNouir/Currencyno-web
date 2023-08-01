@@ -9,10 +9,13 @@ import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiCheckShield } from "react-icons/bi";
+import { FaBuilding } from "react-icons/fa";
+import { FaTruckFast } from "react-icons/fa6";
 import {
   HiBuildingStorefront,
   HiOutlineArchiveBoxXMark,
 } from "react-icons/hi2";
+import { MdSupportAgent } from "react-icons/md";
 
 const screens = [
   { id: 0, name: "سبد خرید", component: <ProductScreen /> },
@@ -200,6 +203,19 @@ function ProductScreen() {
         >
           <p className="text-xl font-bold">سفارش نهایی</p>
         </button>
+        <div
+          style={{
+            gridTemplateColumns: "40px 1fr",
+          }}
+          className="grid gap-y-5 text-gray-500"
+        >
+          <MdSupportAgent className="text-2xl" />
+          <p>مشاوره و پشتیبانی هفت روز هفته بجز ایام تعطیل ۱۰ صبح تا ۷ شب</p>
+          <FaBuilding className="text-2xl" />
+          <p>مجموعه فروشگاهی خدماتی کارنسینو </p>
+          <FaTruckFast className="text-2xl" />
+          <p>ارسال سریع در کمترین زمان</p>
+        </div>
       </div>
       <LoginModal message={loginMessage} handler={loginMessageHandler} />
       <SettingDataModal open={settingData} handler={settingDataHandler} />
