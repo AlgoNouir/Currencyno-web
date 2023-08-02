@@ -156,7 +156,7 @@ export default function Header(props: { state: number }) {
             )}
           </div>
           <div className="flex-col items-center justify-center ">
-            <div className="grid grid-cols-5 gap-5">
+            <div className="grid grid-cols-5 gap-5 relative">
               {[
                 { name: "محصولات دیجیتال", url: "/store/" },
                 { name: "کتابخانه اقتصادی", url: "/academy/" },
@@ -165,17 +165,19 @@ export default function Header(props: { state: number }) {
                 { name: "تعمیرات لپتاپ", url: "/fix/" },
               ].map((txt, index) =>
                 index === 0 ? (
-                  <button
-                    key={index}
-                    disabled={index === props.state}
-                    onClick={() => router.push(txt.url)}
-                    className="flex flex-row items-end justify-center transition-all group
+                  <div className="group flex flex-col">
+                    <button
+                      key={index}
+                      disabled={index === props.state}
+                      onClick={() => router.push(txt.url)}
+                      className="flex flex-row items-end justify-center transition-all
                     hover:border-b-4 hover:pb-2 disabled:border-b-4 disabled:pb-2
                     border-prime-100 disabled:border-amber-400 disabled:drop-shadow-lg"
-                  >
+                    >
+                      <p className="sm:text-xl text-xs p-1">{txt.name}</p>
+                    </button>
                     <MegaMenu />
-                    <p className="sm:text-xl text-xs p-1">{txt.name}</p>
-                  </button>
+                  </div>
                 ) : (
                   <button
                     key={index}
