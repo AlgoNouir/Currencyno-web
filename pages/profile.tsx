@@ -143,6 +143,33 @@ function ProductScreen() {
             )}
           </label>
           <small className="text-gray-500">تومان</small>
+          <label className="text-gray-500">پست</label>
+          <label className="text-gray-500">
+            {userProducts.find((p) => {
+              if (
+                [61, 56].includes(
+                  products.find((pp) => pp.id === p.product)?.category || -1
+                )
+              )
+                return true;
+              return false;
+            }) === undefined
+              ? Intl.NumberFormat("fa-IR").format(50000)
+              : "رایگان!"}
+          </label>
+          <small className="text-gray-500">
+            {userProducts.find((p) => {
+              if (
+                [61, 56].includes(
+                  products.find((pp) => pp.id === p.product)?.category || -1
+                )
+              )
+                return true;
+              return false;
+            }) === undefined
+              ? "تومان"
+              : ""}
+          </small>
           <label className="text-red-500">تخفیف</label>
           <label className="text-red-500">
             {Intl.NumberFormat("fa-IR").format(

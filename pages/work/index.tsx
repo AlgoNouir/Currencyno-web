@@ -66,7 +66,7 @@ export default function MainPage() {
               با شغل شمارا برای شما پیدا میکنیم.
             </label>
           </div>
-          <Banner images={[{ src: "work/3.png" }]} />
+          <Banner images={[{ src: "work/3.jpg" }]} />
         </div>
         <Footer />
       </div>
