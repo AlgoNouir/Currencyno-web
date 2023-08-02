@@ -71,8 +71,11 @@ export default function FactorPage() {
               "مرجوع کالا صرفا تنها در زمانی مقدور است که بسته بندی کالا باز نشده باشد.",
               "جهت استفاده از خدمات جدید کارنسینو شامل آنباکس و تست محصول و ارسال ویدیو محصول شما قبل از ارسال لطفا با واحد پشتیبانی تماس بگیرید",
               "سفارش شما در اولین زمان تحویل اداره پست خواهد شد",
-            ].map((data) => (
-              <div className="flex flex-row items-center justify-start space-x-5 rtl:space-x-reverse">
+            ].map((data, index) => (
+              <div
+                key={index}
+                className="flex flex-row items-center justify-start space-x-5 rtl:space-x-reverse"
+              >
                 <div className="bg-amber-500 h-5 w-5 rounded-full"></div>
                 <p className="text-xl">{data}</p>
               </div>

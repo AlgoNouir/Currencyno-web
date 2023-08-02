@@ -165,9 +165,8 @@ export default function Header(props: { state: number }) {
                 { name: "تعمیرات لپتاپ", url: "/fix/" },
               ].map((txt, index) =>
                 index === 0 ? (
-                  <div className="group flex flex-col">
+                  <div key={index} className="group flex flex-col">
                     <button
-                      key={index}
                       disabled={index === props.state}
                       onClick={() => router.push(txt.url)}
                       className="flex flex-row items-end justify-center transition-all

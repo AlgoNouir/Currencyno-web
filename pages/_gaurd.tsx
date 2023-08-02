@@ -51,7 +51,7 @@ export default function Gaurd(props: { children: ReactNode }) {
       });
       dispatch(setNotif({ title: "", message: "", type: "" }));
     }
-  }, [dispatch, serverStatus, notif, api, userModalHandler]);
+  }, [dispatch, serverStatus, notif, api, userModalHandler, account]);
 
   return (
     <>
