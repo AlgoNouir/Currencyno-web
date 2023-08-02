@@ -15,13 +15,15 @@ export type categoryType = {
   name: string;
 };
 
+export type notifType = {
+  title: string;
+  message: string;
+  type: "error" | "success" | "info" | "warning" | "";
+};
+
 const initialState: {
   serverStatus: "connect" | "disconnect" | "pending" | "init";
-  notif: {
-    title: string;
-    message: string;
-    type: "error" | "success" | "info" | "warning" | "";
-  };
+  notif: notifType;
   category: categoryType[];
 } = {
   serverStatus: "init",
@@ -61,6 +63,7 @@ const coreSlice = createSlice({
         message: "مشخصات کاربر با موفقیت تغییر یافت",
       };
     });
+    builder.addCase(loginThunk.pending, (state, action) => {});
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       const { user } = action.payload;
       if (

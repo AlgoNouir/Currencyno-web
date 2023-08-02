@@ -1,6 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { productType } from "../product/slice";
-import { addToCartThunk, changeAccountDataThunk, loginThunk } from "./thunk";
+import {
+  addToCartThunk,
+  changeAccountDataThunk,
+  loginThunk,
+  sendLoginSMS,
+} from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
 
 export interface OrderProduct {
@@ -20,7 +25,13 @@ export type userType = {
 };
 
 const initialState: {
-  login: "inLogin" | "rejected" | "pending" | "accepted";
+  login:
+    | "inLogin"
+    | "rejected"
+    | "pending"
+    | "accepted"
+    | "awaitSMS"
+    | "smsSended";
   user?: userType;
   products: OrderProduct[];
 } = {
@@ -72,6 +83,15 @@ const accountSlice = createSlice({
           state.products.push(action.payload);
         }
       }
+    });
+    builder.addCase(sendLoginSMS.pending, (state, action) => {
+      state.login = "awaitSMS";
+    });
+    builder.addCase(sendLoginSMS.fulfilled, (state, action) => {
+      state.login = "smsSended";
+    });
+    builder.addCase(loginThunk.rejected, (state, action) => {
+      state.login = "rejected";
     });
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.login = "accepted";

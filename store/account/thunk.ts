@@ -55,3 +55,18 @@ export const changeAccountDataThunk = createAsyncThunk(
     }
   }
 );
+
+export const sendLoginSMS = createAsyncThunk(
+  "sendLoginSMS",
+  async (actionData: { phone: number }, { rejectWithValue }) => {
+    const response = await axiosNoUser.post("login/", {
+      phone: actionData.phone,
+    });
+
+    if (response.status === 200) {
+      return 200;
+    } else {
+      rejectWithValue(response.status);
+    }
+  }
+);

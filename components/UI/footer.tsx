@@ -1,16 +1,27 @@
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-function Icon(props: { text: string; icon: any }) {
+function Icon(props: { text: string; icon: any; url?: string }) {
+  const router = useRouter();
   return (
-    <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
+    <button
+      disabled={props?.url === undefined}
+      onClick={
+        props?.url === undefined
+          ? () => {}
+          : () => window.open(props.url, "_blank")
+      }
+      className="flex flex-row space-x-5 rtl:space-x-reverse items-center"
+    >
       <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex text-3xl">
         {props.icon}
       </div>
       <label className="text-xs sm:text-sm xl:text-xl font-bold">
         {props.text}
       </label>
-    </div>
+    </button>
   );
 }
 
@@ -59,6 +70,7 @@ export default function Footer() {
             />
             <Icon
               text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
+              url="tel:09396554370"
               icon={
                 <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg lg:text-3xl text-white">
                   <BsFillTelephoneFill />
@@ -67,6 +79,7 @@ export default function Footer() {
             />
             <Icon
               text="currencyno_plus"
+              url="https://instagram.com/currencyno_plus"
               icon={
                 <Image
                   src={require("@/public/instaLogo.png")}

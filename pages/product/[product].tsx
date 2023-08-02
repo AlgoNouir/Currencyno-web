@@ -81,6 +81,16 @@ export default function ProductPage() {
       <div className="flex flex-col items-center w-full bg-storePattern">
         <Header state={0} />
         <div className="space-y-5 p-5 sm:container pt-40">
+          {product.category === 61 || product.category === 56 ? (
+            <div className="bg-amber-400 p-5 flex items-center justify-center rounded-xl text-2xl font-bold">
+              <p>
+                شما می توانید با خرید لپتاپ از مجموعه کارنسینو از ارسال رایگان
+                بهره مند شوید !!!
+              </p>
+            </div>
+          ) : (
+            <></>
+          )}
           <div
             className="flex flex-col xl:flex-row space-y-5 xl:space-y-0 xl:space-x-5 
             rtl:space-x-reverse rounded-xl bg-bg-200 shadow-xl"
@@ -195,7 +205,7 @@ export default function ProductPage() {
                         >
                           -
                         </button>
-                        <div className="grow flex items-center justify-center">
+                        <div className="grow flex items-center justify-center text-xl font-bold">
                           <p>{Intl.NumberFormat("fa-IR").format(count)}</p>
                         </div>
                         <button
