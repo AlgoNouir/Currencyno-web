@@ -55,20 +55,14 @@ export default function Header(props: { state: number }) {
         }}
         className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow "
       >
-        <button
-          onClick={() => menuHandler(true)}
-          className="absolute p-3 font-bold text-3xl right-1 bottom-0 xl:hidden "
-        >
-          <FiMenu />
-        </button>
         <div
-          className=" container flex flex-col px-5 relative
+          className=" md:container flex flex-col px-5 relative
                     items-center space-y-5 pt-5"
         >
           <div
             className={`flex flex-row items-center ${
-              props.state === 0 ? "xl:justify-between" : ""
-            }  justify-center w-full`}
+              props.state === 0 ? "justify-between" : "justify-center"
+            }  w-full`}
           >
             <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
               <button
@@ -87,7 +81,7 @@ export default function Header(props: { state: number }) {
                 />
                 <div>
                   <p className="font-bold text-2xl ">کارنسینو</p>
-                  <small className="font-bold">
+                  <small className="md:font-bold hidden md:flex">
                     فروشگاه آنلاین و مجموعه خدماتی
                   </small>
                 </div>
@@ -95,7 +89,7 @@ export default function Header(props: { state: number }) {
               {props.state === 0 ? (
                 <div
                   className=" bg-slate-200 w-fit items-center
-                                    space-x-3 rounded-xl p-1 rtl:space-x-reverse xl:flex hidden"
+                                    space-x-3 rounded-xl p-1 rtl:space-x-reverse md:flex hidden"
                 >
                   <AiOutlineSearch className="text-2xl text-gray-700" />
 
@@ -106,7 +100,7 @@ export default function Header(props: { state: number }) {
               )}
             </div>
             {props.state === 0 ? (
-              <div className="xl:flex hidden flex-row space-x-5 rtl:space-x-reverse">
+              <div className="flex-row space-x-5 rtl:space-x-reverse flex">
                 <button
                   onClick={
                     user === undefined
@@ -116,8 +110,8 @@ export default function Header(props: { state: number }) {
                           )
                       : () => router.push("/profile/")
                   }
-                  className="border p-3 rounded-xl flex flex-row space-x-3
-                            rtl:space-x-reverse items-center"
+                  className="border p-3 rounded-xl md:flex flex-row space-x-3
+                            rtl:space-x-reverse items-center hidden"
                 >
                   {user === undefined ? (
                     <></>
@@ -129,6 +123,12 @@ export default function Header(props: { state: number }) {
                       ? "ورود یا ثبت نام"
                       : `${user.fName} ${user.lName}`}
                   </p>
+                </button>
+                <button
+                  onClick={() => menuHandler(true)}
+                  className=" p-3 font-bold text-3xl right-1 bottom-0 md:hidden "
+                >
+                  <FiMenu />
                 </button>
                 <button
                   className="relative"
@@ -306,7 +306,7 @@ function SearchConsole() {
         )
       }
       placeholder="محصول خود را جست و جو کنید ..."
-      className="outline-none p-2 w-96"
+      className="outline-none p-2 w-44 lg:w-96"
     />
   );
 }
