@@ -30,8 +30,8 @@ export default function ProfilePage() {
       <div className="absolute top-0">
         <Header state={0} />
       </div>
-      <div className="h-full p-5 flex flex-row space-x-5 rtl:space-x-reverse">
-        <div className="sm:w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-end py-5">
+      <div className="md:h-full h-fit p-5 flex flex-row md:space-x-5 rtl:space-x-reverse">
+        <div className="sm:w-96 h-full bg-bg-200 rounded-xl hidden lg:flex flex-col space-y-2 items-end py-5">
           {screens.map((s, index) => (
             <button
               key={`screen-${index}`}
@@ -46,11 +46,11 @@ export default function ProfilePage() {
             </button>
           ))}
         </div>
-        <div className="w-full h">
+        <div className="w-full">
           <div className="w-full h-16 rounded-xl bg-bg-200 mb-5 flex items-center justify-center">
             <p className="font-bold text-xl">{screen.name}</p>
           </div>
-          <div className="h-full w-full">{screen.component}</div>
+          <div className="md:h-full h-fit w-full">{screen.component}</div>
         </div>
       </div>
       <Footer />
@@ -78,7 +78,7 @@ function ProductScreen() {
       </button>
     </div>
   ) : (
-    <div className="flex flex-row space-x-5 rtl:space-x-reverse h-full">
+    <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 rtl:space-x-reverse h-full">
       <div
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
@@ -130,7 +130,7 @@ function ProductScreen() {
             );
         })}
       </div>
-      <div className="bg-white w-96 h-fit space-y-14 rounded-xl p-5 justify-items-center">
+      <div className="bg-white w-full md:w-96 h-fit space-y-14 rounded-xl p-5 justify-items-center">
         <div className="grid grid-cols-3 gap-y-5 font-bold text-xl">
           <label className="text-gray-500">قیمت کل</label>
           <label className="text-gray-500">
@@ -225,7 +225,7 @@ function ProductScreen() {
                 }
               : () => router.push("factor")
           }
-          className="bottom-14 text-white z-20 w-full
+          className="bottom-14 text-white z-20 w-full hidden md:flex
           bg-prime-200 px-16 py-3 rounded-xl left-14"
         >
           <p className="text-xl font-bold">سفارش نهایی</p>
@@ -246,6 +246,35 @@ function ProductScreen() {
       </div>
       <LoginModal message={loginMessage} handler={loginMessageHandler} />
       <SettingDataModal open={settingData} handler={settingDataHandler} />
+      <div className="md:hidden flex fixed bg-white w-full bottom-0 right-0 left-0 p-5">
+        <button
+          onClick={
+            user === undefined
+              ? () =>
+                  loginMessageHandler(
+                    "شما برای خرید کردن بایستی ابتدا وارد شوید"
+                  )
+              : user.lName === undefined ||
+                user.fName === undefined ||
+                user.lName === undefined ||
+                user.email === undefined ||
+                user.address === undefined ||
+                user.lName === null ||
+                user.fName === null ||
+                user.lName === null ||
+                user.email === null ||
+                user.address === null
+              ? () => {
+                  settingDataHandler(true);
+                }
+              : () => router.push("factor")
+          }
+          className="bottom-14 text-white z-20 w-full
+          bg-prime-200 px-16 py-3 rounded-xl left-14"
+        >
+          <p className="text-xl font-bold">ادامه خرید</p>
+        </button>
+      </div>
     </div>
   );
 }
