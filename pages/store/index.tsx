@@ -13,9 +13,9 @@ export default function MainPage() {
         <Banner
           images={[
             [
-              { src: "store/1.jpg" },
-              { src: "store/4.jpg" },
-              { src: "store/5.png" },
+              { src: "store/1.jpg", url: "/lists/51" },
+              { src: "store/4.jpg", url: "/lists/61" },
+              { src: "store/5.png", url: "/lists/11" },
             ],
           ]}
         />
@@ -26,7 +26,7 @@ export default function MainPage() {
           )}
           title={{ name: "پرفروش ترین ها", moreDir: "lists/all" }}
         />
-        <Banner images={[{ src: "store/2.jpg" }]} />
+        <Banner images={[{ src: "store/2.jpg", url: "/lists/52" }]} />
         <ProductLists
           products={products
             .filter((product) => product.offerPrice !== 0)
@@ -34,7 +34,14 @@ export default function MainPage() {
             .reverse()}
           title={{ name: "بیشترین تخفیفات", moreDir: "lists/all" }}
         />
-        <Banner images={[[{ src: "store/3.jpg" }, { src: "store/6.png" }]]} />
+        <Banner
+          images={[
+            [
+              { src: "store/3.jpg", url: "/lists/30" },
+              { src: "store/6.png", url: "/lists/53" },
+            ],
+          ]}
+        />
         <ProductLists
           products={products.filter((product) => product.category === 61)}
           title={{ name: "لبتاپ استوک", moreDir: "lists/61" }}

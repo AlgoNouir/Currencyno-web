@@ -44,10 +44,10 @@ export default function MainPage() {
             ]}
           />
           <ProductLists
-            products={products.filter((product) => product.category === 42)}
+            products={products.filter((product) => product.category === 59)}
             title={{
               name: "کتاب های بازار های مالی و اقتصادی",
-              moreDir: "/lists",
+              moreDir: "/lists/59",
             }}
           />
           <div className="bg-amber-300 rounded-xl p-5">

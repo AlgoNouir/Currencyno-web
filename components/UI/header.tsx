@@ -233,31 +233,6 @@ export default function Header(props: { state: number }) {
                   : ""}
               </p>
             </button>
-            <button
-              className="relative"
-              onClick={
-                user === undefined
-                  ? () =>
-                      loginModalOpenHandler(
-                        "برای مشاهده سبد خرید خود وارد شوید یا ثبت نام کنید"
-                      )
-                  : () => router.push("/profile")
-              }
-            >
-              {tmp.products.length > 0 ? (
-                <div
-                  className="bg-red-600 rounded-full w-6 h-6
-                                flex items-center justify-center absolute top-0 -right-3"
-                >
-                  <label className="text-white">
-                    {Intl.NumberFormat("fa-IR").format(tmp.products.length)}
-                  </label>
-                </div>
-              ) : (
-                <></>
-              )}
-              <PiBasketLight className="text-3xl" />
-            </button>
           </div>
           <div
             className=" bg-slate-200 items-center w-full space-x-3
