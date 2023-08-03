@@ -281,7 +281,7 @@ function SearchConsole() {
         )
       }
       placeholder="محصول خود را جست و جو کنید ..."
-      className="outline-none p-2 w-44 lg:w-96"
+      className="outline-none p-2 w-full lg:w-96"
     />
   );
 }
