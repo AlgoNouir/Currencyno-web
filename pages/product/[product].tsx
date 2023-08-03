@@ -64,17 +64,19 @@ export default function ProductPage() {
     product &&
     tmp.filter((p) => p.category === product.category && p.id !== product.id);
 
-  const selected =
-    product?.counts.find((p) => p.id === inCart?.select) ||
-    (product?.counts.filter((p) => p.amount > 0) || []).length >= 1
-      ? product?.counts.filter((p) => p.amount > 0)[0]
-      : undefined;
+  const tmp_product = product?.counts.filter((p) => p.amount > 0) || [];
 
   // states
   const [count, countHandler] = useState(inCart?.count || 1);
   const [select, selectHandler] = useState<keeperCounterType | undefined>(
-    selected
+    undefined
   );
+
+  useEffect(() => {
+    const selected =
+      product?.counts.find((p) => p.id === inCart?.select) || tmp_product[0];
+    selectHandler(selected);
+  }, [selectHandler, product, inCart]);
 
   if (product !== undefined) {
     return (
@@ -121,8 +123,8 @@ export default function ProductPage() {
                 </label>
                 <div>
                   <label>رنگ : </label>
-                  {product.counts.length > 0 ? (
-                    product.counts.map((p, index) => (
+                  {tmp_product.length > 0 ? (
+                    tmp_product.map((p, index) => (
                       <button
                         key={`button-${index}`}
                         onClick={() => selectHandler(p)}
