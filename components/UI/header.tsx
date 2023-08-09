@@ -156,13 +156,14 @@ export default function Header(props: { state: number }) {
             )}
           </div>
           <div className="flex-col items-center justify-center ">
-            <div className="grid grid-cols-5 gap-5 relative">
+            <div className="grid grid-cols-6 gap-5 relative">
               {[
                 { name: "محصولات دیجیتال", url: "/store/" },
                 { name: "کتابخانه اقتصادی", url: "/academy/" },
                 { name: "کافه کارآفرینی", url: "/coffee/" },
                 { name: "کاریابی استخدام", url: "/work/" },
                 { name: "تعمیرات لپتاپ", url: "/fix/" },
+                { name: "درباره ما", url: "/info/" },
               ].map((txt, index) =>
                 index === 0 ? (
                   <div key={index} className="group flex flex-col">

@@ -5,9 +5,11 @@ import ProductLists from "@/components/store/productsList";
 import { useAppSelector } from "@/store/HOCs";
 import ReserveModal from "@/components/academy/reserve";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function MainPage() {
   const products = useAppSelector((store) => store.products);
+  const router = useRouter();
   const [reserveModal, reserveModalHandler] = useState(false);
   return (
     <>
@@ -15,19 +17,25 @@ export default function MainPage() {
         <Header state={1} />
         <div className="sm:container p-5 w-full space-y-5">
           <div className="grid sm:grid-cols-3 gap-5">
-            <button className="bg-amber-400 h-24 rounded-xl">
+            <button
+              onClick={() => router.push("/lists/59")}
+              className="bg-amber-400 h-24 rounded-xl border-4 border-indigo-900"
+            >
               <label className="text-lg sm:text-2xl font-bold">
                 خرید کتاب های اقتصادی و بازار های مالی
               </label>
             </button>
-            <button className="bg-amber-400 h-24 rounded-xl">
+            <button
+              onClick={() => router.push("https://aparat.com")}
+              className="bg-amber-400 h-24 rounded-xl border-4 border-indigo-900"
+            >
               <label className="text-lg sm:text-2xl font-bold">
                 ویدیو های آموزشی بازار های مالی
               </label>
             </button>
             <button
               onClick={() => reserveModalHandler(true)}
-              className="bg-amber-400 h-24 rounded-xl"
+              className="bg-amber-400 h-24 rounded-xl border-4 border-indigo-900"
             >
               <label className="text-lg sm:text-2xl font-bold">
                 رزرو خدمات فضای اشتراکی
