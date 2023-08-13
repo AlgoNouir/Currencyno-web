@@ -10,6 +10,7 @@ import { setNotif } from "@/store/core/slice";
 export default function ReserveModal(props: { handler: any; open: boolean }) {
   const dispatch = useAppDispatch();
   const [name, nameHandler] = useState("");
+  const [desc, descHandler] = useState("");
   const [phone, phoneHandler] = useState<number | "">();
 
   return (
@@ -27,8 +28,8 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
             />
           </div>
           <label className="text-center text-xl font-bold text-gray-600">
-            جهت رزرو کافه کارآفرینی برای مراسمات جلسات کاری و تولد و ایونت های
-            مافیا مشخصات خود را وارد کنید
+            جهت رزرو کافه یا سفارش کارآفرینی برای مراسمات جلسات کاری و تولد و
+            ایونت های مافیا مشخصات خود را وارد کنید
           </label>
         </div>
         <div className="flex flex-col space-y-5 items-center">
@@ -43,11 +44,20 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
               handler={phoneHandler}
               title="شماره تلفن"
             />
+            <div className="flex flex-col space-y-2">
+              <label className="text-xl">توضیحات برای سفارش شما</label>
+              <textarea
+                value={desc}
+                onChange={(e) => descHandler(e.target.value)}
+                className="bg-gray-100 p-5 rounded-xl 2xl:w-96 w-80"
+                placeholder="توضیحات سفارش یا رزرو"
+              />
+            </div>
           </div>
           <button
             onClick={() => {
               if (phone !== undefined && name !== undefined && phone !== "") {
-                dispatch(coffeeOrderThunk({ name, phone }));
+                dispatch(coffeeOrderThunk({ name, phone, desc: desc || "" }));
                 props.handler(false);
                 nameHandler("");
                 phoneHandler("");

@@ -52,7 +52,7 @@ export default function MainPage() {
               <FaRegHandPointLeft />
               <button
                 onClick={() => reserveHandler(true)}
-                className="bg-amber-400 p-5 rounded-xl text-xs"
+                className="bg-amber-400 p-5 rounded-xl text-xs xl:text-xl font-bold"
               >
                 برای مراسمات رزور کنید
               </button>

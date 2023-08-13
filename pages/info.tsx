@@ -12,9 +12,11 @@ export default function Page404() {
           <Banner
             images={[
               [
-                { src: "store/1.jpg", url: "/lists/51" },
-                { src: "store/4.jpg", url: "/lists/61" },
-                { src: "store/5.png", url: "/lists/11" },
+                { src: "info/1.jpg", url: "/lists/51" },
+                { src: "info/2.jpg", url: "/lists/51" },
+                { src: "info/3.jpg", url: "/lists/51" },
+                { src: "info/4.jpg", url: "/lists/61" },
+                { src: "info/5.png", url: "/lists/11" },
               ],
             ]}
           />
