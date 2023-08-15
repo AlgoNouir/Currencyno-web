@@ -7,8 +7,8 @@ export default function Page404() {
   return (
     <div>
       <Header state={5} />
-      <div className="flex items-center justify-center h-screen flex-col space-y-16 bg-caffeePateren">
-        <div className="w-2/3 mt-16">
+      <div className="flex items-center justify-center h-screen flex-col sm:space-y-5 xl:space-y-16 bg-caffeePateren p-5">
+        <div className="xl:w-2/3 mt-16">
           <Banner
             images={[
               [
@@ -21,7 +21,7 @@ export default function Page404() {
             ]}
           />
         </div>
-        <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           <button
             onClick={() => router.push("/store/")}
             className="flex flex-row items-end justify-center hover:bg-primary-500

@@ -158,7 +158,7 @@ export default function Header(props: { state: number }) {
           <div className="flex-col items-center justify-center ">
             <div className="grid grid-cols-6 gap-5 relative">
               {[
-                { name: "محصولات دیجیتال", url: "/store/" },
+                { name: "محصولات دیجیتال", url: "/" },
                 { name: "کتابخانه اقتصادی", url: "/academy/" },
                 { name: "کافه کارآفرینی", url: "/coffee/" },
                 { name: "کاریابی استخدام", url: "/work/" },
