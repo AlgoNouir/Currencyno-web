@@ -106,6 +106,18 @@ export default function FactorPage() {
                         return false;
                       }) === undefined
                         ? 50000
+                        : 0) +
+                      (userProducts.find((p) => {
+                        if (
+                          [61, 56].includes(
+                            products.find((pp) => pp.id === p.product)
+                              ?.category || -1
+                          )
+                        )
+                          return true;
+                        return false;
+                      }) === undefined
+                        ? 50000
                         : 0)
                   )}
                 </p>
