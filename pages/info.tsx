@@ -1,13 +1,34 @@
 import Banner from "@/components/UI/banner";
-import Header from "@/components/UI/header";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function Page404() {
   const router = useRouter();
   return (
     <div>
-      <Header state={5} />
-      <div className="flex items-center justify-center h-screen flex-col sm:space-y-5 xl:space-y-16 bg-caffeePateren p-5">
+      <div
+        className="flex items-center justify-center h-screen flex-col space-y-5
+        sm:space-y-5 xl:space-y-16 bg-caffeePateren p-5"
+      >
+        <button
+          onClick={() => router.push("/store")}
+          className=" flex flex-row items-center space-x-5 rtl:space-x-reverse"
+        >
+          <Image
+            src={
+              "https://currencyno.storage.iran.liara.space/Core/CurrencynoIcon.png"
+            }
+            width="0"
+            height="0"
+            sizes="100wv"
+            className="w-24 h-24 rounded-full"
+            alt="icon"
+          />
+          <div>
+            <p className="font-bold text-4xl ">کارنسینو</p>
+            <small className="font-bold">فروشگاه آنلاین و مجموعه خدماتی</small>
+          </div>
+        </button>
         <div className="xl:w-2/3 mt-16">
           <Banner
             images={[
