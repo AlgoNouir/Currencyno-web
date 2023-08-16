@@ -44,7 +44,7 @@ export default function Page404() {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           <button
-            onClick={() => router.push("/store/")}
+            onClick={() => router.push("/")}
             className="flex flex-row items-end justify-center hover:bg-primary-500
                            bg-primary-600 p-5 rounded-xl transition-all"
           >
