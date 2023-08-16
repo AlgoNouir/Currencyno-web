@@ -6,6 +6,7 @@ import { CgSpinner } from "react-icons/cg";
 import PhoneInput from "../UI/phoneInput";
 import { setNotif } from "@/store/core/slice";
 import Modal from "../UI/modal";
+import Image from "next/image";
 
 export default function LoginModal(props: { handler: any; message: string }) {
   const [sms, smsHandler] = useState(false);
@@ -21,10 +22,18 @@ export default function LoginModal(props: { handler: any; message: string }) {
       title="ورود به حساب کاربری"
       handler={props.handler}
     >
-      <div className="flex flex-col space-y-5 items-center justify-center w-fit">
+      <div className="flex flex-col space-y-5 items-center justify-center w-fit h-full">
+        <Image
+          src="https://currencyno.storage.iran.liara.space/Core/modals/login.jpg"
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="sm:w-96 w-full"
+          alt=""
+        />
         <div
           style={{ direction: "ltr" }}
-          className="space-x-2 flex flex-row w-fit"
+          className="sm:space-x-2 space-y-5 sm:space-y-0 flex sm:flex-row w-fit flex-col items-center"
         >
           <PhoneInput value={phone} handler={phoneHandler} />
           <button
@@ -45,8 +54,8 @@ export default function LoginModal(props: { handler: any; message: string }) {
             }}
             className={`${
               sms ? "bg-prime-200 " : "bg-green-400"
-            } p-3 rounded-xl w-44 disabled:bg-black/30 flex flex-row items-center justify-center
-            space-x-2`}
+            } p-3 rounded-xl sm:w-44 disabled:bg-black/30 flex flex-row items-center justify-center
+            space-x-2 w-full`}
           >
             <p>
               {loginStatus === "awaitSMS"
@@ -108,8 +117,8 @@ export default function LoginModal(props: { handler: any; message: string }) {
         ) : (
           <></>
         )}
+        <p className="text-center text-gray-500 text-sm">{props.message}</p>
       </div>
-      <p className="text-center text-gray-500 text-sm">{props.message}</p>
     </Modal>
   );
 }
