@@ -66,7 +66,7 @@ export default function Header(props: { state: number }) {
           >
             <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
               <button
-                onClick={() => router.push("/store")}
+                onClick={() => router.push("/")}
                 className=" flex flex-row items-center space-x-5 rtl:space-x-reverse"
               >
                 <Image

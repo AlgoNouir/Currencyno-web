@@ -198,7 +198,18 @@ function ProductScreen() {
                       product.count
                   );
                 return 0;
-              }, 0)
+              }, 0) +
+                (userProducts.find((p) => {
+                  if (
+                    [61, 56].includes(
+                      products.find((pp) => pp.id === p.product)?.category || -1
+                    )
+                  )
+                    return true;
+                  return false;
+                }) === undefined
+                  ? 50000
+                  : 0)
             )}
           </label>
           <small className="border-t border-red-700 pt-4">تومان</small>
@@ -226,7 +237,7 @@ function ProductScreen() {
               : () => router.push("factor")
           }
           className="bottom-14 text-white z-20 w-full hidden md:flex
-          bg-prime-200 px-16 py-3 rounded-xl left-14"
+          bg-prime-200 px-16 py-3 rounded-xl left-14 items-center justify-center"
         >
           <p className="text-xl font-bold">سفارش نهایی</p>
         </button>
