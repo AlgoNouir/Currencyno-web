@@ -94,7 +94,19 @@ export default function FactorPage() {
                           ?.price || 0) *
                           cart.count,
                       0
-                    )
+                    ) +
+                      (userProducts.find((p) => {
+                        if (
+                          [61, 56].includes(
+                            products.find((pp) => pp.id === p.product)
+                              ?.category || -1
+                          )
+                        )
+                          return true;
+                        return false;
+                      }) === undefined
+                        ? 50000
+                        : 0)
                   )}
                 </p>
                 <p className="text-gray-800">تومان</p>
