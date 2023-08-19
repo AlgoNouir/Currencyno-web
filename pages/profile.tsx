@@ -4,7 +4,8 @@ import LoginModal from "@/components/login";
 import Product from "@/components/store/product";
 import SettingDataModal from "@/components/store/settingData";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
-import { changeAccountDataThunk } from "@/store/account/thunk";
+import { addOfflineProduct } from "@/store/account/slice";
+import { addToCartThunk, changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -15,7 +16,7 @@ import {
   HiBuildingStorefront,
   HiOutlineArchiveBoxXMark,
 } from "react-icons/hi2";
-import { MdSupportAgent } from "react-icons/md";
+import { MdDelete, MdSupportAgent } from "react-icons/md";
 
 const screens = [
   { id: 0, name: "سبد خرید", component: <ProductScreen /> },
@@ -66,6 +67,8 @@ function ProductScreen() {
   const [loginMessage, loginMessageHandler] = useState("");
   const [settingData, settingDataHandler] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   return userProducts.length === 0 ? (
     <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
       <HiOutlineArchiveBoxXMark className="text-[150px]" />
@@ -90,43 +93,70 @@ function ProductScreen() {
           const select = product?.counts.find((s) => s.id === p.select);
           if (product)
             return (
-              <button
-                onClick={() => router.push(`product/${product.id}`)}
-                className="relative bg-prime-300 rounded-xl h-fit"
-              >
-                <div className="absolute top-3 right-3">
-                  {select !== undefined ? (
-                    <div className="bg-gray-200 p-2 rounded-xl">
-                      {select.name}
+              <div className="relative">
+                <button
+                  onClick={() => {
+                    if (user !== undefined) {
+                      dispatch(
+                        addToCartThunk({
+                          product: product.id,
+                          select: p.select || -1,
+                          count: 0,
+                        })
+                      );
+                    } else {
+                      dispatch(
+                        addOfflineProduct({
+                          id: -1,
+                          product: product.id,
+                          select: p.select,
+                          count: 0,
+                        })
+                      );
+                    }
+                  }}
+                  className="absolute text-red-700 bg-red-500/50 text-2xl p-2 rounded-full z-10 left-3 top-3"
+                >
+                  <MdDelete />
+                </button>
+                <button
+                  onClick={() => router.push(`product/${product.id}`)}
+                  className="relative bg-prime-300 rounded-xl h-fit"
+                >
+                  <div className="absolute top-3 right-3">
+                    {select !== undefined ? (
+                      <div className="bg-gray-200 p-2 rounded-xl">
+                        {select.name}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="h-96">
+                    <Product {...product} />
+                  </div>
+                  <div className="bg-white z-0 rounded-xl p-2 border-4 border-primary-500 space-y-2">
+                    <div className="flex flex-row items-center justify-start font-bold space-x-2 rtl:space-x-reverse text-primary-700">
+                      <BiCheckShield className="text-xl" />
+                      <label className="text-sm">{product.garanty}</label>
                     </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div className="h-96">
-                  <Product {...product} />
-                </div>
-                <div className="bg-white z-0 rounded-xl p-2 border-4 border-primary-500 space-y-2">
-                  <div className="flex flex-row items-center justify-start font-bold space-x-2 rtl:space-x-reverse text-primary-700">
-                    <BiCheckShield className="text-xl" />
-                    <label className="text-sm">{product.garanty}</label>
+                    <div className="flex flex-row text-primary-700 font-bold space-x-2 rtl:space-x-reverse items-center">
+                      <HiBuildingStorefront className="text-xl" />
+                      <label className="text-sm">ارسال از انبار کارنسینو</label>
+                    </div>
+                    <div className="flex flex-row items-end justify-between ">
+                      <label>
+                        {`${Intl.NumberFormat("fa-IR").format(p.count)} عدد`}
+                      </label>
+                      <label>
+                        {`${Intl.NumberFormat("fa-IR").format(
+                          p.count * product.price
+                        )} تومان`}
+                      </label>
+                    </div>
                   </div>
-                  <div className="flex flex-row text-primary-700 font-bold space-x-2 rtl:space-x-reverse items-center">
-                    <HiBuildingStorefront className="text-xl" />
-                    <label className="text-sm">ارسال از انبار کارنسینو</label>
-                  </div>
-                  <div className="flex flex-row items-end justify-between ">
-                    <label>
-                      {`${Intl.NumberFormat("fa-IR").format(p.count)} عدد`}
-                    </label>
-                    <label>
-                      {`${Intl.NumberFormat("fa-IR").format(
-                        p.count * product.price
-                      )} تومان`}
-                    </label>
-                  </div>
-                </div>
-              </button>
+                </button>
+              </div>
             );
         })}
       </div>

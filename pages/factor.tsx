@@ -124,7 +124,7 @@ export default function FactorPage() {
                 <p className="text-gray-800">تومان</p>
               </div>
             </div>
-            <div className="flex flex-row space-x-2 rtl:space-x-reverse">
+            <div className="flex flex-row space-x-2 rtl:space-x-reverse ">
               <button
                 onClick={() => {
                   router.back();

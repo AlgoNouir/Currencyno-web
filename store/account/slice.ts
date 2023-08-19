@@ -50,6 +50,10 @@ const accountSlice = createSlice({
 
       if (product === undefined)
         state.products = [...state.products, action.payload];
+      else if (action.payload.count === 0)
+        state.products = [
+          ...state.products.filter((p) => p.product !== action.payload.product),
+        ];
       else
         state.products = [
           ...state.products.filter((p) => p.product !== action.payload.product),
