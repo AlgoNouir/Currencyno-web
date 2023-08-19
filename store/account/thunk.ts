@@ -39,6 +39,7 @@ export const changeAccountDataThunk = createAsyncThunk(
   "changeAccountDataThunk",
   async (
     actionData: {
+      id: number;
       fName: string;
       lName: string;
       nationalCode: string;
