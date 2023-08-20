@@ -49,7 +49,7 @@ export default function Footer() {
             <Icon
               text="نماد اعتماد"
               icon={
-                <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg lg:text-3xl">
+                <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-white text-lg lg:text-3xl">
                   <a
                     referrerPolicy="origin"
                     target="_blank"
