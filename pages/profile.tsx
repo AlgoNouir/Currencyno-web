@@ -400,7 +400,6 @@ export function SettingScreen() {
 
 function OrderScreen() {
   const orders = useAppSelector((store) => store.orders);
-  const allProducts = useAppSelector((store) => store.products);
   const [pass, passHandler] = useState(false);
   const [products, productsHandler] = useState<OrderProduct[]>([]);
 
@@ -409,7 +408,7 @@ function OrderScreen() {
       <div className="relative w-full h-full">
         <div
           className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
-                absolute top-0 left-0 right-0 bottom-0 scrollbar-hide"
+                absolute top-0 left-0 right-0 scrollbar-hide h-fit"
         >
           {orders.map((order, index) => (
             <button
