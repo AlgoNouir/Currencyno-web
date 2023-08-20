@@ -380,6 +380,7 @@ export function SettingScreen() {
           onClick={() =>
             dispatch(
               changeAccountDataThunk({
+                id: user?.id || -1,
                 fName: name,
                 lName: family,
                 nationalCode,
