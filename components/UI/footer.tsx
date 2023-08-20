@@ -54,13 +54,13 @@ export default function Footer() {
                   target="_blank"
                   href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
                 >
-                  {/* <img
-                                        referrerPolicy="origin"
-                                        src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                                        alt=""
-                                        style={{ cursor: "pointer" }}
-                                        id="gBjq7O5O8goWmRHZYK1Y"
-                                    /> */}
+                  <img
+                    referrerPolicy="origin"
+                    src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
+                    alt=""
+                    style={{ cursor: "pointer" }}
+                    id="gBjq7O5O8goWmRHZYK1Y"
+                  />
                 </a>
               }
             />

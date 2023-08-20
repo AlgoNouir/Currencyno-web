@@ -1,12 +1,15 @@
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
 import LoginModal from "@/components/login";
+import HistoryModal from "@/components/store/historyProduct";
 import Product from "@/components/store/product";
 import SettingDataModal from "@/components/store/settingData";
+import { postPrice } from "@/core";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
-import { addOfflineProduct } from "@/store/account/slice";
+import { OrderProduct, addOfflineProduct } from "@/store/account/slice";
 import { addToCartThunk, changeAccountDataThunk } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
+import { productType } from "@/store/product/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiCheckShield } from "react-icons/bi";
@@ -59,7 +62,7 @@ export default function ProfilePage() {
   );
 }
 
-function ProductScreen() {
+export function ProductScreen() {
   const router = useRouter();
   const userProducts = useAppSelector((store) => store.account.products);
   const user = useAppSelector((store) => store.account.user);
@@ -184,7 +187,7 @@ function ProductScreen() {
                 return true;
               return false;
             }) === undefined
-              ? Intl.NumberFormat("fa-IR").format(50000)
+              ? Intl.NumberFormat("fa-IR").format(postPrice)
               : "رایگان!"}
           </label>
           <small className="text-gray-500">
@@ -238,7 +241,7 @@ function ProductScreen() {
                     return true;
                   return false;
                 }) === undefined
-                  ? 50000
+                  ? postPrice
                   : 0)
             )}
           </label>
@@ -396,39 +399,51 @@ export function SettingScreen() {
 
 function OrderScreen() {
   const orders = useAppSelector((store) => store.orders);
+  const allProducts = useAppSelector((store) => store.products);
+  const [pass, passHandler] = useState(false);
+  const [products, productsHandler] = useState<OrderProduct[]>([]);
 
   return (
-    <div className="relative w-full h-full">
-      <div
-        className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
+    <>
+      <div className="relative w-full h-full">
+        <div
+          className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
                 absolute top-0 left-0 right-0 bottom-0 scrollbar-hide"
-      >
-        {orders.map((order, index) => (
-          <button
-            key={index}
-            className={`w-full ${
-              order.done === 3 ? "bg-zinc-300" : "bg-white"
-            } rounded-xl p-5 h-32`}
-          >
-            <div className="flex flex-col items-center justify-center sm:items-end sm:justify-between sm:flex-row">
-              <div className="flex flex-col space-y-5 ">
-                <div>{new Date(order.created_at).toLocaleString("fa")}</div>
-                <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">
-                  <label>
-                    {`${Intl.NumberFormat("fa-IR").format(order.price)} تومان`}
-                  </label>
-                  <small className="text-gray-600">{`( ${Intl.NumberFormat(
-                    "fa-IR"
-                  ).format(order.count)} سفارش )`}</small>
+        >
+          {orders.map((order, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                passHandler(true);
+                productsHandler(order.products);
+              }}
+              className={`w-full ${
+                order.done === 3 ? "bg-zinc-300" : "bg-white"
+              } rounded-xl p-5 h-32`}
+            >
+              <div className="flex flex-col items-center justify-center sm:items-end sm:justify-between sm:flex-row">
+                <div className="flex flex-col space-y-5 ">
+                  <div>{new Date(order.created_at).toLocaleString("fa")}</div>
+                  <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">
+                    <p>
+                      {`${Intl.NumberFormat("fa-IR").format(
+                        order.price
+                      )} تومان`}
+                    </p>
+                    <small className="text-gray-600">{`( ${Intl.NumberFormat(
+                      "fa-IR"
+                    ).format(order.count)} سفارش )`}</small>
+                  </div>
+                </div>
+                <div>
+                  <p>{OrderStatusEnum[order.done]}</p>
                 </div>
               </div>
-              <div>
-                <label>{OrderStatusEnum[order.done]}</label>
-              </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+      <HistoryModal open={pass} handler={passHandler} products={products} />
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { axiosUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { postPrice } from "@/core";
 
 function CustomImage(props: { src: string }) {
   return (
@@ -87,14 +88,19 @@ export default function FactorPage() {
               <div className="flex items-center space-x-2 rtl:space-x-reverse">
                 <p className="text-2xl font-bold">
                   {Intl.NumberFormat("fa-IR").format(
-                    userProducts.reduce(
-                      (obj, cart) =>
-                        obj +
-                        (products.find((product) => product.id === cart.product)
-                          ?.price || 0) *
-                          cart.count,
-                      0
-                    ) +
+                    userProducts.reduce((obj, cart) => {
+                      const product = products.find(
+                        (product) => product.id === cart.product
+                      );
+                      const price =
+                        product?.offerPrice === 0
+                          ? product?.price
+                          : product?.offerPrice;
+
+                      return (
+                        obj + (price === undefined ? 0 : price * cart.count)
+                      );
+                    }, 0) +
                       (userProducts.find((p) => {
                         if (
                           [61, 56].includes(
@@ -105,19 +111,7 @@ export default function FactorPage() {
                           return true;
                         return false;
                       }) === undefined
-                        ? 50000
-                        : 0) +
-                      (userProducts.find((p) => {
-                        if (
-                          [61, 56].includes(
-                            products.find((pp) => pp.id === p.product)
-                              ?.category || -1
-                          )
-                        )
-                          return true;
-                        return false;
-                      }) === undefined
-                        ? 50000
+                        ? postPrice
                         : 0)
                   )}
                 </p>
