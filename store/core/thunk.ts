@@ -1,7 +1,7 @@
 import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getInitDataThunk = createAsyncThunk(
+export const getInitDataThunk: any = createAsyncThunk(
   "getInitData",
   async (_, { rejectWithValue }) => {
     const response = await axiosNoUser.get("products/");
@@ -13,7 +13,7 @@ export const getInitDataThunk = createAsyncThunk(
   }
 );
 
-export const coffeeOrderThunk = createAsyncThunk(
+export const coffeeOrderThunk: any = createAsyncThunk(
   "coffeeOrder",
   async (
     actionData: { name: string; phone: number; desc: string },
@@ -29,7 +29,7 @@ export const coffeeOrderThunk = createAsyncThunk(
   }
 );
 
-export const jobOfferOrderThunk = createAsyncThunk(
+export const jobOfferOrderThunk: any = createAsyncThunk(
   "jobOfferOrder",
   async (
     actionData: {
@@ -53,7 +53,7 @@ export const jobOfferOrderThunk = createAsyncThunk(
   }
 );
 
-export const jobRequestOrderThunk = createAsyncThunk(
+export const jobRequestOrderThunk: any = createAsyncThunk(
   "jobRequestOrder",
   async (
     actionData: {
@@ -78,7 +78,7 @@ export const jobRequestOrderThunk = createAsyncThunk(
   }
 );
 
-export const academyOrderThunk = createAsyncThunk(
+export const academyOrderThunk: any = createAsyncThunk(
   "academyOrder",
   async (
     actionData: {
@@ -98,7 +98,7 @@ export const academyOrderThunk = createAsyncThunk(
   }
 );
 
-export const fixOrderThunk = createAsyncThunk(
+export const fixOrderThunk: any = createAsyncThunk(
   "fixOrder",
   async (actionData: { name: string; phone: number }, { rejectWithValue }) => {
     const response = await axiosNoUser.post("fix/", actionData);

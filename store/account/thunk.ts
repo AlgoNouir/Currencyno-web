@@ -2,7 +2,7 @@ import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { OrderProduct } from "./slice";
 
-export const addToCartThunk = createAsyncThunk(
+export const addToCartThunk: any = createAsyncThunk(
   "addToCartThunk",
   async (
     actionData: { product: number; count: number; select: number },
@@ -20,7 +20,7 @@ export const addToCartThunk = createAsyncThunk(
   }
 );
 
-export const loginThunk = createAsyncThunk(
+export const loginThunk: any = createAsyncThunk(
   "loginThunk",
   async (
     actionData: { code: string; phone: number; products: OrderProduct[] },
@@ -38,7 +38,7 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
-export const changeAccountDataThunk = createAsyncThunk(
+export const changeAccountDataThunk: any = createAsyncThunk(
   "changeAccountDataThunk",
   async (
     actionData: {
@@ -60,7 +60,7 @@ export const changeAccountDataThunk = createAsyncThunk(
   }
 );
 
-export const sendLoginSMS = createAsyncThunk(
+export const sendLoginSMS: any = createAsyncThunk(
   "sendLoginSMS",
   async (actionData: { phone: number }, { rejectWithValue }) => {
     const response = await axiosNoUser.post("login/", {
@@ -74,7 +74,7 @@ export const sendLoginSMS = createAsyncThunk(
     }
   }
 );
-export const logoutThunk = createAsyncThunk(
+export const logoutThunk: any = createAsyncThunk(
   "logoutThunk",
   async (actionData: undefined, { rejectWithValue }) => {
     // TODO: fetch to server
