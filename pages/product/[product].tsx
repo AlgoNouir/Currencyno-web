@@ -110,7 +110,7 @@ export default function ProductPage() {
                     {product.persianName}
                   </label>
 
-                  {product.Orginal ? (
+                  {product.orginal ? (
                     <></>
                   ) : (
                     <small className="m-2 text-white bg-slate-300 p-1 rounded-xl absolute top-3 left-3">

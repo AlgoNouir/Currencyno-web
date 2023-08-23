@@ -23,7 +23,7 @@ export type productType = {
   price: number;
   desc: string;
   counts: keeperCounterType[];
-  Orginal: boolean;
+  orginal: boolean;
   data: {
     [key: string]: string;
   };
