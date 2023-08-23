@@ -4,6 +4,7 @@ import {
   addToCartThunk,
   changeAccountDataThunk,
   loginThunk,
+  logoutThunk,
   sendLoginSMS,
 } from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
@@ -105,6 +106,9 @@ const accountSlice = createSlice({
     });
     builder.addCase(cartToOrderThunk.fulfilled, (state) => {
       if (state.user) state.products = [];
+    });
+    builder.addCase(logoutThunk.fulfilled, (state) => {
+      state.user = undefined;
     });
     builder.addCase(changeAccountDataThunk.fulfilled, (state, action) => {
       if (state.user)

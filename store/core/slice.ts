@@ -7,7 +7,11 @@ import {
   jobOfferOrderThunk,
   jobRequestOrderThunk,
 } from "./thunk";
-import { changeAccountDataThunk, loginThunk } from "../account/thunk";
+import {
+  changeAccountDataThunk,
+  loginThunk,
+  logoutThunk,
+} from "../account/thunk";
 
 export type categoryType = {
   id: number;
@@ -118,6 +122,13 @@ const coreSlice = createSlice({
         type: "success",
         title: "درخواست موفق",
         message: "درخواست شما با موفقیت ثبت شد",
+      };
+    });
+    builder.addCase(logoutThunk.fulfilled, (state) => {
+      state.notif = {
+        type: "success",
+        title: "خروج از حساب",
+        message: "با موفقیت از حساب خود خارج شدید",
       };
     });
   },

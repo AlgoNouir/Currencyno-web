@@ -74,3 +74,10 @@ export const sendLoginSMS = createAsyncThunk(
     }
   }
 );
+export const logoutThunk = createAsyncThunk(
+  "logoutThunk",
+  async (actionData: undefined, { rejectWithValue }) => {
+    // TODO: fetch to server
+    return 1;
+  }
+);

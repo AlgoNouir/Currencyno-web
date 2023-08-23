@@ -11,14 +11,15 @@ import Image from "next/image";
 export default function LoginModal(props: { handler: any; message: string }) {
   const [sms, smsHandler] = useState(false);
   const [code, codeHandler] = useState("");
-  const [phone, phoneHandler] = useState<number | "">();
+  const [phone, phoneHandler] = useState<number | "" | 0>();
   const products = useAppSelector((store) => store.account.products);
   const loginStatus = useAppSelector((store) => store.account.login);
+  const user = useAppSelector((store) => store.account.user);
   const dispatch = useAppDispatch();
 
   return (
     <Modal
-      open={props.message}
+      open={props.message && user === undefined}
       title="ورود به حساب کاربری"
       handler={props.handler}
     >
@@ -97,8 +98,6 @@ export default function LoginModal(props: { handler: any; message: string }) {
                       products,
                     })
                   );
-                  props.handler("");
-                  smsHandler(false);
                 } else {
                   dispatch(
                     setNotif({

@@ -7,7 +7,11 @@ import SettingDataModal from "@/components/store/settingData";
 import { postPrice } from "@/core";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { OrderProduct, addOfflineProduct } from "@/store/account/slice";
-import { addToCartThunk, changeAccountDataThunk } from "@/store/account/thunk";
+import {
+  addToCartThunk,
+  changeAccountDataThunk,
+  logoutThunk,
+} from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
 import { productType } from "@/store/product/slice";
 import { useRouter } from "next/router";
@@ -29,6 +33,8 @@ const screens = [
 
 export default function ProfilePage() {
   const [screen, screenHandler] = useState(screens[0]);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   return (
     <div className="h-screen relative pt-32">
       <div className="absolute top-0">
@@ -49,6 +55,16 @@ export default function ProfilePage() {
               {s.name}
             </button>
           ))}
+          <button
+            key={`screen-exit`}
+            onClick={() => {
+              dispatch(logoutThunk());
+              router.push("/");
+            }}
+            className="w-5/6 p-5 rounded-r-full text-red-700"
+          >
+            خروج از حساب کاربری
+          </button>
         </div>
         <div className="w-full">
           <div className="w-full h-16 rounded-xl bg-bg-200 mb-5 flex items-center justify-center">
