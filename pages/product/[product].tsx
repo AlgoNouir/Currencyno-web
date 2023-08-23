@@ -78,6 +78,8 @@ export default function ProductPage() {
     selectHandler(selected);
   }, [selectHandler, product, inCart]);
 
+  console.log(product);
+
   if (product !== undefined) {
     return (
       <div className="flex flex-col items-center w-full bg-storePattern">
@@ -110,7 +112,7 @@ export default function ProductPage() {
                     {product.persianName}
                   </label>
 
-                  {product.orginal ? (
+                  {product.original ? (
                     <></>
                   ) : (
                     <small className="m-2 text-white bg-slate-300 p-1 rounded-xl absolute top-3 left-3">
