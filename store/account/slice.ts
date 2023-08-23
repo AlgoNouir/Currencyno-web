@@ -24,6 +24,7 @@ export type userType = {
   phone: number;
   email?: string;
   nationalCode?: string;
+  access: string;
 };
 
 const initialState: {

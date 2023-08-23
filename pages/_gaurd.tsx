@@ -1,4 +1,5 @@
 import PersonalModal from "@/components/login/personalDataModal";
+import { axiosUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { setNotif } from "@/store/core/slice";
 import { getInitDataThunk } from "@/store/core/thunk";
@@ -21,6 +22,9 @@ export default function Gaurd(props: { children: ReactNode }) {
   useEffect(() => {
     // get init data
     if (serverStatus === "init") {
+      if (account.user)
+        axiosUser.defaults.headers.Authorization = `Bearer ${account.user.access}`;
+
       dispatch(getInitDataThunk());
     } else if (serverStatus === "disconnect") {
       // router.push("error");
