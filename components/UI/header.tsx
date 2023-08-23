@@ -53,7 +53,7 @@ export default function Header(props: { state: number }) {
           transitionDuration: "500ms",
           transform: show ? "" : "translate(0, -80px)",
         }}
-        className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow "
+        className="fixed flex items-center justify-center w-screen bg-white top-0 z-20 shadow left-0 right-0"
       >
         <div
           className=" md:container flex flex-col px-5 relative
@@ -64,10 +64,20 @@ export default function Header(props: { state: number }) {
               props.state === 0 ? "justify-between" : "justify-center"
             }  w-full`}
           >
+            {props.state === 0 ? (
+              <button
+                onClick={() => menuHandler(true)}
+                className=" p-3 font-bold text-3xl right-1 bottom-0 md:hidden "
+              >
+                <FiMenu />
+              </button>
+            ) : (
+              <></>
+            )}
             <div className="flex flex-row space-x-5 rtl:space-x-reverse items-center">
               <button
                 onClick={() => router.push("/")}
-                className=" flex flex-row items-center space-x-5 rtl:space-x-reverse"
+                className=" flex flex-row items-center space-x-1 rtl:space-x-reverse"
               >
                 <Image
                   src={
@@ -80,8 +90,8 @@ export default function Header(props: { state: number }) {
                   alt="icon"
                 />
                 <div>
-                  <p className="font-bold text-2xl ">کارنسینو</p>
-                  <small className="md:font-bold hidden md:flex">
+                  <p className="font-bold text-2xl -mb-1">کارنسینو</p>
+                  <small className="md:font-bold text-[10px]">
                     فروشگاه آنلاین و مجموعه خدماتی
                   </small>
                 </div>
@@ -125,12 +135,6 @@ export default function Header(props: { state: number }) {
                   </p>
                 </button>
                 <button
-                  onClick={() => menuHandler(true)}
-                  className=" p-3 font-bold text-3xl right-1 bottom-0 md:hidden "
-                >
-                  <FiMenu />
-                </button>
-                <button
                   className="relative"
                   onClick={() => router.push("/profile")}
                 >
@@ -148,7 +152,11 @@ export default function Header(props: { state: number }) {
                   ) : (
                     <></>
                   )}
-                  <PiBasketLight className="text-3xl" />
+                  {user === undefined ? (
+                    <PiBasketLight className="text-3xl" />
+                  ) : (
+                    <BsFillPersonFill className="text-4xl text-gray-600" />
+                  )}
                 </button>
               </div>
             ) : (
