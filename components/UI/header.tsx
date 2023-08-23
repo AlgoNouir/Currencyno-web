@@ -67,7 +67,7 @@ export default function Header(props: { state: number }) {
             {props.state === 0 ? (
               <button
                 onClick={() => menuHandler(true)}
-                className=" p-3 font-bold text-3xl right-1 bottom-0 md:hidden "
+                className="font-bold text-3xl md:hidden "
               >
                 <FiMenu />
               </button>
