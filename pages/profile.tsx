@@ -1,6 +1,6 @@
 import Footer from "@/components/UI/footer";
 import Header from "@/components/UI/header";
-import LoginModal from "@/components/login";
+import LoginModal, { LoginComponent } from "@/components/login";
 import HistoryModal from "@/components/store/historyProduct";
 import Product from "@/components/store/product";
 import SettingDataModal from "@/components/store/settingData";
@@ -25,22 +25,32 @@ import {
 } from "react-icons/hi2";
 import { MdDelete, MdSupportAgent } from "react-icons/md";
 
-const screens = [
-  { id: 0, name: "سبد خرید", component: <ProductScreen /> },
-  { id: 1, name: "سوابق سفارشات", component: <OrderScreen /> },
-  { id: 2, name: "تنظیمات", component: <SettingScreen /> },
-];
-
 export default function ProfilePage() {
+  const user = useAppSelector((store) => store.account.user);
+  const screens = [
+    { id: 0, name: "سبد خرید", component: <ProductScreen /> },
+    ...(user === undefined
+      ? [
+          {
+            id: 1,
+            name: "ورود یه حساب کاربری",
+            component: <LoginScreen />,
+          },
+        ]
+      : [
+          { id: 2, name: "سوابق سفارشات", component: <OrderScreen /> },
+          { id: 3, name: "تنظیمات", component: <SettingScreen /> },
+        ]),
+  ];
   const [screen, screenHandler] = useState(screens[0]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
-    <div className="h-screen relative pt-32">
+    <div className="relative pt-32 flex flex-col space-y-10">
       <div className="absolute top-0">
         <Header state={0} />
       </div>
-      <div className="md:h-full h-fit p-5 flex flex-row md:space-x-5 rtl:space-x-reverse">
+      <div className="md:h-full h-fit p-5 flex flex-row md:space-x-5 rtl:space-x-reverse mb-10 min-h-screen">
         <div className="sm:w-96 h-full bg-bg-200 rounded-xl hidden lg:flex flex-col space-y-2 items-end py-5">
           {screens.map((s, index) => (
             <button
@@ -66,14 +76,23 @@ export default function ProfilePage() {
             خروج از حساب کاربری
           </button>
         </div>
-        <div className="w-full">
-          <div className="w-full h-16 rounded-xl bg-bg-200 mb-5 flex items-center justify-center">
-            <p className="font-bold text-xl">{screen.name}</p>
-          </div>
+        <div className="w-full flex flex-col">
           <div className="md:h-full h-fit w-full">{screen.component}</div>
         </div>
       </div>
       <Footer />
+    </div>
+  );
+}
+
+export function LoginScreen() {
+  const userStatus = useAppSelector((store) => store.account.login);
+  const [pending, pendingHandler] = useState(false);
+
+  return (
+    <div className="bg-white h-full items-center justify-center w-full relative rounded-xl">
+      <LoginComponent message="" />
+      <div className="w-full h-full absolute top-0 left-0 right-0 bottom-0 bg-black/30 flex items-center justify-center"></div>
     </div>
   );
 }

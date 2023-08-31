@@ -79,7 +79,7 @@ export default function Header(props: { state: number }) {
                 onClick={() => router.push("/")}
                 className=" flex flex-row items-center space-x-1 rtl:space-x-reverse"
               >
-                <Image
+                <img
                   src={
                     "https://currencyno.storage.iran.liara.space/Core/CurrencynoIcon.png"
                   }
@@ -112,51 +112,35 @@ export default function Header(props: { state: number }) {
             {props.state === 0 ? (
               <div className="flex-row space-x-5 rtl:space-x-reverse flex">
                 <button
-                  onClick={
-                    user === undefined
-                      ? () =>
-                          loginModalOpenHandler(
-                            "برای ثبت نام یا ورود به حساب کاربری خود شماره موبایل خود را وارد کنید"
-                          )
-                      : () => router.push("/profile/")
-                  }
-                  className="border p-3 rounded-xl md:flex flex-row space-x-3
-                            rtl:space-x-reverse items-center hidden"
-                >
-                  {user === undefined ? (
-                    <></>
-                  ) : (
-                    <BsFillPersonFill className="text-2xl text-gray-600" />
-                  )}
-                  <p>
-                    {user === undefined
-                      ? "ورود یا ثبت نام"
-                      : `${user.fName} ${user.lName}`}
-                  </p>
-                </button>
-                <button
-                  className="relative"
+                  className="relative flex flex-row items-center space-x-2 rtl:space-x-reverse lg:border-2 p-2 rounded-xl shadow px-5"
                   onClick={() => router.push("/profile")}
                 >
-                  {tmp.products.length > 0 ? (
-                    <div
-                      className="bg-red-600 rounded-full w-6 h-6
-                                flex items-center justify-center absolute top-0 -right-3"
-                    >
-                      <label className="text-white">
-                        {Intl.NumberFormat("fa-IR").format(
-                          tmp.products.length || 0
-                        )}
-                      </label>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {user === undefined ? (
-                    <PiBasketLight className="text-3xl" />
-                  ) : (
-                    <BsFillPersonFill className="text-4xl text-gray-600" />
-                  )}
+                  <p className="hidden lg:flex font-bold">
+                    {user === undefined
+                      ? "سبد خرید"
+                      : `${user.fName} ${user.lName}`}
+                  </p>
+                  <div className="relative">
+                    {tmp.products.length > 0 ? (
+                      <div
+                        className="bg-red-600 rounded-full w-6 h-6
+                                flex items-center justify-center absolute top-0 -left-3"
+                      >
+                        <label className="text-white">
+                          {Intl.NumberFormat("fa-IR").format(
+                            tmp.products.length || 0
+                          )}
+                        </label>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {user === undefined ? (
+                      <PiBasketLight className="text-3xl" />
+                    ) : (
+                      <BsFillPersonFill className="text-4xl text-gray-600" />
+                    )}
+                  </div>
                 </button>
               </div>
             ) : (

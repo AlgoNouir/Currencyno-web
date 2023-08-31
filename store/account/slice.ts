@@ -8,6 +8,7 @@ import {
   sendLoginSMS,
 } from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
+import { getInitDataThunk } from "../core/thunk";
 
 export interface OrderProduct {
   id: number;
@@ -117,6 +118,13 @@ const accountSlice = createSlice({
           ...state.user,
           ...action.payload,
         };
+    });
+    builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
+      state.products = state.products.filter((product) =>
+        action.payload.products.includes(
+          (p: productType) => p.id === product.id
+        )
+      );
     });
   },
 });

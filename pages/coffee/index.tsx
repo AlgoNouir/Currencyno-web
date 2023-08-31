@@ -9,7 +9,7 @@ import { useState } from "react";
 
 function ImageBaner(props: { image: string }) {
   return (
-    <Image
+    <img
       src={`https://currencyno.storage.iran.liara.space/Banners/caffeh/${props.image}`}
       width="0"
       height="0"
@@ -73,7 +73,7 @@ export default function MainPage() {
               "11.jpg",
               "7.jpg",
             ].map((image, index) => (
-              <ImageBaner key={index} image={image} />
+              <imgBaner key={index} image={image} />
             ))}
           </div>
           <div className="bg-white p-10 space-y-5 rounded-xl text-3xl">

@@ -20,7 +20,7 @@ export default function TextBanner(props: {
           {props.images === "" ? (
             <div className="h-96"></div>
           ) : (
-            <Image
+            <img
               alt={props.images}
               src={`https://currencyno.storage.iran.liara.space/banner/${props.images}`}
               width="0"

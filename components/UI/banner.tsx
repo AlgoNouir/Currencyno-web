@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 function CustomImage(props: { src: string; url?: string }) {
   const router = useRouter();
   return props.url === undefined ? (
-    <Image
+    <img
       alt={props.src}
       src={`https://currencyno.storage.iran.liara.space/Banners/${props.src}`}
       width="0"
@@ -15,7 +15,7 @@ function CustomImage(props: { src: string; url?: string }) {
     />
   ) : (
     <button onClick={() => router.push(props.url || "")}>
-      <Image
+      <img
         alt={props.src}
         src={`https://currencyno.storage.iran.liara.space/Banners/${props.src}`}
         width="0"
