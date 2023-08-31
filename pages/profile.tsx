@@ -16,7 +16,7 @@ import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiCheckShield, BiSolidUser, BiUser } from "react-icons/bi";
-import { BsCardChecklist, BsCart, BsCartFill } from "react-icons/bs";
+import { BsCardChecklist, BsCart, BsCartFill, BsCartX } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
 import { RiSettings5Line, RiSettings5Fill } from "react-icons/ri";
 import { FaTruckFast } from "react-icons/fa6";
@@ -71,8 +71,11 @@ export default function ProfilePage() {
       <div className="absolute top-0">
         <Header state={0} />
       </div>
-      <div className="md:h-full h-fit p-5 flex flex-row md:space-x-5 rtl:space-x-reverse mb-10 min-h-screen">
-        <div className="sm:w-96 h-full bg-bg-200 rounded-xl hidden lg:flex flex-col space-y-2 items-end py-5">
+      <div
+        className="md:h-full h-fit p-5 flex flex-col space-y-6 lg:space-y-0 lg:flex-row md:space-x-5 
+        rtl:space-x-reverse mb-10 min-h-screen"
+      >
+        <div className="sm:w-96 h-full bg-bg-200 rounded-xl flex flex-col space-y-2 items-center lg:items-end py-5">
           {screens.map((s, index) => (
             <button
               key={`screen-${index}`}
@@ -83,7 +86,7 @@ export default function ProfilePage() {
                 color: s.id === screen.id ? "#FFFFFF" : "#000000",
               }}
               className="w-5/6 p-5 rounded-r-full font-bold flex flex-row 
-              items-center justify-center space-x-3 rtl:space-x-reverse"
+              items-center justify-center space-x-3 rtl:space-x-reverse max-lg:rounded-l-full"
             >
               <p className="text-2xl">
                 {s.id === screen.id ? s.iconSelected : s.icon}
@@ -134,7 +137,7 @@ export function ProductScreen() {
   const dispatch = useAppDispatch();
 
   return userProducts.length === 0 ? (
-    <div className="flex items-center justify-center h-full flex-col space-y-5 text-gray-600">
+    <div className="flex items-center justify-center h-2/3 flex-col space-y-5 text-gray-600">
       <HiOutlineArchiveBoxXMark className="text-[150px]" />
       <label>در حال حاضر شما محصولی سفارش نداده اید</label>
       <button
@@ -463,46 +466,60 @@ function OrderScreen() {
   const orders = useAppSelector((store) => store.orders);
   const [pass, passHandler] = useState(false);
   const [products, productsHandler] = useState<OrderProduct[]>([]);
+  const router = useRouter();
 
   return (
     <>
       <div className="relative w-full h-full">
-        <div
-          className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
-                absolute top-0 left-0 right-0 scrollbar-hide h-fit"
-        >
-          {orders.map((order, index) => (
+        {orders.length === 0 ? (
+          <div className="flex items-center justify-center flex-col space-y-5 text-gray-600 h-2/3">
+            <BsCartX className="text-[150px]" />
+            <label>تا کنون سفارشی نداشته اید</label>
             <button
-              key={index}
-              onClick={() => {
-                passHandler(true);
-                productsHandler(order.products);
-              }}
-              className={`w-full ${
-                order.done === 3 ? "bg-zinc-300" : "bg-white"
-              } rounded-xl p-5 h-32`}
+              onClick={() => router.push("/lists/all")}
+              className="bg-prime-100 p-5 rounded-xl"
             >
-              <div className="flex flex-col items-center justify-center sm:items-end sm:justify-between sm:flex-row">
-                <div className="flex flex-col space-y-5 ">
-                  <div>{new Date(order.created_at).toLocaleString("fa")}</div>
-                  <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">
-                    <p>
-                      {`${Intl.NumberFormat("fa-IR").format(
-                        order.price
-                      )} تومان`}
-                    </p>
-                    <small className="text-gray-600">{`( ${Intl.NumberFormat(
-                      "fa-IR"
-                    ).format(order.count)} سفارش )`}</small>
+              <p className="text-white">مشاهده لیست محصولات</p>
+            </button>
+          </div>
+        ) : (
+          <div
+            className="grid grid-cols-1 xl:grid-cols-2 gap-5 overflow-scroll 
+                    absolute top-0 left-0 right-0 scrollbar-hide h-fit"
+          >
+            {orders.map((order, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  passHandler(true);
+                  productsHandler(order.products);
+                }}
+                className={`w-full ${
+                  order.done === 3 ? "bg-zinc-300" : "bg-white"
+                } rounded-xl p-5 h-32`}
+              >
+                <div className="flex flex-col items-center justify-center sm:items-end sm:justify-between sm:flex-row">
+                  <div className="flex flex-col space-y-5 ">
+                    <div>{new Date(order.created_at).toLocaleString("fa")}</div>
+                    <div className="flex flex-row space-x-2 items-center rtl:space-x-reverse">
+                      <p>
+                        {`${Intl.NumberFormat("fa-IR").format(
+                          order.price
+                        )} تومان`}
+                      </p>
+                      <small className="text-gray-600">{`( ${Intl.NumberFormat(
+                        "fa-IR"
+                      ).format(order.count)} سفارش )`}</small>
+                    </div>
+                  </div>
+                  <div>
+                    <p>{OrderStatusEnum[order.done]}</p>
                   </div>
                 </div>
-                <div>
-                  <p>{OrderStatusEnum[order.done]}</p>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <HistoryModal open={pass} handler={passHandler} products={products} />
     </>
