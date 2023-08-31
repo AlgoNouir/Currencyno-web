@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 // TODO get all data in init
 export default function ListsPage() {
   const products = useAppSelector((store) => store.products);
-  const category = useAppSelector((store) => store.core.category);
+  const category = useAppSelector((store) => store.account.category);
   const test = useCallback(() => menuDirector(category), [category]);
 
   const router = useRouter();

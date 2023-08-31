@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function CustomImage(props: { src: string }) {
   return (
-    <img
+    <Image
       alt={props.src}
       src={`https://currencyno.storage.iran.liara.space/${props.src}`}
       width="0"

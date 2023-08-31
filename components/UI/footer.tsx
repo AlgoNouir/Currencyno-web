@@ -68,7 +68,7 @@ export default function Footer() {
             />
             <Icon
               text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
-              icon={<img src={require("@/public/eita.png")} alt="ایتا" />}
+              icon={<Image src={require("@/public/eita.png")} alt="ایتا" />}
             />
             <Icon
               text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
@@ -83,7 +83,7 @@ export default function Footer() {
               text="currencyno_plus"
               url="https://instagram.com/currencyno_plus"
               icon={
-                <img src={require("@/public/instaLogo.png")} alt="اینستاگرام" />
+                <Image src={require("@/public/instaLogo.png")} alt="اینستاگرام" />
               }
             />
           </div>

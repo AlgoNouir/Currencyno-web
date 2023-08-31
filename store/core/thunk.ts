@@ -1,9 +1,13 @@
 import { axiosNoUser, axiosUser } from "@/core/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { store } from "../store";
 
 export const getInitDataThunk: any = createAsyncThunk(
   "getInitData",
   async (_, { rejectWithValue }) => {
+    const access = store.getState().account.user?.access;
+    if (access) axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
+
     const response = await axiosNoUser.get("products/");
     if (response.status === 200) {
       return response.data;

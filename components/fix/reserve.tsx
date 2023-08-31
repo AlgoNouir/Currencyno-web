@@ -19,7 +19,7 @@ export default function FixRequestModal(props: {
     <Modal {...props} title="درخواست تعمیر لوازم الکترونیکی">
       <div className="lg:space-x-5 space-y-5 flex flex-col lg:flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
         <div className="flex flex-col space-y-5">
-          <img
+          <Image
             src="https://currencyno.storage.iran.liara.space/Banners/fix/requestVector.jpg"
             width="0"
             height="0"

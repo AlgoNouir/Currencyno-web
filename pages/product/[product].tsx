@@ -100,7 +100,7 @@ export default function ProductPage() {
             rtl:space-x-reverse rounded-xl bg-bg-200 shadow-xl"
           >
             <div className="xl:w-1/2">
-              <imgCarousel images={[product.image]} />
+              <ImageCarousel images={[product.image]} />
             </div>
             <div
               className="xl:w-1/2 p-10 flex

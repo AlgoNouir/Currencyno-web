@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/store/HOCs";
-import { categoryType } from "@/store/core/slice";
+import { categoryType } from "@/store/account/slice";
 import { useRouter } from "next/router";
 
 function Section(props: { title: string; data: categoryType[] }) {
@@ -23,7 +23,7 @@ function Section(props: { title: string; data: categoryType[] }) {
 }
 
 export default function MegaMenu() {
-  const category = useAppSelector((store) => store.core.category);
+  const category = useAppSelector((store) => store.account.category);
 
   return (
     <div className="items-center justify-center top-36 border fixed w-screen xl:group-hover:flex hidden left-0">

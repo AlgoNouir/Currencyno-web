@@ -29,10 +29,10 @@ export const loginThunk: any = createAsyncThunk(
     const response = await axiosNoUser.post("login/", actionData);
     console.log(response.data);
 
-    const { user, access, orders } = response.data;
+    const { user, access, orders, refresh } = response.data;
     axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
     return {
-      user: { ...user, access },
+      user: { ...user, access, refresh },
       orders,
     };
   }

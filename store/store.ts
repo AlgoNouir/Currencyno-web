@@ -22,6 +22,7 @@ const reducer = {
 const persistConfig = {
   key: "root",
   storage: storage,
+  blacklist: ["core"],
 };
 
 const persist = persistCombineReducers(persistConfig, reducer);

@@ -17,7 +17,7 @@ export default function ReserveModal(props: { handler: any; open: boolean }) {
     <Modal {...props} title="درخواست استفاده از فضای کار اشتراکی">
       <div className="space-x-5 flex flex-row items-center justify-between w-5/6 rtl:space-x-reverse">
         <div className="flex flex-col space-y-5">
-          <img
+          <Image
             src="https://currencyno.storage.iran.liara.space/Core/academy/reserveAcademy.jpg"
             width="0"
             height="0"

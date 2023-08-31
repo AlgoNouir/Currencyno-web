@@ -17,7 +17,7 @@ export function LoginComponent(props: { message: string }) {
   const dispatch = useAppDispatch();
   return (
     <div className="flex flex-col space-y-5 items-center justify-center w-fit h-full">
-      <img
+      <Image
         src="https://currencyno.storage.iran.liara.space/Core/modals/login.jpg"
         width="0"
         height="0"

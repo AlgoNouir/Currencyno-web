@@ -17,6 +17,12 @@ export interface OrderProduct {
   select?: number;
 }
 
+export type categoryType = {
+  id: number;
+  parent?: number;
+  name: string;
+};
+
 export type userType = {
   id: number;
   fName: string;
@@ -26,6 +32,7 @@ export type userType = {
   email?: string;
   nationalCode?: string;
   access: string;
+  refresh: string;
 };
 
 const initialState: {
@@ -37,10 +44,12 @@ const initialState: {
     | "awaitSMS"
     | "smsSended";
   user?: userType;
+  category: categoryType[];
   products: OrderProduct[];
 } = {
   login: "inLogin",
   products: [],
+  category: [],
 };
 
 const accountSlice = createSlice({
@@ -120,6 +129,7 @@ const accountSlice = createSlice({
         };
     });
     builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
+      state.category = action.payload.category;
       state.products = state.products.filter((product) =>
         action.payload.products.includes(
           (p: productType) => p.id === product.id

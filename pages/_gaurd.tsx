@@ -12,7 +12,7 @@ export default function Gaurd(props: { children: ReactNode }) {
   const core = useAppSelector((store) => store.core);
   const account = useAppSelector((store) => store.account);
 
-  const { serverStatus, serverLastUpdate } = core;
+  const { serverStatus } = core;
   const notif = core.notif;
 
   const [api, contextHolder] = notification.useNotification();
@@ -20,15 +20,15 @@ export default function Gaurd(props: { children: ReactNode }) {
 
   useEffect(() => {
     // get init data
-    if (serverStatus === "init" || Date.now() - serverLastUpdate > 10) {
-      if (account.user)
-        axiosUser.defaults.headers.Authorization = account.user.access;
+    console.log(serverStatus);
 
+    if (serverStatus === "init") {
+      // if (account.user)
+      // axiosUser.defaults.headers.Authorization = account.user.access;
       dispatch(getInitDataThunk());
     } else if (serverStatus === "disconnect") {
       // router.push("error");
     }
-
     if (account.user !== undefined) {
       if (
         account.user.lName === undefined ||
@@ -45,7 +45,6 @@ export default function Gaurd(props: { children: ReactNode }) {
         userModalHandler(true);
       }
     }
-
     // show notif in web and delete
     if (notif.type !== "") {
       api[notif.type]({
@@ -54,7 +53,7 @@ export default function Gaurd(props: { children: ReactNode }) {
       });
       dispatch(setNotif({ title: "", message: "", type: "" }));
     }
-  }, [dispatch, serverStatus, notif, api, userModalHandler, account]);
+  }, [dispatch, core, notif, api, userModalHandler, account, getInitDataThunk]);
 
   return (
     <>

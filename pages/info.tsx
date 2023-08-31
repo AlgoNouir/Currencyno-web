@@ -14,7 +14,7 @@ export default function Page404() {
           onClick={() => router.push("/store")}
           className=" flex flex-row items-center space-x-5 rtl:space-x-reverse"
         >
-          <img
+          <Image
             src={
               "https://currencyno.storage.iran.liara.space/Core/CurrencynoIcon.png"
             }

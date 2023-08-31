@@ -13,12 +13,6 @@ import {
   logoutThunk,
 } from "../account/thunk";
 
-export type categoryType = {
-  id: number;
-  parent?: number;
-  name: string;
-};
-
 export type notifType = {
   title: string;
   message: string;
@@ -27,14 +21,10 @@ export type notifType = {
 
 const initialState: {
   serverStatus: "connect" | "disconnect" | "pending" | "init";
-  serverLastUpdate: number;
   notif: notifType;
-  category: categoryType[];
 } = {
   serverStatus: "init",
   notif: { title: "", message: "", type: "" },
-  category: [],
-  serverLastUpdate: 0,
 };
 
 const coreSlice = createSlice({
@@ -60,9 +50,7 @@ const coreSlice = createSlice({
       state.serverStatus = "pending";
     });
     builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
-      state.category = action.payload.category;
       state.serverStatus = "connect";
-      state.serverLastUpdate = Date.now();
     });
     builder.addCase(changeAccountDataThunk.fulfilled, (state) => {
       state.notif = {

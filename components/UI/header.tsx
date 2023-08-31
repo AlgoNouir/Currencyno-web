@@ -14,7 +14,7 @@ import MegaMenu from "../megamenu";
 export default function Header(props: { state: number }) {
   const tmp = useAppSelector((store) => store.account);
   const user = tmp.user;
-  const category = useAppSelector((store) => store.core.category);
+  const category = useAppSelector((store) => store.account.category);
   const router = useRouter();
   const [loginModalOpen, loginModalOpenHandler] = useState("");
   const [menu, menuHandler] = useState(false);
@@ -79,7 +79,7 @@ export default function Header(props: { state: number }) {
                 onClick={() => router.push("/")}
                 className=" flex flex-row items-center space-x-1 rtl:space-x-reverse"
               >
-                <img
+                <Image
                   src={
                     "https://currencyno.storage.iran.liara.space/Core/CurrencynoIcon.png"
                   }
