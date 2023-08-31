@@ -1,4 +1,3 @@
-import { axiosNoUser } from "@/core/axios";
 import { useAppDispatch, useAppSelector } from "@/store/HOCs";
 import { loginThunk, sendLoginSMS } from "@/store/account/thunk";
 import { useState } from "react";
@@ -48,7 +47,7 @@ export function LoginComponent(props: { message: string }) {
           }}
           className={`${
             sms ? "bg-prime-200 " : "bg-green-400"
-          } p-3 rounded-xl sm:w-44 disabled:bg-black/30 flex flex-row items-center justify-center
+          } p-3 rounded-xl sm:w-44 disabled:bg-black/30 flex flex-row h-full items-center justify-center
       space-x-2 w-full`}
         >
           <p>
@@ -68,20 +67,17 @@ export function LoginComponent(props: { message: string }) {
       {sms ? (
         <div
           style={{ direction: "ltr" }}
-          className="space-x-2 flex flex-row w-fit"
+          className="space-x-2 flex flex-row w-full items-center justify-center"
         >
-          <div
-            className="flex bg-slate-200 items-center
-              space-x-5 rounded-xl pl-3 rtl:space-x-reverse w-full"
-          >
-            <input
-              type="text"
-              value={code}
-              onChange={(e) => codeHandler(e.target.value)}
-              className="outline-none bg-slate-200 p-2 w-full"
-            />
-          </div>
+          <input
+            disabled={loginStatus === "awaitSMS"}
+            type="text"
+            value={code}
+            onChange={(e) => codeHandler(e.target.value)}
+            className="disabled:bg-gray-100 bg-slate-200 px-5 py-2 rounded-xl w-64 h-full"
+          />
           <button
+            disabled={loginStatus === "awaitSMS"}
             onClick={() => {
               if (typeof phone === "number" && phone?.toString()[0] === "9") {
                 dispatch(
@@ -101,7 +97,7 @@ export function LoginComponent(props: { message: string }) {
                 );
               }
             }}
-            className="p-3 rounded-xl w-44 bg-prime-300"
+            className="p-3 rounded-xl w-44 bg-prime-300 disabled:bg-black/30"
           >
             <p>تایید کد</p>
           </button>

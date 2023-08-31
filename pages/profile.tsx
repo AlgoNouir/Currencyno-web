@@ -13,11 +13,12 @@ import {
   logoutThunk,
 } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
-import { productType } from "@/store/product/slice";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
-import { BiCheckShield } from "react-icons/bi";
+import { BiCheckShield, BiSolidUser, BiUser } from "react-icons/bi";
+import { BsCardChecklist, BsCart, BsCartFill } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
+import { RiSettings5Line, RiSettings5Fill } from "react-icons/ri";
 import { FaTruckFast } from "react-icons/fa6";
 import {
   HiBuildingStorefront,
@@ -28,18 +29,38 @@ import { MdDelete, MdSupportAgent } from "react-icons/md";
 export default function ProfilePage() {
   const user = useAppSelector((store) => store.account.user);
   const screens = [
-    { id: 0, name: "سبد خرید", component: <ProductScreen /> },
-    ...(user === undefined
+    {
+      id: 0,
+      name: "سبد خرید",
+      component: <ProductScreen />,
+      icon: <BsCart />,
+      iconSelected: <BsCartFill />,
+    },
+    ...(user !== undefined
       ? [
           {
             id: 1,
-            name: "ورود یه حساب کاربری",
+            name: "ورود به حساب کاربری",
             component: <LoginScreen />,
+            icon: <BiUser />,
+            iconSelected: <BiSolidUser />,
           },
         ]
       : [
-          { id: 2, name: "سوابق سفارشات", component: <OrderScreen /> },
-          { id: 3, name: "تنظیمات", component: <SettingScreen /> },
+          {
+            id: 2,
+            name: "سوابق سفارشات",
+            component: <OrderScreen />,
+            iconSelected: <BsCardChecklist />,
+            icon: <BsCardChecklist />,
+          },
+          {
+            id: 3,
+            name: "تنظیمات",
+            component: <SettingScreen />,
+            icon: <RiSettings5Line />,
+            iconSelected: <RiSettings5Fill />,
+          },
         ]),
   ];
   const [screen, screenHandler] = useState(screens[0]);
@@ -55,26 +76,35 @@ export default function ProfilePage() {
           {screens.map((s, index) => (
             <button
               key={`screen-${index}`}
+              disabled={s.id === screen.id}
               onClick={() => screenHandler(s)}
               style={{
                 backgroundColor: s.id === screen.id ? "#4771AF" : "",
                 color: s.id === screen.id ? "#FFFFFF" : "#000000",
               }}
-              className="w-5/6 p-5 rounded-r-full"
+              className="w-5/6 p-5 rounded-r-full font-bold flex flex-row 
+              items-center justify-center space-x-3 rtl:space-x-reverse"
             >
-              {s.name}
+              <p className="text-2xl">
+                {s.id === screen.id ? s.iconSelected : s.icon}
+              </p>
+              <p>{s.name}</p>
             </button>
           ))}
-          <button
-            key={`screen-exit`}
-            onClick={() => {
-              dispatch(logoutThunk());
-              router.push("/");
-            }}
-            className="w-5/6 p-5 rounded-r-full text-red-700"
-          >
-            خروج از حساب کاربری
-          </button>
+          {user === undefined ? (
+            <></>
+          ) : (
+            <button
+              key={`screen-exit`}
+              onClick={() => {
+                dispatch(logoutThunk());
+                router.push("/");
+              }}
+              className="w-5/6 p-5 rounded-r-full text-red-700"
+            >
+              خروج از حساب کاربری
+            </button>
+          )}
         </div>
         <div className="w-full flex flex-col">
           <div className="md:h-full h-fit w-full">{screen.component}</div>
@@ -86,13 +116,9 @@ export default function ProfilePage() {
 }
 
 export function LoginScreen() {
-  const userStatus = useAppSelector((store) => store.account.login);
-  const [pending, pendingHandler] = useState(false);
-
   return (
-    <div className="bg-white h-full items-center justify-center w-full relative rounded-xl">
+    <div className="bg-white h-2/3 items-center justify-center w-full relative rounded-xl flex">
       <LoginComponent message="" />
-      <div className="w-full h-full absolute top-0 left-0 right-0 bottom-0 bg-black/30 flex items-center justify-center"></div>
     </div>
   );
 }
