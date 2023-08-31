@@ -12,18 +12,17 @@ export default function Gaurd(props: { children: ReactNode }) {
   const core = useAppSelector((store) => store.core);
   const account = useAppSelector((store) => store.account);
 
-  const serverStatus = core.serverStatus;
+  const { serverStatus, serverLastUpdate } = core;
   const notif = core.notif;
 
   const [api, contextHolder] = notification.useNotification();
   const [userModal, userModalHandler] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     // get init data
-    if (serverStatus === "init") {
+    if (serverStatus === "init" || Date.now() - serverLastUpdate > 10) {
       if (account.user)
-        axiosUser.defaults.headers.Authorization = `Bearer ${account.user.access}`;
+        axiosUser.defaults.headers.Authorization = account.user.access;
 
       dispatch(getInitDataThunk());
     } else if (serverStatus === "disconnect") {
