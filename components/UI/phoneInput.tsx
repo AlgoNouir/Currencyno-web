@@ -13,7 +13,11 @@ export default function PhoneInput(props: {
       <input
         type="text"
         value={props.value && "0" + props.value}
-        onChange={(e) => props.handler(parseInt(e.target.value) || "")}
+        onChange={(e) =>
+          props.handler(
+            e.target.value === "0" ? 0 : parseInt(e.target.value) || ""
+          )
+        }
         className="bg-gray-100 p-5 rounded-xl  2xl:w-96 w-80"
         placeholder="شماره تلفن را وارد کنید."
       />

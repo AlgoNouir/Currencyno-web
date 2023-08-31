@@ -79,6 +79,12 @@ const coreSlice = createSlice({
           title: "هشدار کامل نبودن مشخصات",
           message: "برای تکمیل ثبت نام خود لطفا مشخصات کاربری خود را کامل کنید",
         };
+      } else {
+        state.notif = {
+          type: "success",
+          title: "ورود موفق",
+          message: "با موفقیت وارد حساب کاربری خود شدید",
+        };
       }
     });
     builder.addCase(fixOrderThunk.fulfilled, (state) => {

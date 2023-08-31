@@ -112,7 +112,7 @@ export default function Header(props: { state: number }) {
             {props.state === 0 ? (
               <div className="flex-row space-x-5 rtl:space-x-reverse flex">
                 <button
-                  className="relative flex flex-row items-center space-x-2 rtl:space-x-reverse lg:border-2 p-2 rounded-xl shadow px-5"
+                  className="relative flex flex-row items-center space-x-2 rtl:space-x-reverse lg:border-2 p-2 rounded-xl lg:shadow lg:px-5"
                   onClick={() => router.push("/profile")}
                 >
                   <p className="hidden lg:flex font-bold">

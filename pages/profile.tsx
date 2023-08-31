@@ -14,7 +14,7 @@ import {
 } from "@/store/account/thunk";
 import { OrderStatusEnum } from "@/store/order/slice";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BiCheckShield, BiSolidUser, BiUser } from "react-icons/bi";
 import { BsCardChecklist, BsCart, BsCartFill, BsCartX } from "react-icons/bs";
 import { FaBuilding } from "react-icons/fa";
@@ -64,6 +64,10 @@ export default function ProfilePage() {
         ]),
   ];
   const [screen, screenHandler] = useState(screens[0]);
+
+  useEffect(() => {
+    if (screen.id === 1 && user !== undefined) screenHandler(screens[0]);
+  }, [screen, screenHandler, user]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
