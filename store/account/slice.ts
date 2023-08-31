@@ -73,6 +73,9 @@ const accountSlice = createSlice({
           { ...product, count: action.payload.count },
         ];
     },
+    changeAccess: (state, action: PayloadAction<{ access: string }>) => {
+      if (state.user) state.user.access = action.payload.access;
+    },
   },
   extraReducers(builder) {
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
@@ -140,4 +143,4 @@ const accountSlice = createSlice({
 });
 
 export default accountSlice.reducer;
-export const { addOfflineProduct } = accountSlice.actions;
+export const { addOfflineProduct, changeAccess } = accountSlice.actions;
