@@ -36,7 +36,7 @@ export default function ProfilePage() {
       icon: <BsCart />,
       iconSelected: <BsCartFill />,
     },
-    ...(user !== undefined
+    ...(user === undefined
       ? [
           {
             id: 1,
