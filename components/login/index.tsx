@@ -21,7 +21,7 @@ export function LoginComponent(props: { message: string }) {
         width="0"
         height="0"
         sizes="100vw"
-        className="sm:w-96 w-full"
+        className="sm:w-96 w-64"
         alt=""
       />
       <div
@@ -74,7 +74,7 @@ export function LoginComponent(props: { message: string }) {
             type="text"
             value={code}
             onChange={(e) => codeHandler(e.target.value)}
-            className="disabled:bg-gray-100 bg-slate-200 px-5 py-2 rounded-xl w-64 h-full"
+            className="disabled:bg-gray-100 bg-slate-200 px-5 py-2 w-full rounded-xl grow lg:w-64 h-full"
           />
           <button
             disabled={loginStatus === "awaitSMS"}
@@ -97,7 +97,7 @@ export function LoginComponent(props: { message: string }) {
                 );
               }
             }}
-            className="p-3 rounded-xl w-44 bg-prime-300 disabled:bg-black/30"
+            className="p-3 rounded-xl lg:w-44 w-full bg-prime-300 disabled:bg-black/30"
           >
             <p>تایید کد</p>
           </button>
