@@ -6,6 +6,7 @@ import { getInitDataThunk } from "@/store/core/thunk";
 import { notification } from "antd";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 export default function Gaurd(props: { children: ReactNode }) {
   const dispatch = useAppDispatch();
@@ -17,17 +18,19 @@ export default function Gaurd(props: { children: ReactNode }) {
 
   const [api, contextHolder] = notification.useNotification();
   const [userModal, userModalHandler] = useState(false);
+  const [pending, pendingHandler] = useState(true);
 
   useEffect(() => {
     // get init data
-    console.log(serverStatus);
 
     if (serverStatus === "init") {
       // if (account.user)
       // axiosUser.defaults.headers.Authorization = account.user.access;
       dispatch(getInitDataThunk());
-    } else if (serverStatus === "disconnect") {
-      // router.push("error");
+    } else if (serverStatus === "connect") {
+      console.log(serverStatus);
+
+      pendingHandler(false);
     }
     if (account.user !== undefined) {
       if (
@@ -53,13 +56,32 @@ export default function Gaurd(props: { children: ReactNode }) {
       });
       dispatch(setNotif({ title: "", message: "", type: "" }));
     }
-  }, [dispatch, core, notif, api, userModalHandler, account, getInitDataThunk]);
+  }, [
+    dispatch,
+    core,
+    notif,
+    api,
+    userModalHandler,
+    account,
+    getInitDataThunk,
+    pendingHandler,
+  ]);
 
   return (
     <>
       {props.children}
       {contextHolder}
       <PersonalModal open={userModal} handler={userModalHandler} />
+      {pending === true ? (
+        <div className="fixed z-20 top-0 left-0 right-0 bottom-0 bg-black/30 items-center justify-center flex flex-col">
+          <div className="bg-white flex flex-col items-center justify-center space-y-5 p-5 rounded-xl">
+            <CgSpinner className="text-8xl animate-spin" />
+            <label unselectable="on">در حال بروزرسانی داده ها</label>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
