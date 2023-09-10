@@ -9,7 +9,6 @@ import {
 } from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
 import { getInitDataThunk } from "../core/thunk";
-import { axiosUser } from "@/core/axios";
 
 export interface OrderProduct {
   id: number;
@@ -38,12 +37,12 @@ export type userType = {
 
 const initialState: {
   login:
-    | "inLogin"
-    | "rejected"
-    | "pending"
-    | "accepted"
-    | "awaitSMS"
-    | "smsSended";
+  | "inLogin"
+  | "rejected"
+  | "pending"
+  | "accepted"
+  | "awaitSMS"
+  | "smsSended";
   user?: userType;
   category: categoryType[];
   cartProduct: OrderProduct[];

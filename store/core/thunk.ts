@@ -7,8 +7,13 @@ export const getInitDataThunk: any = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     const user = store.getState().account.user;
     var response = { status: 403, data: {} };
+
+    console.log(user);
+
+    // get data from server with user
     if (user === undefined) response = await axiosNoUser.get("products/");
-    else response = await axiosNoUser.get("productsUser/");
+    else response = await axiosUser.get("productsUser/");
+
     if (response.status === 200) {
       return response.data;
     } else {
