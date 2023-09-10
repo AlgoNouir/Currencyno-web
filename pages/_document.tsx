@@ -4,7 +4,7 @@ import Script from "next/script";
 export default function Document() {
     return (
         <Html dir="rtl" lang="fa">
-            <Head />
+            <Head></Head>
             <body className="bg-bg-100">
                 <Main />
                 <NextScript />
