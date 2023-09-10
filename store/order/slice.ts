@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk } from "../account/thunk";
-import { cartToOrderThunk } from "./thunk";
-import { productType } from "../product/slice";
 import { OrderProduct } from "../account/slice";
 import { getInitDataThunk } from "../core/thunk";
 
