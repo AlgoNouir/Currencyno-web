@@ -132,7 +132,7 @@ export function LoginScreen() {
 
 export function ProductScreen() {
   const router = useRouter();
-  const userProducts = useAppSelector((store) => store.account.products);
+  const userProducts = useAppSelector((store) => store.account.cartProduct);
   const user = useAppSelector((store) => store.account.user);
   const products = useAppSelector((store) => store.products);
   const [loginMessage, loginMessageHandler] = useState("");

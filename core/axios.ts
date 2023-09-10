@@ -16,17 +16,6 @@ export const axiosUser = axios.create({
   },
 });
 
-// axiosUser.interceptors.request.use(
-//   (config) => {
-//     const access = store.getState().account.user?.access;
-//     if (access) {
-//       config.headers.Authorization = `Bearer ${access}`;
-//     }
-//     return config;
-//   },
-//   (err) => Promise.reject(err)
-// );
-
 // If request was failed with 401, trying to refresh the AccessToken
 createAuthRefreshInterceptor(axiosUser, (failedRequest) => {
   const refresh = store.getState().account.user?.refresh;

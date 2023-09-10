@@ -121,14 +121,14 @@ export default function Header(props: { state: number }) {
                       : `${user.fName} ${user.lName}`}
                   </p>
                   <div className="relative">
-                    {tmp.products.length > 0 ? (
+                    {tmp.cartProduct.length > 0 ? (
                       <div
                         className="bg-red-600 rounded-full w-6 h-6
                                 flex items-center justify-center absolute top-0 -left-3"
                       >
                         <label className="text-white">
                           {Intl.NumberFormat("fa-IR").format(
-                            tmp.products.length || 0
+                            tmp.cartProduct.length || 0
                           )}
                         </label>
                       </div>

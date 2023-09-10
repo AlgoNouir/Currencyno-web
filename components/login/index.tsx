@@ -11,7 +11,7 @@ export function LoginComponent(props: { message: string }) {
   const [sms, smsHandler] = useState(false);
   const [code, codeHandler] = useState("");
   const [phone, phoneHandler] = useState<number | "" | 0>();
-  const products = useAppSelector((store) => store.account.products);
+  const products = useAppSelector((store) => store.account.cartProduct);
   const loginStatus = useAppSelector((store) => store.account.login);
   const dispatch = useAppDispatch();
   return (

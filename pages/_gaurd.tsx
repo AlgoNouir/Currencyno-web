@@ -22,10 +22,14 @@ export default function Gaurd(props: { children: ReactNode }) {
 
   useEffect(() => {
     // get init data
+    if (account.user !== undefined) {
+      {
+        console.log(account.user.access);
+        axiosUser.defaults.headers.Authorization = `Bearer ${account.user.access}`;
+      }
+    }
 
     if (serverStatus === "init") {
-      // if (account.user)
-      // axiosUser.defaults.headers.Authorization = account.user.access;
       dispatch(getInitDataThunk());
     } else if (serverStatus === "connect") {
       console.log(serverStatus);
@@ -65,6 +69,7 @@ export default function Gaurd(props: { children: ReactNode }) {
     account,
     getInitDataThunk,
     pendingHandler,
+    axiosUser,
   ]);
 
   return (

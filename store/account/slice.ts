@@ -9,6 +9,7 @@ import {
 } from "./thunk";
 import { cartToOrderThunk } from "../order/thunk";
 import { getInitDataThunk } from "../core/thunk";
+import { axiosUser } from "@/core/axios";
 
 export interface OrderProduct {
   id: number;
@@ -45,10 +46,10 @@ const initialState: {
     | "smsSended";
   user?: userType;
   category: categoryType[];
-  products: OrderProduct[];
+  cartProduct: OrderProduct[];
 } = {
   login: "inLogin",
-  products: [],
+  cartProduct: [],
   category: [],
 };
 
@@ -57,19 +58,23 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     addOfflineProduct: (state, action: PayloadAction<OrderProduct>) => {
-      const product = state.products.find(
+      const product = state.cartProduct.find(
         (p) => p.product === action.payload.product
       );
 
       if (product === undefined)
-        state.products = [...state.products, action.payload];
+        state.cartProduct = [...state.cartProduct, action.payload];
       else if (action.payload.count === 0)
-        state.products = [
-          ...state.products.filter((p) => p.product !== action.payload.product),
+        state.cartProduct = [
+          ...state.cartProduct.filter(
+            (p) => p.product !== action.payload.product
+          ),
         ];
       else
-        state.products = [
-          ...state.products.filter((p) => p.product !== action.payload.product),
+        state.cartProduct = [
+          ...state.cartProduct.filter(
+            (p) => p.product !== action.payload.product
+          ),
           { ...product, count: action.payload.count },
         ];
     },
@@ -80,12 +85,12 @@ const accountSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
       if (state.user) {
-        const product = state.products.find(
+        const product = state.cartProduct.find(
           (p) => p.product === action.payload.product
         );
         if (product && action.payload.count !== 0) {
-          state.products = [
-            ...state.products.filter(
+          state.cartProduct = [
+            ...state.cartProduct.filter(
               (p) => p.product !== action.payload.product
             ),
             {
@@ -94,13 +99,13 @@ const accountSlice = createSlice({
             },
           ];
         } else if (action.payload.count === 0) {
-          state.products = [
-            ...state.products.filter(
+          state.cartProduct = [
+            ...state.cartProduct.filter(
               (p) => p.product !== action.payload.product
             ),
           ];
         } else {
-          state.products.push(action.payload);
+          state.cartProduct.push(action.payload);
         }
       }
     });
@@ -116,10 +121,11 @@ const accountSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.login = "accepted";
       state.user = action.payload.user;
-      state.products = action.payload.user.products;
+
+      state.cartProduct = action.payload.user.products;
     });
     builder.addCase(cartToOrderThunk.fulfilled, (state) => {
-      if (state.user) state.products = [];
+      if (state.user) state.cartProduct = [];
     });
     builder.addCase(logoutThunk.fulfilled, (state) => {
       state.user = undefined;
@@ -132,12 +138,14 @@ const accountSlice = createSlice({
         };
     });
     builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
-      state.category = action.payload.category;
-      state.products = state.products.filter((product) =>
-        action.payload.products.includes(
-          (p: productType) => p.id === product.id
-        )
-      );
+      return {
+        ...state,
+        category: action.payload.category,
+        cartProduct:
+          action.payload.cart === undefined
+            ? state.cartProduct
+            : action.payload.cart,
+      };
     });
   },
 });

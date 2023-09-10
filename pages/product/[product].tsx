@@ -58,7 +58,7 @@ export default function ProductPage() {
     (p) => p.id === (typeof productId === "string" ? parseInt(productId) : -1)
   );
   const inCart =
-    product && account.products.find((p) => p.product === product.id);
+    product && account.cartProduct.find((p) => p.product === product.id);
 
   const products =
     product &&

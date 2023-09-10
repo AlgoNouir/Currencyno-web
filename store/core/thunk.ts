@@ -5,10 +5,10 @@ import { store } from "../store";
 export const getInitDataThunk: any = createAsyncThunk(
   "getInitData",
   async (_, { rejectWithValue }) => {
-    const access = store.getState().account.user?.access;
-    if (access) axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
-
-    const response = await axiosNoUser.get("products/");
+    const user = store.getState().account.user;
+    var response = { status: 403, data: {} };
+    if (user === undefined) response = await axiosNoUser.get("products/");
+    else response = await axiosNoUser.get("productsUser/");
     if (response.status === 200) {
       return response.data;
     } else {

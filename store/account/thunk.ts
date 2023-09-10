@@ -31,6 +31,7 @@ export const loginThunk: any = createAsyncThunk(
 
     const { user, access, orders, refresh } = response.data;
     axiosUser.defaults.headers.Authorization = `Bearer ${access}`;
+
     return {
       user: { ...user, access, refresh },
       orders,

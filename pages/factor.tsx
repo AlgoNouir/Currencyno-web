@@ -24,7 +24,7 @@ export default function FactorPage() {
   const router = useRouter();
 
   // resdux
-  const userProducts = useAppSelector((store) => store.account.products);
+  const userProducts = useAppSelector((store) => store.account.cartProduct);
   const products = useAppSelector((store) => store.products);
   const dispatch = useAppDispatch();
   const [loading, loadingHandler] = useState(false);
