@@ -3,6 +3,7 @@ import { loginThunk } from "../account/thunk";
 import { cartToOrderThunk } from "./thunk";
 import { productType } from "../product/slice";
 import { OrderProduct } from "../account/slice";
+import { getInitDataThunk } from "../core/thunk";
 
 export enum OrderStatusEnum {
   "در حال بررسی سفارش",
@@ -29,6 +30,12 @@ const orderSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       return action.payload.orders;
+    });
+    builder.addCase(getInitDataThunk.fulfilled, (state, action) => {
+      if (action.payload.orders)
+        return action.payload.orders;
+      else
+        return []
     });
   },
 });
