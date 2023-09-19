@@ -5,8 +5,12 @@ import { persistor, store } from "@/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import Gaurd from "./_gaurd";
 import { DefaultSeo } from "next-seo";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { axiosNoUser } from "@/core/axios";
+import { MetaTag } from "next-seo/lib/types";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <DefaultSeo
