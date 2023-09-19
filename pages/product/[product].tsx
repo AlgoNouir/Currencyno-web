@@ -65,11 +65,8 @@ export default function ProductPage(props: any) {
     product && account.cartProduct.find((p) => p.product === product.id);
 
   const products =
-    (product &&
-      tmp.filter(
-        (p) => p.category === product.category && p.id !== product.id
-      )) ||
-    {};
+    product &&
+    tmp.filter((p) => p.category === product.category && p.id !== product.id);
 
   const tmp_product = product?.counts.filter((p) => p.amount > 0) || [];
 
