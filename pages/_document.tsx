@@ -8,16 +8,24 @@ export default function Document(props: any) {
   return (
     <Html dir="rtl" lang="fa">
       <Head>
-        {Object.entries(torob).map(([indx, trb]: [string, any]) =>
-          trb.name === "image" ? (
-            <meta
-              key={trb.keyOverride}
-              property="og:image"
-              content={trb.content}
-            />
-          ) : (
-            <meta key={trb.keyOverride} name={trb.name} content={trb.content} />
+        {torob !== undefined ? (
+          Object.entries(torob).map(([indx, trb]: [string, any]) =>
+            trb.name === "image" ? (
+              <meta
+                key={trb.keyOverride}
+                property="og:image"
+                content={trb.content}
+              />
+            ) : (
+              <meta
+                key={trb.keyOverride}
+                name={trb.name}
+                content={trb.content}
+              />
+            )
           )
+        ) : (
+          <></>
         )}
       </Head>
       <body className="bg-bg-100">
