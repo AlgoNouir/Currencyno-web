@@ -456,7 +456,7 @@ export async function getServerSideProps(context: any) {
     },
     {
       name: "image",
-      content: `currencyno.storage.iran.liara.space/${response.data.image[0]}`,
+      content: `https://currencyno.storage.iran.liara.space/${response.data.image[0]}`,
       keyOverride: "image",
     },
   ];
