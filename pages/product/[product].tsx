@@ -430,7 +430,10 @@ export async function getServerSideProps(context: any) {
     },
     {
       name: "product_price",
-      content: response.data.price - response.data.offerPrice,
+      content:
+        response.data.offerPrice === 0
+          ? response.data.price
+          : response.data.offerPrice,
       keyOverride: "product_price",
     },
     {
