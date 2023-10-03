@@ -47,7 +47,7 @@ export default function MainPage() {
           />
           <ProductLists
             products={products.filter((product) => product.category === 61)}
-            title={{ name: "لبتاپ استوک", moreDir: "lists/61" }}
+            title={{ name: "لپتاپ استوک", moreDir: "lists/61" }}
           />
         </div>
         <Footer />

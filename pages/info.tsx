@@ -37,7 +37,6 @@ export default function Page404() {
                 { src: "info/2.jpg", url: "/lists/51" },
                 { src: "info/3.jpg", url: "/lists/51" },
                 { src: "info/4.jpg", url: "/lists/61" },
-                { src: "info/5.png", url: "/lists/11" },
               ],
             ]}
           />
