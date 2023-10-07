@@ -50,7 +50,7 @@ export default function PersonalModal(props: { open: boolean; handler: any }) {
               value={address}
               onChange={(e) => addressHandler(e.target.value)}
               className="bg-gray-100 p-3 rounded-xl outline-none w-full h-40"
-              placeholder="تهران - خیابان انقلاب - کوچه ..."
+              placeholder="آدرس دقیق :‌ استان - شهرستان - خیابان - ... - کوچه - پلاک"
             />
           </div>
           <button

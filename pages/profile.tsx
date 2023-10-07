@@ -440,6 +440,7 @@ export function SettingScreen() {
             value={address}
             onChange={(e) => addressHandler(e.target.value)}
             className="bg-gray-100 p-3 rounded-xl outline-none w-full h-40"
+            placeholder="آدرس دقیق :‌ استان - شهرستان - خیابان - ... - کوچه - پلاک"
           />
         </div>
       </div>
