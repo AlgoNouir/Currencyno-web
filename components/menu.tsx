@@ -5,7 +5,6 @@ type MenuItem = Required<MenuProps>["items"][number];
 
 export function menuDirector(array: categoryType[]): MenuItem[] {
 
-  console.log(array);
   
   const result: MenuItem[] = array.filter(c => c.parent === null).map(c => {
     let tmp =array.filter(cc => cc.parent == c.id).map(cc => ({
