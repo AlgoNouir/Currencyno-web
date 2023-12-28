@@ -126,7 +126,7 @@ export default function Footer() {
       </div>
       <div className="flex lg:flex-row flex-col items-center justify-center max-lg:space-y-2 lg:space-x-2 rtl:space-x-reverse">
         <p className="text-center">
-          تمام حقوق این وبسایت متعلق به شرکت تحلیلگران نگرش نو تجارت است. ۱۴۰۳
+          تمام حقوق این وبسایت متعلق به شرکت ایده خلاقان سبز آرتا است. ۱۴۰۳
         </p>
       </div>
     </div>
