@@ -10,7 +10,7 @@ function Icon(props: { text: string; icon: any; url?: string }) {
       disabled={props?.url === undefined}
       onClick={
         props?.url === undefined
-          ? () => {}
+          ? () => { }
           : () => window.open(props.url, "_blank")
       }
       className="flex flex-row space-x-5 rtl:space-x-reverse items-center"
@@ -72,7 +72,7 @@ export default function Footer() {
             />
             <Icon
               text="۰۹۳۹۶۵۵۴۳۷۰ - ۰۹۱۴۹۵۲۰۶۰۸"
-              url="tel:09396554370"
+              url="tel:09149520608"
               icon={
                 <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-green-400 text-lg lg:text-3xl text-white">
                   <BsFillTelephoneFill />
