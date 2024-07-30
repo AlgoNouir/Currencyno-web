@@ -50,19 +50,7 @@ export default function Footer() {
               text="نماد اعتماد"
               icon={
                 <div className="lg:w-16 w-9 lg:h-16 h-9 items-center justify-center flex rounded-xl bg-white text-lg lg:text-3xl">
-                  <a
-                    referrerPolicy="origin"
-                    target="_blank"
-                    href="https://trustseal.enamad.ir/?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                  >
-                    <img
-                      referrerPolicy="origin"
-                      src="https://Trustseal.eNamad.ir/logo.aspx?id=284371&amp;Code=gBjq7O5O8goWmRHZYK1Y"
-                      alt=""
-                      style={{ cursor: "pointer" }}
-                      id="gBjq7O5O8goWmRHZYK1Y"
-                    />
-                  </a>
+                  <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=512258&Code=AvIaSbo1btg8Dke9wZfUVl4H5S6USt6X'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=512258&Code=AvIaSbo1btg8Dke9wZfUVl4H5S6USt6X' alt='' style='cursor:pointer' code='AvIaSbo1btg8Dke9wZfUVl4H5S6USt6X'></a>
                 </div>
               }
             />
